@@ -689,11 +689,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shaye\\source\\repos\\MateServerSide\\MateServerSide\\MateServerSide.csproj",
+      "projectUniqueName": "C:\\Users\\shaye\\Documents\\GitHub\\Mate\\MateServerSide\\MateServerSide\\MateServerSide.csproj",
       "projectName": "MateServerSide",
-      "projectPath": "C:\\Users\\shaye\\source\\repos\\MateServerSide\\MateServerSide\\MateServerSide.csproj",
+      "projectPath": "C:\\Users\\shaye\\Documents\\GitHub\\Mate\\MateServerSide\\MateServerSide\\MateServerSide.csproj",
       "packagesPath": "C:\\Users\\shaye\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shaye\\source\\repos\\MateServerSide\\MateServerSide\\obj\\",
+      "outputPath": "C:\\Users\\shaye\\Documents\\GitHub\\Mate\\MateServerSide\\MateServerSide\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
