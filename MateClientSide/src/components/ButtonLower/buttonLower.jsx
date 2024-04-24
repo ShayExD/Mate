@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet,Pressable,Text,View ,Dimensions} from 'react-native';
-import Theme from '../../assets/styles/theme';
-import { windowHeight, windowWidth } from '../utils';
+import Theme from '../../../assets/styles/theme';
+import { windowHeight, windowWidth } from '../../utils';
 
 const ButtonLower = ({textContent,handlePress}) =>{  
 

@@ -2,7 +2,7 @@ import { StyleSheet,Image, Text, View } from 'react-native'
 import React from 'react'
 import { windowHeight, windowWidth } from '../../utils';
 import Theme from '../../../assets/styles/theme';
-import ButtonLower from '../../components/buttonLower';
+import ButtonLower from '../../components/ButtonLower/buttonLower';
 
 export default function Intro() {
   return (
