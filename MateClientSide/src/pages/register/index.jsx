@@ -69,7 +69,7 @@ const handleLogin = () => {
 
 const styles = StyleSheet.create({
 screen:{
-    flex:1,
+flex:1,
 },
 title:{
 marginTop:windowHeight*0.175,
