@@ -6,11 +6,12 @@ import Intro from './src/pages/intro';
 import Login from './src/pages/login';
 import Register from './src/pages/register';
 import PlanTrip from './src/pages/ai_trip';
+import Test from './src/pages/test';
 export default function App() {
   return (
     <View style={styles.container}>
       {/* <Text> Open lala lala up App.js to start working on your app!</Text>
-      <StatusBar style="auto" /> */}<PlanTrip ></PlanTrip>
+      <StatusBar style="auto" /> */}<Test ></Test>
     </View>
   );
 }
@@ -20,6 +21,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent:'center',
   },
 });
