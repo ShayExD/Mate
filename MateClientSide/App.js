@@ -7,12 +7,19 @@ import Login from './src/pages/login';
 import Register from './src/pages/register';
 import PlanTrip from './src/pages/ai_trip';
 import EditProfile from './src/pages/edit_profile';
+import Test from './src/pages/test';
+import { Provider } from 'react-native-paper';
+import { TouchableWithoutFeedback, Keyboard } from 'react-native'
+
 export default function App() {
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <Provider>
     <View style={styles.container}>
-      {/* <Text> Open lala lala up App.js to start working on your app!</Text>
-      <StatusBar style="auto" /> */}<EditProfile ></EditProfile>
+    <Test></Test>
     </View>
+    </Provider>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -21,6 +28,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent:'center',
   },
 });
