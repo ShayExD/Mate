@@ -94,10 +94,7 @@ export default function EditProfile() {
 					textAlign="right"
 				/>
 				<AgePicker selectedAge={age} onAgeChange={setAge} />
-                <CountryPicker
-          selectedCountries={selectedCountries}
-          onCountryChange={setSelectedCountries}
-        />
+               
 				<TextInput
 					label={'סיסמה'}
 					value={password}
@@ -109,6 +106,10 @@ export default function EditProfile() {
 					selectionColor="gray"
 					textAlign="right"
 				/>
+				<CountryPicker
+        		selectedCountries={selectedCountries}
+        		onCountryChange={setSelectedCountries}
+        		/>
 				{/* ... */}
 			</View>
 			<ButtonLower textContent={'יצירת פרופיל'} handlePress={handleLogin} />

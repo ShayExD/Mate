@@ -15,7 +15,7 @@ export default function App() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <Provider>
     <View style={styles.container}>
-    <EditProfile></EditProfile>
+    <Test></Test>
     </View>
     </Provider>
     </TouchableWithoutFeedback>

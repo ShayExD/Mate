@@ -8,6 +8,7 @@ import { windowHeight, windowWidth, VerticalScale, HorizontalScale } from '../..
 import * as googleGenerativeAI from '@google/generative-ai';
 import DropdownComponent from '../../components/DropdownCountryCityComponents/dropdownCountryCityComponents';
 import NumberPicker from '../../components/NumberPicker/numberPicker';
+import DialogAi from '../../components/DialogAi/dialogAi';
 
 const Test = () => {
   const [daysNumber, setDaysNumber] = useState('');
@@ -17,6 +18,8 @@ const Test = () => {
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const hideDialog = () => setVisible(false);
 
   const StartChat = async () => {
     setIsLoading(true);
@@ -24,7 +27,7 @@ const Test = () => {
     const API_KEY = 'AIzaSyBozb6vVgoZ6pYEjsfZ7W5jtsEZjRSgI2Y';
     const genAI = new googleGenerativeAI.GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-    const prompt = `Write travel for ${daysNumber} days in ${countryLabel} in ${cityLabel} please write me without the * and answer me in hebrew please`;
+    const prompt = `Write travel for ${daysNumber} days in ${countryLabel} in ${cityLabel} please write me without the "*" and answer me in hebrew please`;
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
@@ -35,7 +38,7 @@ const Test = () => {
     setDaysNumber('');
     setAnswer(text);
     console.log(text);
-
+    setVisible(true);
     setIsLoading(false);
   };
 
@@ -73,11 +76,11 @@ const Test = () => {
             </View>
           ) : (
             <View>
-              <Text style={Theme.primaryText}>{answer}</Text>
             </View>
           )}
         </View>
       </TouchableWithoutFeedback>
+      <DialogAi Title={answer} visible={visible} onDismiss={hideDialog}></DialogAi>
     </ScrollView>
   );
 };
