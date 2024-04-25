@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
-const NumberPicker = ({selectedValueState, onValueChange },text) => {
+const NumberPicker = ({selectedValueState, onValueChange ,text}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const Options = Array.from({ length: 100 }, (_, index) => index + 1);
 

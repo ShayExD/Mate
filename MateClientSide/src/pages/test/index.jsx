@@ -50,7 +50,7 @@ const Test = () => {
         <Text style={[Theme.primaryTitle, styles.title]}>התייעצות עם Ai</Text>
         <View style={styles.inputsContainer}>
         <DropdownComponent setCountryLabel={setCountryLabel} setCityLabel={setCityLabel}> </DropdownComponent>
-        <NumberPicker selectedValueState={daysNumber} onValueChange={setDaysNumber} ></NumberPicker>
+        <NumberPicker selectedValueState={daysNumber} onValueChange={setDaysNumber} text="בר המלך" ></NumberPicker>
         </View>
         <ButtonLower
           textContent={'יצירת תכנון טיול עם Ai'}
