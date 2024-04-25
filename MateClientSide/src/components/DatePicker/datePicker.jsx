@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const DatePickerComponent = ({ selectedDate, onDateChange }) => {
-  const [showPicker, setShowPicker] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  const openPicker = () => {
-    setShowPicker(true);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
   };
 
-  const onChange = (event, selected) => {
-    setShowPicker(false);
-    if (selected) {
-      onDateChange(selected);
-    }
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    onDateChange(date);
+    hideDatePicker();
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.touchableArea} onPress={openPicker}>
+      <TouchableOpacity style={styles.touchableArea} onPress={showDatePicker}>
         <Text style={styles.selectedDate}>
           {selectedDate
-            ? `תאריך לידה: ${selectedDate.toLocaleDateString()}`
-            : 'תאריך לידה'}
+            ? `בחירת תאריך: ${selectedDate.toLocaleDateString()}`
+            : 'Select Date'}
         </Text>
       </TouchableOpacity>
-      {showPicker && (
-        <DateTimePicker
-          value={selectedDate || new Date()}
-          mode="date"
-          display="spinner"
-          onChange={onChange}
-        />
-      )}
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
     </View>
   );
 };
@@ -45,9 +45,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center', // Center the content horizontally
+    alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'black',
+    paddingHorizontal: 10,
+    textAlign: 'left',
+    direction: 'rtl',
   },
   selectedDate: {
     fontSize: 16,
