@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import axios from 'axios'
 import { TextInput } from 'react-native-paper'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import * as googleGenerativeAI from '@google/generative-ai'
+import { Dialog, Portal, Text } from 'react-native-paper';
+import Theme from '../../../assets/styles/theme'
 
 const hobbies = [
   { label: 'טכנולוגיה', value: 'טכנולוגיה' },
@@ -25,30 +27,31 @@ const hobbies = [
   { label: 'צילום', value: 'צילום' },
 ]
 
-const DropdownComponent = () => {
+const DropdownComponent = ({setCityLabel,setCountryLabel,setDaysNumber,days}) => {
+  const [visible, setVisible] = useState(false);
   const [countryData, setCountryData] = useState([])
   const [cityData, setCityData] = useState([])
   const [country, setCountry] = useState('')
   const [city, setCity] = useState('')
-  const [cityLabel, setCityLabel] = useState('')
-  const [countryLabel, setcountryLabel] = useState('')
-  const [daysNumber, setdaysNumber] = useState('')
-  const [answear, setAnswear] = useState('')
+  const [answer, setAnswer] = useState('')
   const [hobbys, sethobbys] = useState(0)
   const [value, setValue] = useState(null)
   const [isFocus, setIsFocus] = useState(false)
+  const [isFocusCity, setIsFocusCity] = useState(false)
+
   const API_KEY = 'AIzaSyBozb6vVgoZ6pYEjsfZ7W5jtsEZjRSgI2Y'
 
-  const renderLabel = () => {
-    if (value || isFocus) {
+  const renderLabel = (text,focus) => {
+    if (value || focus) {
       return (
-        <Text style={[styles.label, isFocus && { color: 'blue' }]}>
-          Select a country
+        <Text style={[styles.label, isFocus && { color: 'black' }]}>
+         {text}
         </Text>
       )
     }
     return null
   }
+
 
   useEffect(() => {
     var config = {
@@ -78,23 +81,20 @@ const DropdownComponent = () => {
       })
   }, [])
 
-  const buildTrip = () => {
-    // console.log(countryLabel)
-    // console.log(cityLabel)
-    // console.log(daysNumber)
-    const StartChat = async () => {
-      const genAI = new googleGenerativeAI.GoogleGenerativeAI(API_KEY)
-      const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
-      const prompt = `Write travel for ${daysNumber} days in ${countryLabel} in ${cityLabel}`
-      // const prompt = 'Write travel for 3 days in budapest'
-      const result = await model.generateContent(prompt)
-      const response = await result.response
-      const text = response.text()
-      console.log(text)
-      setAnswear(text)
-    }
-    StartChat()
-  }
+  // const buildTrip = () => {
+  //   const StartChat = async () => {
+  //     const genAI = new googleGenerativeAI.GoogleGenerativeAI(API_KEY)
+  //     const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+  //     const prompt = `Write travel for ${daysNumber} days in ${countryLabel} in ${cityLabel}`
+  //     // const prompt = 'Write travel for 3 days in budapest'
+  //     const result = await model.generateContent(prompt)
+  //     const response = await result.response
+  //     const text = response.text()
+  //     console.log(text)
+  //     setAnswer(text)
+  //   }
+  //   StartChat()
+  // }
 
   const handleCity = (countyCode) => {
     var config = {
@@ -125,9 +125,8 @@ const DropdownComponent = () => {
 
   return (
     <View style={styles.container}>
-      {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+        style={[styles.dropdown, isFocus && { borderColor: Theme.primaryColor.color }]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
@@ -145,13 +144,13 @@ const DropdownComponent = () => {
         onChange={(item) => {
           // setValue(item.value)
           setCountry(item.value)
-          setcountryLabel(item.label)
+          setCountryLabel(item.label)
           setIsFocus(false)
           handleCity(item.value)
         }}
       />
       <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+        style={[styles.dropdown, isFocusCity && { borderColor: Theme.primaryColor.color }]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
@@ -161,21 +160,21 @@ const DropdownComponent = () => {
         maxHeight={300}
         labelField='label'
         valueField='value'
-        placeholder={!isFocus ? 'בחירת עיר' : '...'}
-        searchPlaceholder='Search...'
+        placeholder={!isFocusCity ? 'בחירת עיר' : '...'}
+        searchPlaceholder='חיפוש...'
         value={city}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
+        onFocus={() => setIsFocusCity(true)}
+        onBlur={() => setIsFocusCity(false)}
         onChange={(item) => {
           setCity(item.value)
           setCityLabel(item.label)
-          setIsFocus(false)
+          setIsFocusCity(false)
         }}
       />
-      <TextInput
+      {/* <TextInput
         label={'הכנס מספר ימים'}
-        value={daysNumber}
-        onChangeText={setdaysNumber}
+        value={days}
+        onChangeText={setDaysNumber}
         style={styles.input}
         mode='outlined'
         activeOutlineColor='#E6824A'
@@ -190,7 +189,7 @@ const DropdownComponent = () => {
           borderWidth: 0.3,
         }}
         keyboardType='number-pad'
-      />
+      /> */}
       {/* <Dropdown
         style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
         placeholderStyle={styles.placeholderStyle}
@@ -213,18 +212,6 @@ const DropdownComponent = () => {
           sethobbys(item.value)
         }}
       /> */}
-      <ButtonLower textContent={'צור לי טיול'} handlePress={buildTrip} />
-      {/* <ScrollView
-        style={styles.answerContainer}
-        contentContainerStyle={styles.answerContent}
-      >
-        <Text style={styles.answerText}>{answear}</Text>
-      </ScrollView> */}
-      <ScrollView style={styles.scrollViewStyle}>
-        <Text style={styles.textStyle}>
-          {Array(100).fill('Scroll me ').join('')}
-        </Text>
-      </ScrollView>
     </View>
   )
 }
@@ -233,8 +220,8 @@ export default DropdownComponent
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: 'white',
+    minWidth:'95%',
     padding: 16,
   },
   dropdown: {
@@ -251,7 +238,7 @@ const styles = StyleSheet.create({
   label: {
     position: 'absolute',
     backgroundColor: 'white',
-    left: 22,
+    right: 22,
     top: 8,
     zIndex: 999,
     paddingHorizontal: 8,
@@ -259,6 +246,7 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 16,
+    writingDirection:'rtl'
   },
   selectedTextStyle: {
     fontSize: 16,

@@ -13,15 +13,26 @@ import {
   VerticalScale,
   HorizontalScale,
 } from '../../utils'
+import { Picker } from '@react-native-picker/picker';
+
 import { List, RadioButton } from 'react-native-paper'
 import * as googleGenerativeAI from '@google/generative-ai'
 import DropdownComponent from '../../components/dropdownTest/dropdowntTest'
+import DaysPicker from '../../components/NumberPicker/numberPicker'
+import NumberPicker from '../../components/NumberPicker/numberPicker'
 
 const Test = () => {
-  const API_KEY = 'AIzaSyBozb6vVgoZ6pYEjsfZ7W5jtsEZjRSgI2Y'
-
-  useEffect(() => {
-    const StartChat = async () => {
+  const [daysNumber, setDaysNumber] = useState('')
+  const [cityLabel, setCityLabel] = useState('')
+  const [countryLabel, setCountryLabel] = useState('')
+  const myObject = {
+    text: "Hello, world!"
+  };
+      const StartChat = async (country,city,numberOfDay) => {
+      setdaysNumber(numberOfDay);
+      setCityLabel(city);
+      setcountryLabel(country);
+      const API_KEY = 'AIzaSyBozb6vVgoZ6pYEjsfZ7W5jtsEZjRSgI2Y'
       const genAI = new googleGenerativeAI.GoogleGenerativeAI(API_KEY)
       const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
       const prompt = 'Write travel for 3 days in budapest'
@@ -30,8 +41,7 @@ const Test = () => {
       const text = response.text()
       console.log(text)
     }
-    StartChat()
-  }, [])
+
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -39,14 +49,15 @@ const Test = () => {
         <BackArrow />
         <Text style={[Theme.primaryTitle, styles.title]}>התייעצות עם Ai</Text>
         <View style={styles.inputsContainer}>
-          <DropdownComponent></DropdownComponent>
+        <DropdownComponent setCountryLabel={setCountryLabel} setCityLabel={setCityLabel}> </DropdownComponent>
+        <NumberPicker selectedValueState={daysNumber} onValueChange={setDaysNumber} ></NumberPicker>
         </View>
         <ButtonLower
           textContent={'יצירת תכנון טיול עם Ai'}
-          handlePress={() => {}}
+          handlePress={() => {StartChat()}}
         />
       </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
   )
 }
 
@@ -55,6 +66,7 @@ export default Test
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    alignItems:'center'
   },
   title: {
     marginTop: windowHeight * 0.175,
@@ -63,4 +75,7 @@ const styles = StyleSheet.create({
   inputsContainer: {
     marginTop: VerticalScale(44),
   },
+  input:{
+    width:"95%"
+  }
 })
