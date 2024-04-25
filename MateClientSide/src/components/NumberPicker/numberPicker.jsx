@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
+import Theme from '../../../assets/styles/theme'
 
 
 const NumberPicker = ({selectedValueState, onValueChange ,text}) => {
@@ -48,7 +49,7 @@ const NumberPicker = ({selectedValueState, onValueChange ,text}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+  width:'200px'
   },
   touchableArea: {
     backgroundColor: 'white',

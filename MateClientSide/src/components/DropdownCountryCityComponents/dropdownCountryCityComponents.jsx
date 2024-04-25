@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
-import AntDesign from '@expo/vector-icons/AntDesign'
 import axios from 'axios'
-import { TextInput } from 'react-native-paper'
-import ButtonLower from '../../components/ButtonLower/buttonLower'
-import * as googleGenerativeAI from '@google/generative-ai'
-import { Dialog, Portal, Text } from 'react-native-paper';
 import Theme from '../../../assets/styles/theme'
 
 const hobbies = [
@@ -27,30 +22,12 @@ const hobbies = [
   { label: 'צילום', value: 'צילום' },
 ]
 
-const DropdownComponent = ({setCityLabel,setCountryLabel,setDaysNumber,days}) => {
-  const [visible, setVisible] = useState(false);
+const DropdownCountryCityComponents = ({setCityLabel,setCountryLabel,cityValue,countryValue,setCityValue,setCountryValue}) => {
   const [countryData, setCountryData] = useState([])
   const [cityData, setCityData] = useState([])
-  const [country, setCountry] = useState('')
-  const [city, setCity] = useState('')
-  const [answer, setAnswer] = useState('')
-  const [hobbys, sethobbys] = useState(0)
   const [value, setValue] = useState(null)
   const [isFocus, setIsFocus] = useState(false)
   const [isFocusCity, setIsFocusCity] = useState(false)
-
-  const API_KEY = 'AIzaSyBozb6vVgoZ6pYEjsfZ7W5jtsEZjRSgI2Y'
-
-  const renderLabel = (text,focus) => {
-    if (value || focus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: 'black' }]}>
-         {text}
-        </Text>
-      )
-    }
-    return null
-  }
 
 
   useEffect(() => {
@@ -81,20 +58,6 @@ const DropdownComponent = ({setCityLabel,setCountryLabel,setDaysNumber,days}) =>
       })
   }, [])
 
-  // const buildTrip = () => {
-  //   const StartChat = async () => {
-  //     const genAI = new googleGenerativeAI.GoogleGenerativeAI(API_KEY)
-  //     const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
-  //     const prompt = `Write travel for ${daysNumber} days in ${countryLabel} in ${cityLabel}`
-  //     // const prompt = 'Write travel for 3 days in budapest'
-  //     const result = await model.generateContent(prompt)
-  //     const response = await result.response
-  //     const text = response.text()
-  //     console.log(text)
-  //     setAnswer(text)
-  //   }
-  //   StartChat()
-  // }
 
   const handleCity = (countyCode) => {
     var config = {
@@ -138,12 +101,12 @@ const DropdownComponent = ({setCityLabel,setCountryLabel,setDaysNumber,days}) =>
         valueField='value'
         placeholder={!isFocus ? 'בחירת מדינה' : '...'}
         searchPlaceholder='Search...'
-        value={country}
+        value={countryValue}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
           // setValue(item.value)
-          setCountry(item.value)
+          setCountryValue(item.value)
           setCountryLabel(item.label)
           setIsFocus(false)
           handleCity(item.value)
@@ -162,11 +125,11 @@ const DropdownComponent = ({setCityLabel,setCountryLabel,setDaysNumber,days}) =>
         valueField='value'
         placeholder={!isFocusCity ? 'בחירת עיר' : '...'}
         searchPlaceholder='חיפוש...'
-        value={city}
+        value={cityValue}
         onFocus={() => setIsFocusCity(true)}
         onBlur={() => setIsFocusCity(false)}
         onChange={(item) => {
-          setCity(item.value)
+          setCityValue(item.value)
           setCityLabel(item.label)
           setIsFocusCity(false)
         }}
@@ -216,7 +179,7 @@ const DropdownComponent = ({setCityLabel,setCountryLabel,setDaysNumber,days}) =>
   )
 }
 
-export default DropdownComponent
+export default DropdownCountryCityComponents
 
 const styles = StyleSheet.create({
   container: {
@@ -246,7 +209,7 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 16,
-    writingDirection:'rtl'
+    textAlign:'center'
   },
   selectedTextStyle: {
     fontSize: 16,
