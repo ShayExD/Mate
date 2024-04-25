@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <Text> Open lala lala up App.js to start working on your app!</Text>
-      <StatusBar style="auto" /> */}<PlanTrip ></PlanTrip>
+      <StatusBar style="auto" /> */}<PlanTrip></PlanTrip>
     </View>
   );
 }
