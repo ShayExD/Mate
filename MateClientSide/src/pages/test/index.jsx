@@ -25,9 +25,9 @@ const Test = () => {
   const [daysNumber, setDaysNumber] = useState('')
   const [cityLabel, setCityLabel] = useState('')
   const [countryLabel, setCountryLabel] = useState('')
-  const myObject = {
-    text: "Hello, world!"
-  };
+  // const myObject = {
+  //   text: "Hello, world!"
+  // };
       const StartChat = async (country,city,numberOfDay) => {
       setdaysNumber(numberOfDay);
       setCityLabel(city);
@@ -50,8 +50,12 @@ const Test = () => {
         <Text style={[Theme.primaryTitle, styles.title]}>התייעצות עם Ai</Text>
         <View style={styles.inputsContainer}>
         <DropdownComponent setCountryLabel={setCountryLabel} setCityLabel={setCityLabel}> </DropdownComponent>
-        <NumberPicker selectedValueState={daysNumber} onValueChange={setDaysNumber} ></NumberPicker>
-        </View>
+        <NumberPicker
+        selectedValueState={daysNumber}
+        onValueChange={setDaysNumber}
+        text="בר המלך"
+      />
+      </View>
         <ButtonLower
           textContent={'יצירת תכנון טיול עם Ai'}
           handlePress={() => {StartChat()}}
