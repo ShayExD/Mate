@@ -14,7 +14,7 @@ const Theme = StyleSheet.create({
   primaryText:{
     color:'black',
     fontFamily:'OpenSans',
-    fontSize:15,
+    fontSize:16,
     textAlign:'center',
     lineHeight:windowHeight*0.0281,
     marginHorizontal:windowWidth*0.100,

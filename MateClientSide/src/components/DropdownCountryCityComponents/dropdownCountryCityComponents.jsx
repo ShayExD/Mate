@@ -184,8 +184,6 @@ export default DropdownCountryCityComponents
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    minWidth:'95%',
-    padding: 16,
   },
   dropdown: {
     height: 50,
@@ -194,6 +192,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
     marginBottom: 10,
+    minWidth:'90%'
   },
   icon: {
     marginRight: 5,
@@ -208,11 +207,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   placeholderStyle: {
-    fontSize: 16,
-    textAlign:'center'
+    fontSize: Theme.primaryText.fontSize,
+    textAlign:'center',
   },
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: Theme.primaryText.fontSize,
   },
   iconStyle: {
     width: 20,
@@ -220,10 +219,10 @@ const styles = StyleSheet.create({
   },
   inputSearchStyle: {
     height: 40,
-    fontSize: 16,
+    fontSize: Theme.primaryText.fontSize,
   },
   input: {
-    fontSize: 16,
+    fontSize: Theme.primaryText.fontSize,
     height: 50,
     width: 340,
     marginBottom: 15,
