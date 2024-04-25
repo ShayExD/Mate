@@ -1,22 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
+import axios from 'axios';
 
 const CountryPicker = ({ selectedCountries, onCountryChange }) => {
-  const countries = [
-    { id: '1', name: 'USA' },
-    { id: '2', name: 'Canada' },
-    { id: '3', name: 'UK' },
-    { id: '4', name: 'Australia' },
-    { id: '5', name: 'Germany' },
-    // Add more countries as needed
-  ];
+const [countries,setCountries]=useState([])
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get('https://restcountries.com/v3.1/all');
+        const countryNames = response.data.map(country => country.name.common);
+        const sortedCountries = countryNames.sort();
+        setCountries(sortedCountries);
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
+  const formatCountriesForDropdown = (countries) => {
+    return countries.map(country => ({
+      id: country,
+      name: country
+    }));
+  };
+
+
 
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Select Countries to Visit:</Text>
       <MultiSelect
-        items={countries}
+        items={formatCountriesForDropdown(countries)}
         uniqueKey="id"
         onSelectedItemsChange={onCountryChange}
         selectedItems={selectedCountries}
