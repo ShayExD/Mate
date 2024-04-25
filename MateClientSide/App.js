@@ -6,6 +6,7 @@ import Intro from './src/pages/intro';
 import Login from './src/pages/login';
 import Register from './src/pages/register';
 import PlanTrip from './src/pages/ai_trip';
+import EditProfile from './src/pages/edit_profile';
 import Test from './src/pages/test';
 import { Provider } from 'react-native-paper';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native'

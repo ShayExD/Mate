@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import React, { useState } from 'react'
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
+import { Picker } from '@react-native-picker/picker'
+
 
 const NumberPicker = ({selectedValueState, onValueChange ,text}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const Options = Array.from({ length: 100 }, (_, index) => index + 1);
 
   const openPicker = () => {
-    setModalVisible(true);
-  };
+    setModalVisible(true)
+  }
 
   const closePicker = () => {
-    setModalVisible(false);
-  };
+    setModalVisible(false)
+  }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.touchableArea} onPress={openPicker}>
-        <Text style={styles.selectedDays}>
-          {selectedValueState ? ` ${selectedValueState}` : text}
-        </Text>
-      </TouchableOpacity>
-      <Modal visible={modalVisible} animationType="slide" transparent>
+    <TouchableOpacity style={styles.touchableArea} onPress={openPicker}>
+  <Text style={styles.selectedDays}>
+    {selectedValueState ? ` ${selectedValueState.toString()}` : text}
+  </Text>
+</TouchableOpacity>
+      <Modal visible={modalVisible} animationType='slide' transparent>
         <View style={styles.modalContainer}>
           <View style={styles.pickerContainer}>
             <Picker
               selectedValue={selectedValueState}
               onValueChange={(itemValue) => {
-                onValueChange(itemValue);
-                closePicker();
+                onValueChange(itemValue)
+                closePicker()
               }}
             >
               {Options.map((option) => (
@@ -42,8 +43,8 @@ const NumberPicker = ({selectedValueState, onValueChange ,text}) => {
         </View>
       </Modal>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +82,6 @@ const styles = StyleSheet.create({
     color: 'blue',
     textAlign: 'center', // Center the text horizontally
   },
-});
+})
 
-export default NumberPicker;
+export default NumberPicker
