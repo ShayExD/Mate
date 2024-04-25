@@ -29,7 +29,7 @@ export default BackArrow
 const styles = StyleSheet.create({
     container:{
         position:'absolute',
-        left:'10%',
+        left:'5%',
         top:VerticalScale(56),
         backgroundColor: '#F7F7F9',
         borderRadius:'50%'

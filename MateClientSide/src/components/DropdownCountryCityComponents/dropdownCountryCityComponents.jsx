@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     minWidth:'90%'
   },
   icon: {
-    marginRight: 5,
+    marginRight: 0,
   },
   label: {
     position: 'absolute',
@@ -228,25 +228,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'right',
   },
-  // answerContainer: {
-  //   borderWidth: 1,
-  //   borderColor: 'lightgrey',
-  //   borderRadius: 8,
-  //   marginBottom: 15,
-  //   maxHeight: 200, // Keep this to limit the visible area
-  // },
-  // answerText: {
-  //   fontSize: 16,
-  //   padding: 10,
-  // },
-  // answerContent: {
-  //   flexGrow: 1,
-  // },
-  scrollViewStyle: {
-    flex: 1,
-    backgroundColor: 'lightgrey',
-    maxHeight: 200,
-  },
+
   textStyle: {
     fontSize: 20,
     textAlign: 'center',
