@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React,{useState} from 'react'
 import Theme from '../../../assets/styles/theme'
-import { VerticalScale, windowHeight } from '../../utils'
+import { HorizontalScale, VerticalScale, windowHeight } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
 import { TextInput, Button } from 'react-native-paper';
 import Input from '../../components/Input/input'
@@ -70,6 +70,8 @@ const handleLogin = () => {
 const styles = StyleSheet.create({
 screen:{
 flex:1,
+width:'100%',
+alignItems:'center',
 },
 title:{
 marginTop:windowHeight*0.175,
@@ -77,11 +79,13 @@ marginBottom:windowHeight*0.0174
 
 },
 inputsContainer:{
-marginTop:VerticalScale(44)
+marginTop:VerticalScale(44),
+width:'90%',
+
 },
 text:{
 color:'gray',
-marginHorizontal:0
+marginHorizontal:0,
 },
 input: {
   marginBottom: VerticalScale(24),

@@ -10,7 +10,7 @@ import DropdownComponent from '../../components/DropdownCountryCityComponents/dr
 import NumberPicker from '../../components/NumberPicker/numberPicker';
 import DialogAi from '../../components/DialogAi/dialogAi';
 
-const Test = () => {
+const PlanTrip = () => {
   const [daysNumber, setDaysNumber] = useState('');
   const [cityLabel, setCityLabel] = useState('');
   const [countryLabel, setCountryLabel] = useState('');
@@ -85,7 +85,7 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default PlanTrip;
 
 const styles = StyleSheet.create({
   screen: {

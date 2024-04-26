@@ -4,7 +4,7 @@ import { windowHeight, windowWidth } from '../../utils';
 import Theme from '../../../assets/styles/theme';
 import ButtonLower from '../../components/ButtonLower/buttonLower';
 
-export default function Intro() {
+export default function Intro({navigation}) {
   return (
     <View style={styles.screen}>
     <View>
@@ -17,7 +17,7 @@ export default function Intro() {
        <Text style={styles.span}> אנשים מרתקים </Text>מחכים להכיר אותך, בכל פינה של העולם.
        </Text>
        <Text style={Theme.primaryText}>העולם מלא באנשים מרתקים, ותמיד מחפשים חברים חדשים, חוויות משותפות והזדמנויות חדשות. טיול גדול הוא הזדמנות נהדרת לפגוש אנשים מכל העולם, ללמוד על תרבויות שונות וליצור קשרים חדשים.</Text>
-       <ButtonLower textContent={"מתחילים לטייל ביחד"} handlePress={()=>{}}/>
+       <ButtonLower textContent={"מתחילים לטייל ביחד"} handlePress={()=>{navigation.navigate('Login')}}/>
     </View>
   )
 }

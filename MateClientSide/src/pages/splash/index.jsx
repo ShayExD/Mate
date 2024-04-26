@@ -1,7 +1,7 @@
 
 import {windowWidth,windowHeight} from '../../utils'
 import React, {useEffect,useState } from 'react';
-import { StyleSheet,Image,Dimensions  } from 'react-native';
+import { StyleSheet,Image,Dimensions ,View } from 'react-native';
 import * as Font from 'expo-font';
 
 export default function Splash({navigation}) {
@@ -29,28 +29,38 @@ export default function Splash({navigation}) {
       }, []);
    
    
-    //    useEffect(()=>{
-    //      if(loadingComplete){
-    //         setTimeout(() => {
-    //             navigation.navigate('Intro');
-    //         }, 4000);
-    //       }
-    //     },[loadingComplete]);
+       useEffect(()=>{
+         if(loadingComplete){
+            setTimeout(() => {
+                navigation.navigate('Intro');
+            }, 4000);
+          }
+        },[loadingComplete]);
 
            
    return (
-   
+      <View style={styles.screen}>
        <Image
        source={require("../../../assets/images/logo.png")}
        resizeMode="contain"
        style = {styles.image}/>
+       </View>
         )
 }
 
 
 const styles = StyleSheet.create({
-      image:{
+screen:
+{
+    width:'100%',
+    height:'100%',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems:'center',
+},
+image:
+{
         width:  windowWidth,
         height: windowHeight*0.56
-      },
+},
 });
