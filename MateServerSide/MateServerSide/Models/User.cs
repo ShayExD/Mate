@@ -48,7 +48,7 @@ namespace MateServerSide.Models
             return dbs.ReadUsers();// - needs Implements on dbServices
         }
 
-        public static bool Registration(string email, string password)
+        public static User Registration(string email, string password)
         {
             DBservices dbs = new DBservices();
             return dbs.Register(email, password);

@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\shaye\Documents\GitHub\Mate\MateServerSide\MateServerSide\bin\Release\net6.0\publish\</_PublishTargetUrl>
-    <History>True|2024-04-24T18:22:46.5809398Z;</History>
+    <History>True|2024-04-28T13:18:08.2003330Z;True|2024-04-24T21:22:46.5809398+03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

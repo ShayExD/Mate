@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import Theme from '../../../assets/styles/theme'
 import { HorizontalScale, VerticalScale, windowHeight } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
@@ -7,18 +7,15 @@ import { TextInput, Button } from 'react-native-paper';
 import Input from '../../components/Input/input'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import axios from 'axios';
+import { AuthContext } from '../../../AuthContext'
+
 
 export default function Register({navigation}) {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const { loginUser,loggedInUser } = useContext(AuthContext);
 
-const handleLogin = () => {
-    // Handle login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
 
   const handleRegister = async () => {
     try {
@@ -32,8 +29,11 @@ const handleLogin = () => {
           },
         }
       );
-      console.log('User logged in successfully:', response.data);
-      // navigation.navigate('Home')
+      
+      console.log('User register in successfully:', response.data);
+      loginUser(response.data)
+      console.log(loggedInUser)
+      navigation.navigate('EditProfile')
 
       // Handle further actions after successful login
     } catch (error) {
@@ -52,6 +52,7 @@ const handleLogin = () => {
   //     console.error('Error fetching data:', error);
   //   }
   // };
+
 
   return (
     <View style={[Theme.screen,styles.screen]}>

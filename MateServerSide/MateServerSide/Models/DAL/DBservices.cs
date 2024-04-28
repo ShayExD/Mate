@@ -350,51 +350,51 @@ namespace MateServerSide.Models.DAL
 
         //}
 
-        public bool Register(string email, string password)
-        {
+        //public bool Register(string email, string password)
+        //{
 
-            SqlConnection con;
-            SqlCommand cmd;
+        //    SqlConnection con;
+        //    SqlCommand cmd;
 
-            try
-            {
-                con = connect("myProjDB"); // create the connection
-            }
-            catch (Exception ex)
-            {
-                // write to log
-                throw (ex);
-            }
+        //    try
+        //    {
+        //        con = connect("myProjDB"); // create the connection
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // write to log
+        //        throw (ex);
+        //    }
 
-            Dictionary<string, object> paramDic = new Dictionary<string, object>();
-            paramDic.Add("@email", email);
-            paramDic.Add("@password", password);
+        //    Dictionary<string, object> paramDic = new Dictionary<string, object>();
+        //    paramDic.Add("@email", email);
+        //    paramDic.Add("@password", password);
 
 
-            cmd = CreateCommandWithStoredProcedure("SP_Register_User", con, paramDic);             // create the command
+        //    cmd = CreateCommandWithStoredProcedure("SP_Register_User", con, paramDic);             // create the command
 
-            try
-            {
-                int numEffected = cmd.ExecuteNonQuery(); // execute the command
-                /*int numEffected = Convert.ToInt32(cmd.ExecuteScalar());*/ // returning the id
-                return numEffected == 1;
-            }
-            catch (Exception ex)
-            {
-                // write to log
-                throw (ex);
-            }
+        //    try
+        //    {
+        //        int numEffected = cmd.ExecuteNonQuery(); // execute the command
+        //        /*int numEffected = Convert.ToInt32(cmd.ExecuteScalar());*/ // returning the id
+        //        return numEffected == 1;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // write to log
+        //        throw (ex);
+        //    }
 
-            finally
-            {
-                if (con != null)
-                {
-                    // close the db connection
-                    con.Close();
-                }
-            }
+        //    finally
+        //    {
+        //        if (con != null)
+        //        {
+        //            // close the db connection
+        //            con.Close();
+        //        }
+        //    }
 
-        }
+        //}
 
         public User Login(string email, string password)
         {
@@ -473,6 +473,82 @@ namespace MateServerSide.Models.DAL
 
         }
 
+        public User Register(string email, string password)
+        {
+
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@email", email);
+            paramDic.Add("@password", password);
+
+
+            cmd = CreateCommandWithStoredProcedure("SP_Register_User", con, paramDic);             // create the command
+
+            User user = new User();
+
+
+            try
+            {
+
+                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dataReader.Read())
+                {
+                    user.Id = Convert.ToInt32(dataReader["id"]);
+                    user.Fullname = dataReader["fullname"] == DBNull.Value ? "" : dataReader["fullname"].ToString();
+                    user.Password = dataReader["password"] == DBNull.Value ? "" : dataReader["password"].ToString();
+                    user.Introduction = dataReader["introduction"] == DBNull.Value ? "" : dataReader["introduction"].ToString();
+                    user.Gender = dataReader["gender"] == DBNull.Value ? ' ' : Convert.ToChar(dataReader["gender"]);
+                    user.Age = dataReader["age"] == DBNull.Value ? 0 : Convert.ToInt32(dataReader["age"]);
+                    user.Instagram = dataReader["instagram"] == DBNull.Value ? "" : dataReader["instagram"].ToString();
+                    user.Email = dataReader["email"] == DBNull.Value ? "" : dataReader["email"].ToString();
+                    user.PhoneNumber = dataReader["phoneNumber"] == DBNull.Value ? "" : dataReader["phoneNumber"].ToString();
+                    user.ProfileImage = dataReader["profileImage"] == DBNull.Value ? "" : dataReader["profileImage"].ToString();
+                    user.City = dataReader["city"] == DBNull.Value ? "" : dataReader["city"].ToString();
+
+                    // Assuming travelPlan and tripInterests are stored as comma-separated values in the database
+                    string travelPlanStr = dataReader["travelPlan"] == DBNull.Value ? "" : dataReader["travelPlan"].ToString();
+                    string tripInterestsStr = dataReader["tripInterests"] == DBNull.Value ? "" : dataReader["tripInterests"].ToString();
+                    List<string> travelPlanList = new List<string>(travelPlanStr.Split(','));
+                    List<string> tripInterestsList = new List<string>(tripInterestsStr.Split(','));
+
+                    user.TravelPlan = travelPlanList;
+                    user.TripInterests = tripInterestsList;
+                }
+                if (user.Email == null)
+                {
+                    throw new Exception("User already exists");
+                }
+                return user;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+
+        }
 
         //public User Register(string email, string password)
         //{
@@ -489,11 +565,9 @@ namespace MateServerSide.Models.DAL
         //        throw;
         //    }
 
-        //    Dictionary<string, object> paramDic = new Dictionary<string, object>
-        //        {
-        //{ "@email", email },
-        //{ "@password", password }
-        //    };
+        //    Dictionary<string, object> paramDic = new Dictionary<string, object>();
+        //    paramDic.Add("@email", email);
+        //    paramDic.Add("@password", password);
 
         //    cmd = CreateCommandWithStoredProcedure("SP_Register_User", con, paramDic); // create the command
 
