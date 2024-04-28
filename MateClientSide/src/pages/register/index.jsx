@@ -8,7 +8,7 @@ import Input from '../../components/Input/input'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import axios from 'axios';
 
-export default function Register() {
+export default function Register({navigation}) {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,29 @@ const handleLogin = () => {
     console.log('Password:', password);
   };
 
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post(
+        `https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User/Register?email=${encodeURIComponent(email)}`,
+        password.toString(),
+         // Send password in the request body
+        {
+          headers: {
+            'Content-Type': 'application/json', // Set the Content-Type header to application/json
+          },
+        }
+      );
+      console.log('User logged in successfully:', response.data);
+      // navigation.navigate('Home')
 
+      // Handle further actions after successful login
+    } catch (error) {
+      console.error('Error logging in:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+      }
+    }
+  };
   // const handleLogin = async () => {
   //   try {
   //     const response = await axios.get(`https://localhost:7271/api/User`);
@@ -32,7 +54,7 @@ const handleLogin = () => {
   // };
 
   return (
-    <View style={styles.screen}>
+    <View style={[Theme.screen,styles.screen]}>
       <BackArrow/>
       <Text style={[Theme.primaryTitle,styles.title]}>הרשמה</Text>
       <Text  style={[Theme.primaryText,styles.text]}>מלא את השדות הבאים על מנת להירשם</Text>
@@ -60,8 +82,8 @@ const handleLogin = () => {
 
       />
       </View>
-      <ButtonLower textContent={"התחבר"} handlePress={handleLogin}/>
-      <Text style={Theme.primaryText}> כבר יש לך חשבון? <Text style={Theme.primaryColor} onPress={()=>console.log("מעבר עמוד")}>כניסה לחשבון</Text></Text>
+      <ButtonLower textContent={"הירשם"} handlePress={handleRegister}/>
+      <Text style={Theme.primaryText}> כבר יש לך חשבון? <Text style={Theme.primaryColor} onPress={()=>navigation.navigate('Login')}>כניסה לחשבון</Text></Text>
      
     </View>
   )
@@ -69,8 +91,6 @@ const handleLogin = () => {
 
 const styles = StyleSheet.create({
 screen:{
-flex:1,
-width:'100%',
 alignItems:'center',
 },
 title:{

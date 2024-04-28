@@ -2,6 +2,8 @@
 import {windowWidth,windowHeight} from '../../utils'
 import React, {useEffect,useState } from 'react';
 import { StyleSheet,Image,Dimensions ,View } from 'react-native';
+import Theme from '../../../assets/styles/theme';
+
 import * as Font from 'expo-font';
 
 export default function Splash({navigation}) {
@@ -39,7 +41,7 @@ export default function Splash({navigation}) {
 
            
    return (
-      <View style={styles.screen}>
+      <View style={[Theme.screen,styles.screen]}>
        <Image
        source={require("../../../assets/images/logo.png")}
        resizeMode="contain"
@@ -52,9 +54,7 @@ export default function Splash({navigation}) {
 const styles = StyleSheet.create({
 screen:
 {
-    width:'100%',
-    height:'100%',
-    flex: 1,
+
     justifyContent: 'center',
     alignItems:'center',
 },

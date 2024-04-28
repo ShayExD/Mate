@@ -6,7 +6,7 @@ import ButtonLower from '../../components/ButtonLower/buttonLower';
 
 export default function Intro({navigation}) {
   return (
-    <View style={styles.screen}>
+    <View style={[Theme.screen,styles.screen]}>
     <View>
       <Image
        source={require("../../../assets/images/IntroImage.png")}
@@ -24,7 +24,6 @@ export default function Intro({navigation}) {
 
 const styles = StyleSheet.create({
     screen:{
-        flex: 1,
         justifyContent: 'flex-start',
         alignItems:'center',
         

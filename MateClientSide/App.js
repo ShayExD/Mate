@@ -11,16 +11,19 @@ import { Provider } from 'react-native-paper';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native'
 import MainNavigation from './src/navigation/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
+import { AuthProvider } from './AuthContext';
 
 
 export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <AuthProvider>
     <NavigationContainer style={styles.container}>
     <Provider>
     <MainNavigation></MainNavigation>
     </Provider>
     </NavigationContainer>
+    </AuthProvider>
     </TouchableWithoutFeedback>
   );
 }

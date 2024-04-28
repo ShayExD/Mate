@@ -16,7 +16,7 @@ namespace MateServerSide.Controllers
         }
 
         [HttpPost("Register")]
-        public bool Post(string email, [FromBody] string password)
+        public Models.User Post(string email, [FromBody] string password)
         {
             return Models.User.Registration(email,password);
 

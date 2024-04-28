@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import Theme from '../../../assets/styles/theme'
 import { VerticalScale, windowHeight,HorizontalScale } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
@@ -7,23 +7,18 @@ import { TextInput, Button } from 'react-native-paper';
 import Input from '../../components/Input/input'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import axios from 'axios';
-
-export default function Login() {
+import { AuthContext } from '../../../AuthContext'
+export default function Login({navigation}) {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
-
-const handleLogin = () => {
-    // Handle login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
+  const { loginUser,loggedInUser } = useContext(AuthContext);
 
 
-  // const handleLogin = async () => {
+  // const getAllUser = async () => {
   //   try {
-  //     const response = await axios.get(`https://localhost:7271/api/User`);
+  //     const response = await axios.get(`https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User`);
+  
   //     setData(response.data);
   //     console.log('Data fetched successfully:', response.data);
   //   } catch (error) {
@@ -31,8 +26,37 @@ const handleLogin = () => {
   //   }
   // };
 
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        `https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User/Login?email=${encodeURIComponent(email)}`,
+        password.toString(),
+         // Send password in the request body
+        {
+          headers: {
+            'Content-Type': 'application/json', // Set the Content-Type header to application/json
+          },
+        }
+      );
+      loginUser(response.data)
+      console.log(loggedInUser)
+      console.log('User logged in successfully:', response.data);
+      // navigation.navigate('Home')
+
+      // Handle further actions after successful login
+    } catch (error) {
+      console.error('Error logging in:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+      }
+    }
+  };
+  
+  // Example usage:
+  // Replace 'user@email.com' and 'password123' with actual user input
+
   return (
-    <View style={styles.screen}>
+    <View style={[Theme.screen,styles.screen]}>
       <BackArrow/>
       <Text style={[Theme.primaryTitle,styles.title]}>התחברות</Text>
       <Text  style={[Theme.primaryText,styles.text]}>אנא הרשם לאפליקציה על מנת להתחיל להכיר מטיילים</Text>
@@ -60,7 +84,7 @@ const handleLogin = () => {
 
       />
       </View>
-      <Text style={Theme.primaryText}> עדיין אין לך חשבון? <Text style={Theme.primaryColor} onPress={()=>console.log("מעבר עמוד")}>להרשמה</Text></Text>
+      <Text style={Theme.primaryText}> עדיין אין לך חשבון? <Text style={Theme.primaryColor} onPress={()=>navigation.navigate('Register')}>להרשמה</Text></Text>
      
     <ButtonLower textContent={"התחבר"} handlePress={handleLogin}/>
     </View>
@@ -69,8 +93,6 @@ const handleLogin = () => {
 
 const styles = StyleSheet.create({
 screen:{
-flex:1,
-width:'100%',
 alignItems:'center',
 },
 title:{

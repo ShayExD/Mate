@@ -17,6 +17,7 @@ const MainNavigation = () => {
       <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
+
       {/* <Stack.Screen name="MyTabs" component={MyTabs} /> */}
     </Stack.Navigator>
   );
