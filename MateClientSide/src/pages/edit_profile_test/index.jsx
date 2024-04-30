@@ -3,14 +3,10 @@ import React, { useState,useEffect } from 'react'
 import Theme from '../../../assets/styles/theme'
 import { VerticalScale, windowHeight } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
-import { TextInput, Button } from 'react-native-paper'
-import Input from '../../components/Input/input'
+import { TextInput } from 'react-native-paper'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
-import { Avatar } from 'react-native-paper'
 import axios from 'axios'
 import AgePicker from '../../components/AgePicker/agePicker'
-import CountryPicker from '../../components/CountryPicker/countryPicker'
-import ProfilePicturePicker from '../../components/ProfilePicturePicker/profilePicturePicker'
 import GenderPicker from '../../components/GenderPicker/genderPicker'
 import AvatarComponent from '../../components/Avatar/AvatarComponent '
 import MultiSelectDropdown from '../../components/MultiSelectDropdown/multiSelectDropdown';
@@ -18,8 +14,8 @@ import { hobbies } from '../../utils'
 
 export default function EditProfileTest() {
   const [profilePicture, setProfilePicture] = useState(null)
-  const [fullName, setFullName] = useState([])
-  const [data, setData] = useState([])
+  const [fullName, setFullName] = useState('')
+  const [description, setDescription] = useState('')
   const [age, setAge] = useState('')
   const [gender, setGender] = useState('')
   const [interests, setInterests] = useState('')
@@ -74,27 +70,28 @@ export default function EditProfileTest() {
         <AvatarComponent></AvatarComponent>
       </View>
       <View style={styles.inputsContainer}>
+      <TextInput
+        label= {"שם מלא"}
+        value={fullName}
+        onChangeText={setFullName}
+        style={styles.input}
+        mode="outlined"
+        activeOutlineColor='#E6824A'
+        selectionColor='gray'
+        textAlign='right'
+      />  
+       <TextInput
+        label= {"קצת עלי"}
+        value={description}
+        onChangeText={setDescription}
+        style={styles.input}
+        mode="outlined"
+        secureTextEntry
+        activeOutlineColor='#E6824A'
+        selectionColor='gray'
+        textAlign='right'
 
-        <TextInput
-          label={'שם מלא'}
-          value={fullName}
-          onChangeText={setFullName}
-          style={styles.input}
-          mode='outlined'
-          activeOutlineColor='#E6824A'
-          selectionColor='gray'
-          textAlign='right'
-        />
-        <TextInput
-          label={'הצגה עצמית'}
-          value={data}
-          onChangeText={setData}
-          style={styles.input}
-          mode='outlined'
-          activeOutlineColor='#E6824A'
-          selectionColor='gray'
-          textAlign='right'
-        />
+      />
         <AgePicker selectedAge={age} onAgeChange={setAge} />
         <GenderPicker></GenderPicker>
         <MultiSelectDropdown
@@ -137,9 +134,8 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: VerticalScale(24),
     paddingHorizontal: 10,
-    textAlign: 'left',
+    textAlign: 'left', 
     direction: 'rtl',
-    minWidth: '85%',
   },
   button: {
     marginTop: 10,

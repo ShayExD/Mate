@@ -32,9 +32,9 @@ const MultiSelectDropdown = (props) => {
         placeholder={props.title}
         boxStyles={{
           direction: 'rtl',
-          textAlign: 'right',
+          textAlign: 'center',
           minWidth: '100%',
-          alignContent: 'flex-end',
+          alignItems:'center'
         }}
         inputStyles={{
           fontSize: 16,
@@ -45,7 +45,6 @@ const MultiSelectDropdown = (props) => {
           minWidth: '50%',
           maxWidth: '100%',
           alignItems: 'flex-end',
-          direction: 'ltr',
         }}
         dropdownItemStyles={{ width: '100%', justifyContent: 'space-between' }}
         setSelected={(val) => setSelected(val)}
@@ -73,13 +72,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   label: {
-    textAlign: 'right',
-    direction: 'rtl',
+    textAlign:'left',
     color: 'black',
+    
     fontFamily: Theme.primaryText.fontFamily,
-    marginRight: '60%',
   },
   badges: {
+    width:'45%',
+    alignItems:'center',
+    textAlign:'center',
     backgroundColor: Theme.primaryColor.color,
     fontFamily: Theme.primaryText.fontFamily,
   },
