@@ -56,9 +56,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center', // Center the content horizontally
+    alignItems: 'flex-start',
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'black',
+    paddingHorizontal: 10,
+    textAlign: 'left',
+    direction: 'rtl',
   },
   selectedGender: {
     fontSize: 16,
@@ -80,7 +83,8 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Center the content horizontally
   },
   closeButtonText: {
-    fontSize: 16,
+    marginBottom: 10,
+    fontSize: 18,
     color: 'blue',
     textAlign: 'center', // Center the text horizontally
   },

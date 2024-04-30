@@ -10,6 +10,7 @@ import AgePicker from '../../components/AgePicker/agePicker'
 import GenderPicker from '../../components/GenderPicker/genderPicker'
 import AvatarComponent from '../../components/Avatar/AvatarComponent '
 import MultiSelectDropdown from '../../components/MultiSelectDropdown/multiSelectDropdown';
+import DatePickerComponent from '../../components/DatePicker/datePicker'
 import { hobbies } from '../../utils'
 
 export default function EditProfileTest() {
@@ -17,6 +18,7 @@ export default function EditProfileTest() {
   const [fullName, setFullName] = useState('')
   const [description, setDescription] = useState('')
   const [age, setAge] = useState('')
+  const [selectedDate, setSelectedDate] = useState(null);
   const [gender, setGender] = useState('')
   const [interests, setInterests] = useState('')
   const [destination, setDestination] = useState('')
@@ -92,7 +94,10 @@ export default function EditProfileTest() {
         textAlign='right'
 
       />
-        <AgePicker selectedAge={age} onAgeChange={setAge} />
+       <DatePickerComponent
+					selectedDate={selectedDate}
+					onDateChange={setSelectedDate}
+				/>
         <GenderPicker></GenderPicker>
         <MultiSelectDropdown
             data={hobbies}
