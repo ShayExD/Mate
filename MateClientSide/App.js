@@ -21,7 +21,7 @@ export default function App() {
     <AuthProvider>
     <NavigationContainer style={styles.container}>
     <Provider>
-    <MainNavigation></MainNavigation> 
+    <EditProfileTest></EditProfileTest> 
     {/* <Register> </Register> */}
     </Provider>
     </NavigationContainer>

@@ -27,7 +27,8 @@
     "react-native-modal-datetime-picker": "^17.1.0",
     "react-native-multiple-select": "^0.5.12",
     "react-native-paper": "^5.12.3",
-    "react-native-web": "~0.19.6"
+    "react-native-web": "~0.19.6",
+    "expo-image-picker": "~14.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

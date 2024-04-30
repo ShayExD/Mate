@@ -13,7 +13,8 @@ import CountryPicker from '../../components/CountryPicker/countryPicker'
 import ProfilePicturePicker from '../../components/ProfilePicturePicker/profilePicturePicker'
 import GenderPicker from '../../components/GenderPicker/genderPicker'
 import DropdownHobbies from '../../components/DropdownHobbies/dropdownHobbies'
-
+import AvatarComponent from '../../components/Avatar/AvatarComponent '
+import ImageLibrary from '../../components/ImagesLibrary/imagesLibraty'
 export default function EditProfileTest() {
   const [profilePicture, setProfilePicture] = useState(null)
   const [fullName, setFullName] = useState([])
@@ -72,13 +73,12 @@ export default function EditProfileTest() {
       <BackArrow />
       <Text style={[Theme.primaryTitle, styles.title]}>בניית הפרופיל שלך</Text>
       <View style={styles.avatarContainer}>
-        <Avatar.Image
+        {/* <Avatar.Image
           size={150}
           source={require('../../../assets/images/avatar.jpg')}
-        />
+        /> */}
+        <AvatarComponent></AvatarComponent>
       </View>
-      <Text style={[Theme.primaryText, styles.text]}>העלאת תמונת פרופיל</Text>
-      {/* <ProfilePicturePicker onImagePick={handleImagePick} /> */}
       <View style={styles.inputsContainer}>
         <DropdownHobbies
           selectedItems={selectedHobbies}
