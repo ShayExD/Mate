@@ -98,7 +98,9 @@ export default function EditProfileTest() {
 					selectedDate={selectedDate}
 					onDateChange={setSelectedDate}
 				/>
-        <GenderPicker></GenderPicker>
+        <GenderPicker
+        onGenderChange={setGender}
+        selectedGender={gender}></GenderPicker>
         <MultiSelectDropdown
             data={hobbies}
             title={'בחירת תחביבים'}

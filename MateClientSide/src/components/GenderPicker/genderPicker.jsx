@@ -20,7 +20,7 @@ const GenderPicker = ({ selectedGender, onGenderChange }) => {
       <TouchableOpacity style={styles.touchableArea} onPress={openPicker}>
         <Text style={styles.selectedGender}>
           {selectedGender
-            ? `בחר מין: ${selectedGender}`
+            ? `${selectedGender}`
             : 'בחר מין'}
         </Text>
       </TouchableOpacity>
