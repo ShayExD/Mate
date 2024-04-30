@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Theme from '../../../assets/styles/theme'
 import { VerticalScale, windowHeight } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
@@ -25,6 +25,41 @@ export default function EditProfileTest() {
   const [instagram, setInstagram] = useState('')
   const [city, setCity] = useState('')
   const [selectedHobbies, setSelectedHobbies] = useState([])
+  const [countryData, setCountryData] = useState([])
+
+
+  useEffect(() => {
+    var config = {
+      method: 'get',
+      url: 'https://api.countrystatecity.in/v1/countries',
+      headers: {
+        'X-CSCAPI-KEY':
+          'RHRXUkhPTXl1aUlKTEk5WlFua1lwR01xVDE2b3U3R2NCUndPM01hTg==',
+      },
+    }
+
+    axios(config)
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data))
+        var count = Object.keys(response.data).length
+        let countryArray = []
+        for (var i = 0; i < count; i++) {
+          countryArray.push({
+            value: response.data[i].iso2,
+            label: response.data[i].name,
+          })
+        }
+        setCountryData(countryArray)
+        console.log(countryData)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }, [])
+
+
+
+
   const handleImagePick = (image) => {
     setProfilePicture(image)
   }

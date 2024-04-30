@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React,{useState,useContext} from 'react'
+import { StyleSheet, Text, View,Alert } from 'react-native'
+import React,{useState,useContext,useEffect} from 'react'
 import Theme from '../../../assets/styles/theme'
 import { HorizontalScale, VerticalScale, windowHeight } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
 import { TextInput, Button } from 'react-native-paper';
-import Input from '../../components/Input/input'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import axios from 'axios';
 import { AuthContext } from '../../../AuthContext'
@@ -14,10 +13,42 @@ export default function Register({navigation}) {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const { loginUser,loggedInUser } = useContext(AuthContext);
+  const [showError,setShowError] = useState(false);
 
+  const emailRegex = /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]).{8,}$/;
+
+
+  useEffect(() => {
+    const validateEmail = () => {
+      if (!emailRegex.test(email)) {
+        setEmailError('Please enter a valid email address.');
+      } else {
+        setEmailError('');
+      }
+    };
+
+    const validatePassword = () => {
+      if (!passwordRegex.test(password)) {
+        setPasswordError('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
+      } else {
+        setPasswordError('');
+      }
+    };
+
+    validateEmail();
+    validatePassword();
+  }, [email, password]);
 
   const handleRegister = async () => {
+    setShowError(true);
+
+    if(emailError !='' || passwordError !=''){
+      return;
+    }
     try {
       const response = await axios.post(
         `https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User/Register?email=${encodeURIComponent(email)}`,
@@ -33,13 +64,28 @@ export default function Register({navigation}) {
       console.log('User register in successfully:', response.data);
       loginUser(response.data)
       console.log(loggedInUser)
-      navigation.navigate('EditProfile')
+      Alert.alert(
+        'Registration Successful',
+        'You have successfully registered!',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.navigate('EditProfile');
+            },
+          },
+        ]
+      );
 
       // Handle further actions after successful login
     } catch (error) {
-      console.error('Error logging in:', error);
+      // console.error('Error logging in:', error);
       if (error.response) {
-        console.error('Response data:', error.response.data);
+        Alert.alert('Email already exists', 'Please enter a different email address.');
+        setShowError(false)
+        setEmail('')
+        setPassword('')
+        // console.error('Response data:', error.response.data);
       }
     }
   };
@@ -60,6 +106,8 @@ export default function Register({navigation}) {
       <Text style={[Theme.primaryTitle,styles.title]}>הרשמה</Text>
       <Text  style={[Theme.primaryText,styles.text]}>מלא את השדות הבאים על מנת להירשם</Text>
       <View style={styles.inputsContainer}>
+        {showError&&emailError!='' ?  <Text>{emailError}</Text> : null}
+
       <TextInput
         label= {"אימייל"}
         value={email}
@@ -80,8 +128,9 @@ export default function Register({navigation}) {
         activeOutlineColor='#E6824A'
         selectionColor='gray'
         textAlign='right'
+        />
+        {showError&&passwordError!='' ?  <Text>{passwordError}</Text> : null}
 
-      />
       </View>
       <ButtonLower textContent={"הירשם"} handlePress={handleRegister}/>
       <Text style={Theme.primaryText}> כבר יש לך חשבון? <Text style={Theme.primaryColor} onPress={()=>navigation.navigate('Login')}>כניסה לחשבון</Text></Text>
