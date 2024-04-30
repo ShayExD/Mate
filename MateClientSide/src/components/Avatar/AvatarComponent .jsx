@@ -18,7 +18,7 @@ const AvatarComponent = () => {
     });
 
     if (!result.cancelled) {
-      setAvatar(result.assets[0].uri);s
+      setAvatar(result.assets[0].uri);
       console.log(result.assets[0].uri)
     }
   };
@@ -26,7 +26,7 @@ const AvatarComponent = () => {
   return (
     <View style={{  alignItems: 'center', justifyContent: 'center' }}>
       {avatar && <Image source={{ uri: avatar }} style={{ width: (150), height: (150), borderRadius: 75 }} />}
-      <Button title="שנה תמונת פרופיל" onPress={pickImage} />
+      <Button title="העלאת תמונת פרופיל" onPress={pickImage} />
     </View>
   );
 };

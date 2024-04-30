@@ -23,6 +23,10 @@ export default function EditProfile() {
     const [profilePicture, setProfilePicture] = useState(null);
 
 
+
+
+
+	
     const handleImagePick = (image) => {
         setProfilePicture(image);
       };

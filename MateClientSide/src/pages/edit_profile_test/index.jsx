@@ -12,9 +12,10 @@ import AgePicker from '../../components/AgePicker/agePicker'
 import CountryPicker from '../../components/CountryPicker/countryPicker'
 import ProfilePicturePicker from '../../components/ProfilePicturePicker/profilePicturePicker'
 import GenderPicker from '../../components/GenderPicker/genderPicker'
-import DropdownHobbies from '../../components/DropdownHobbies/dropdownHobbies'
 import AvatarComponent from '../../components/Avatar/AvatarComponent '
-import ImageLibrary from '../../components/ImagesLibrary/imagesLibraty'
+import MultiSelectDropdown from '../../components/MultiSelectDropdown/multiSelectDropdown';
+import { hobbies } from '../../utils'
+
 export default function EditProfileTest() {
   const [profilePicture, setProfilePicture] = useState(null)
   const [fullName, setFullName] = useState([])
@@ -27,7 +28,6 @@ export default function EditProfileTest() {
   const [city, setCity] = useState('')
   const [selectedHobbies, setSelectedHobbies] = useState([])
   const [countryData, setCountryData] = useState([])
-
 
   useEffect(() => {
     var config = {
@@ -46,7 +46,7 @@ export default function EditProfileTest() {
         let countryArray = []
         for (var i = 0; i < count; i++) {
           countryArray.push({
-            value: response.data[i].iso2,
+            value: response.data[i].name,
             label: response.data[i].name,
           })
         }
@@ -59,15 +59,9 @@ export default function EditProfileTest() {
   }, [])
 
 
-
-
-  const handleImagePick = (image) => {
-    setProfilePicture(image)
-  }
-
   return (
     <ScrollView
-      contentContainerStyle={[Theme.screen, styles.screen]}
+      contentContainerStyle={[styles.screen]}
       showsVerticalScrollIndicator={false}
     >
       <BackArrow />
@@ -80,10 +74,7 @@ export default function EditProfileTest() {
         <AvatarComponent></AvatarComponent>
       </View>
       <View style={styles.inputsContainer}>
-        <DropdownHobbies
-          selectedItems={selectedHobbies}
-          setSelectedItems={setSelectedHobbies}
-        />
+
         <TextInput
           label={'שם מלא'}
           value={fullName}
@@ -106,7 +97,20 @@ export default function EditProfileTest() {
         />
         <AgePicker selectedAge={age} onAgeChange={setAge} />
         <GenderPicker></GenderPicker>
+        <MultiSelectDropdown
+            data={hobbies}
+            title={'בחירת תחביבים'}
+          ></MultiSelectDropdown>
+          <MultiSelectDropdown
+            data={countryData}
+            title={'בחירת יעדים'}
+          ></MultiSelectDropdown>
       </View>
+      
+
+
+
+
       <ButtonLower textContent={'עדכון פרטים'} handlePress={() => {}} />
     </ScrollView>
   )
@@ -114,7 +118,7 @@ export default function EditProfileTest() {
 
 const styles = StyleSheet.create({
   screen: {
-    flexGrow: 1,
+    flexGrow:'1',
     width: '100%',
     paddingVertical: 20,
     alignItems: 'center',
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     alignItems: 'center',
-    marginVertical: windowHeight * 0.05,
+    // marginVertical: windowHeight * 0.05,
   },
   pickerContainer: {
     borderWidth: 1,
