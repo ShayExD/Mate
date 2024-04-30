@@ -13,6 +13,7 @@ import MainNavigation from './src/navigation/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider } from './AuthContext';
 import EditProfileTest from './src/pages/edit_profile_test';
+import ViewProfile from './src/pages/view_profile';
 
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
     <AuthProvider>
     <NavigationContainer style={styles.container}>
     <Provider>
-    <EditProfileTest></EditProfileTest> 
+    <ViewProfile></ViewProfile> 
     {/* <Register> </Register> */}
     </Provider>
     </NavigationContainer>
