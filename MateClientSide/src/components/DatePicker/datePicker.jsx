@@ -24,7 +24,7 @@ const DatePickerComponent = ({ selectedDate, onDateChange }) => {
         <Text style={styles.selectedDate}>
           {selectedDate
             ? `בחירת תאריך: ${selectedDate.toLocaleDateString()}`
-            : 'Select Date'}
+            : 'תאריך לידה'}
         </Text>
       </TouchableOpacity>
       <DateTimePickerModal
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     borderWidth: 1,
     borderColor: 'black',
     paddingHorizontal: 10,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   selectedDate: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'right',
   },
 });
 

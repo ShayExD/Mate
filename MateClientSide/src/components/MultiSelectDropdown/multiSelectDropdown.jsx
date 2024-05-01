@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     fontFamily: Theme.primaryText.fontFamily,
   },
   badges: {
-    width:'45%',
+    // width:'45%',
     alignItems:'center',
     textAlign:'center',
     backgroundColor: Theme.primaryColor.color,
