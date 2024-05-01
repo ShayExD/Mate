@@ -9,7 +9,6 @@ const MultiSelectDropdown = (props) => {
   const [loadingMore, setLoadingMore] = useState(false);
 
   const loadMoreData = useCallback(() => {
-    // Simulated data loading delay
     if (!loadingMore) {
       setLoadingMore(true);
       setTimeout(() => {
