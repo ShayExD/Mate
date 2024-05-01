@@ -5,7 +5,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 const DatePickerComponent = ({ selectedDate, onDateChange }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const today = new Date();
-  const minDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
   console.log(minDate);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -32,7 +32,7 @@ const DatePickerComponent = ({ selectedDate, onDateChange }) => {
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
-        maximumDate={minDate}
+        maximumDate={maxDate}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
