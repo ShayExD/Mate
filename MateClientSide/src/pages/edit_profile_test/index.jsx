@@ -12,6 +12,7 @@ import AvatarComponent from '../../components/Avatar/AvatarComponent '
 import MultiSelectDropdown from '../../components/MultiSelectDropdown/multiSelectDropdown';
 import DatePickerComponent from '../../components/DatePicker/datePicker'
 import { hobbies } from '../../utils'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function EditProfileTest() {
   const [profilePicture, setProfilePicture] = useState(null)
@@ -28,33 +29,12 @@ export default function EditProfileTest() {
   const [countryData, setCountryData] = useState([])
 
   useEffect(() => {
-    var config = {
-      method: 'get',
-      url: 'https://api.countrystatecity.in/v1/countries',
-      headers: {
-        'X-CSCAPI-KEY':
-          'RHRXUkhPTXl1aUlKTEk5WlFua1lwR01xVDE2b3U3R2NCUndPM01hTg==',
-      },
-    }
-
-    axios(config)
-      .then(function (response) {
-        // console.log(JSON.stringify(response.data))
-        var count = Object.keys(response.data).length
-        let countryArray = []
-        for (var i = 0; i < count; i++) {
-          countryArray.push({
-            value: response.data[i].name,
-            label: response.data[i].name,
-          })
-        }
-        setCountryData(countryArray)
-        console.log(countryData)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }, [])
+    const fetchData = async () => {
+      const storedCountryData = await AsyncStorage.getItem('countryData');
+      setCountryData(JSON.parse(storedCountryData));
+    };
+    fetchData();
+  }, []);
 
 
   return (
@@ -80,7 +60,6 @@ export default function EditProfileTest() {
         mode="outlined"
         activeOutlineColor='#E6824A'
         selectionColor='gray'
-        textAlign='right'
       />  
        <TextInput
         label= {"קצת עלי"}
@@ -91,7 +70,6 @@ export default function EditProfileTest() {
         secureTextEntry
         activeOutlineColor='#E6824A'
         selectionColor='gray'
-        textAlign='right'
 
       />
        <DatePickerComponent
@@ -140,9 +118,9 @@ const styles = StyleSheet.create({
   },
   input: {
     marginBottom: VerticalScale(24),
-    paddingHorizontal: 10,
-    textAlign: 'left', 
     direction: 'rtl',
+    textAlign:'right',
+    fontFamily:Theme.primaryText.fontFamily,
   },
   button: {
     marginTop: 10,

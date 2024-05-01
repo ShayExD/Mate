@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useState,useCallback  } from 'react'
 import { MultipleSelectList } from 'react-native-dropdown-select-list'
 import Theme from '../../../assets/styles/theme'
+import { VerticalScale } from '../../utils'
 
 const MultiSelectDropdown = (props) => {
   const [selected, setSelected] = useState([])
@@ -68,7 +69,8 @@ const styles = StyleSheet.create({
     width: '90%',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    marginBottom: 20,
+    marginBottom: VerticalScale(24),
+
   },
   label: {
     textAlign:'left',

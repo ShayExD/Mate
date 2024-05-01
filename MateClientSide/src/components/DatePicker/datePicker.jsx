@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-
+import { VerticalScale } from '../../utils';
+import Theme from '../../../assets/styles/theme';
 const DatePickerComponent = ({ selectedDate, onDateChange }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const today = new Date();
   const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-  console.log(minDate);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -42,10 +42,10 @@ const DatePickerComponent = ({ selectedDate, onDateChange }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    marginBottom: VerticalScale(24),
+    
   },
   touchableArea: {
-    backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
     alignItems: 'flex-start',
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     direction: 'rtl',
   },
   selectedDate: {
+    fontFamily:Theme.primaryText.fontFamily,
     fontSize: 16,
     textAlign: 'right',
   },

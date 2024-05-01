@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
-
+import { VerticalScale } from '../../utils'
+import Theme from '../../../assets/styles/theme'
 const GenderPicker = ({ selectedGender, onGenderChange }) => {
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -50,10 +51,10 @@ const GenderPicker = ({ selectedGender, onGenderChange }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    marginBottom: VerticalScale(24),
+
   },
   touchableArea: {
-    backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
     alignItems: 'flex-start',
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
     direction: 'rtl',
   },
   selectedGender: {
+    fontFamily:Theme.primaryText.fontFamily,
     fontSize: 16,
     textAlign: 'center', // Center the text horizontally
   },

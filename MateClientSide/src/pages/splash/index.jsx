@@ -9,15 +9,20 @@ import * as Font from 'expo-font';
 
 export default function Splash({navigation}) {
 
-    const [loadingComplete, setLoadingComplete] = useState(false);
+    const [loadFont,setLoadFont]= useState(false)
+    const [loadCountries,setLoadCountries]= useState(false)
 
     useEffect(() => {
+
       const fetchCountries = async () => {
         try {
           // Check if the country data is already stored in Async Storage
           const storedCountryData = await AsyncStorage.getItem('countryData');
-          console.log(storedCountryData);
+          console.log(storedCountryData)
+          // console.log(storedCountryData);
           if (storedCountryData) {
+            setLoadCountries(true)
+
             // If data is already stored, don't fetch again
             return;
           }
@@ -43,6 +48,7 @@ export default function Splash({navigation}) {
   
           // Store the country data in Async Storage
           await AsyncStorage.setItem('countryData', JSON.stringify(countryArray));
+          setLoadCountries(true)
         } catch (error) {
           console.log(error);
         }
@@ -60,7 +66,7 @@ export default function Splash({navigation}) {
           'OpenSans-ExtraBold': require('../../../assets/fonts/OpenSans-Bold.ttf'),
 
         });
-        setLoadingComplete(true);
+        setLoadFont(true);
       }
       catch(error){
         console.error('Error loading fonts:', error);
@@ -72,12 +78,12 @@ export default function Splash({navigation}) {
    
    
        useEffect(()=>{
-         if(loadingComplete){
+         if(loadFont&&loadCountries){
             setTimeout(() => {
-                // navigation.navigate('Intro');
+                navigation.navigate('Intro');
             }, 4000);
           }
-        },[loadingComplete]);
+        },[loadFont,loadCountries]);
 
            
    return (
