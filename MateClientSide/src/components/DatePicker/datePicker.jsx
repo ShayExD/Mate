@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-
+import { VerticalScale } from '../../utils';
+import Theme from '../../../assets/styles/theme';
 const DatePickerComponent = ({ selectedDate, onDateChange }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
+  const today = new Date();
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -24,12 +26,13 @@ const DatePickerComponent = ({ selectedDate, onDateChange }) => {
         <Text style={styles.selectedDate}>
           {selectedDate
             ? `בחירת תאריך: ${selectedDate.toLocaleDateString()}`
-            : 'Select Date'}
+            : 'תאריך לידה'}
         </Text>
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
+        maximumDate={maxDate}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
@@ -39,13 +42,13 @@ const DatePickerComponent = ({ selectedDate, onDateChange }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    marginBottom: VerticalScale(24),
+    
   },
   touchableArea: {
-    backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     borderWidth: 1,
     borderColor: 'black',
     paddingHorizontal: 10,
@@ -53,8 +56,9 @@ const styles = StyleSheet.create({
     direction: 'rtl',
   },
   selectedDate: {
+    fontFamily:Theme.primaryText.fontFamily,
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'right',
   },
 });
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
-
+import { VerticalScale } from '../../utils'
+import Theme from '../../../assets/styles/theme'
 const GenderPicker = ({ selectedGender, onGenderChange }) => {
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -20,7 +21,7 @@ const GenderPicker = ({ selectedGender, onGenderChange }) => {
       <TouchableOpacity style={styles.touchableArea} onPress={openPicker}>
         <Text style={styles.selectedGender}>
           {selectedGender
-            ? `בחר מין: ${selectedGender}`
+            ? `${selectedGender}`
             : 'בחר מין'}
         </Text>
       </TouchableOpacity>
@@ -50,17 +51,21 @@ const GenderPicker = ({ selectedGender, onGenderChange }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    marginBottom: VerticalScale(24),
+
   },
   touchableArea: {
-    backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center', // Center the content horizontally
+    alignItems: 'flex-start',
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'black',
+    paddingHorizontal: 10,
+    textAlign: 'left',
+    direction: 'rtl',
   },
   selectedGender: {
+    fontFamily:Theme.primaryText.fontFamily,
     fontSize: 16,
     textAlign: 'center', // Center the text horizontally
   },
@@ -80,7 +85,8 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Center the content horizontally
   },
   closeButtonText: {
-    fontSize: 16,
+    marginBottom: 10,
+    fontSize: 18,
     color: 'blue',
     textAlign: 'center', // Center the text horizontally
   },

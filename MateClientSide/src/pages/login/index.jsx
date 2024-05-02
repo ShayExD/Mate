@@ -8,6 +8,8 @@ import Input from '../../components/Input/input'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import axios from 'axios';
 import { AuthContext } from '../../../AuthContext'
+import { Alert } from 'react-native';
+
 export default function Login({navigation}) {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState('');
@@ -45,9 +47,17 @@ export default function Login({navigation}) {
 
       // Handle further actions after successful login
     } catch (error) {
-      console.error('Error logging in:', error);
+      // console.error('Error logging in:', error);
       if (error.response) {
-        console.error('Response data:', error.response.data);
+        // console.error('Response data:', error.response.data);
+        Alert.alert(
+          'Incorrect Details',
+          'Please enter the correct email and password.',
+          [{ text: 'OK' }],
+          { cancelable: false }
+        );
+        setEmail('')
+        setPassword('')
       }
     }
   };
