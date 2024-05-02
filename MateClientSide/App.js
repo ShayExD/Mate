@@ -12,7 +12,7 @@ import { TouchableWithoutFeedback, Keyboard } from 'react-native'
 import MainNavigation from './src/navigation/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider } from './AuthContext';
-import EditProfileTest from './src/pages/edit_profile_test';
+import EditProfileTest from './src/pages/edit_profile';
 import ViewProfile from './src/pages/view_profile';
 
 
@@ -22,7 +22,7 @@ export default function App() {
     <AuthProvider>
     <NavigationContainer style={styles.container}>
     <Provider>
-    <EditProfileTest></EditProfileTest>
+    <MainNavigation></MainNavigation>
     </Provider>
     </NavigationContainer>
     </AuthProvider>

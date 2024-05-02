@@ -5,7 +5,7 @@ import Login from "../pages/login";
 import Splash from "../pages/splash";
 import Intro from "../pages/intro";
 import EditProfile from "../pages/edit_profile";
-import EditProfileTest from "../pages/edit_profile_test";
+import PlanTrip from "../pages/plan_trip";
 
 const MainNavigation = () => {
   const Stack = createStackNavigator();
@@ -19,7 +19,9 @@ const MainNavigation = () => {
       <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="EditProfile" component={EditProfileTest} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="PlanTrip" component={PlanTrip} />
+
       {/* <Stack.Screen name="MyTabs" component={MyTabs} /> */}
     </Stack.Navigator>
   );
