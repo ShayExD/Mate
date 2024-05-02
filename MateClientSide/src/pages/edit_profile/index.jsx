@@ -13,6 +13,11 @@ import MultiSelectDropdown from '../../components/MultiSelectDropdown/multiSelec
 import DatePickerComponent from '../../components/DatePicker/datePicker'
 import { hobbies } from '../../utils'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { differenceInYears, parseISO } from 'date-fns';
+import { List, Button } from 'react-native-paper';
+import IsraelCitiesNames from '../../utils/citiesInIsrael'
+import Autocomplete from 'react-native-autocomplete-input';
+import AutocompleteCities from '../../components/AutoComplete/autoCompleteCities'
 
 export default function EditProfile() {
   const [profilePicture, setProfilePicture] = useState(null)
@@ -21,20 +26,59 @@ export default function EditProfile() {
   const [age, setAge] = useState('')
   const [selectedDate, setSelectedDate] = useState(null);
   const [gender, setGender] = useState('')
-  const [interests, setInterests] = useState('')
   const [destination, setDestination] = useState('')
   const [instagram, setInstagram] = useState('')
   const [city, setCity] = useState('')
-  const [selectedHobbies, setSelectedHobbies] = useState([])
+  const [selectedInterests, setSelectedInterests] = useState([])
   const [countryData, setCountryData] = useState([])
+  const [localityNames,setLocalityName] = useState([])
+  const [phoneNumber, setPhoneNumber] = useState('');
+const [query,setQuery]=useState('');
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
       const storedCountryData = await AsyncStorage.getItem('countryData');
       setCountryData(JSON.parse(storedCountryData));
+      console.log(IsraelCitiesNames)
     };
     fetchData();
   }, []);
+
+
+
+  useEffect(() => {
+    const ageCalculate = () => {
+       const today = new Date();
+       const birthDate = selectedDate;
+       const calculatedAge = differenceInYears(today, birthDate);
+       setAge(calculatedAge)
+    };
+    ageCalculate();
+  }, [selectedDate]);
+
+  const handleSelectedInterests = (selectedItems) => {
+    setSelectedInterests(selectedItems);
+    console.log(selectedInterests)
+  };
+  
+  const handleSelectedDestinations = (selectedItems) => {
+    setDestination(selectedItems);
+    console.log(destination)
+
+  };
+
+  const handleSelectCity = (city) => {
+    setQuery(city);
+    setShowDropdown(false);
+    onSelectCity(city);
+
+    // You can do whatever you want with the selected city here
+  };
+  
+
 
   return (
     <ScrollView
@@ -66,11 +110,31 @@ export default function EditProfile() {
         onChangeText={setDescription}
         style={styles.input}
         mode="outlined"
-        secureTextEntry
         activeOutlineColor='#E6824A'
         selectionColor='gray'
-
       />
+      <TextInput
+        label= {"אינסטגרם"}
+        value={instagram}
+        onChangeText={setInstagram}
+        style={[styles.input,{textAlign:'left'}]}
+        mode="outlined"
+        activeOutlineColor='#E6824A'
+        selectionColor='gray'
+      />
+      <TextInput
+      label="מספר פלאפון"
+      value={phoneNumber}
+      onChangeText={setPhoneNumber}
+      style={[styles.input,{textAlign:'left'}]}
+      mode="outlined"
+      keyboardType="phone-pad" // Set keyboardType to phone-pad for phone number input
+      activeOutlineColor="#E6824A"
+      selectionColor="gray"
+      />
+      <AutocompleteCities cityNames={IsraelCitiesNames} onSelectCity={handleSelectCity} />
+
+      
        <DatePickerComponent
 					selectedDate={selectedDate}
 					onDateChange={setSelectedDate}
@@ -80,11 +144,15 @@ export default function EditProfile() {
         selectedGender={gender}></GenderPicker>
         <MultiSelectDropdown
             data={hobbies}
-            title={'בחירת תחביבים'}
+            title={'בחירת תחומי עניין בטיול'}
+            onSelectionsChange={handleSelectedInterests}
+
           ></MultiSelectDropdown>
           <MultiSelectDropdown
             data={countryData}
             title={'בחירת יעדים'}
+            onSelectionsChange={handleSelectedDestinations}
+
           ></MultiSelectDropdown>
       </View>
       
