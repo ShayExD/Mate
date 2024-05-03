@@ -12,7 +12,7 @@ const DialogAi = (props) => {
   I18nManager.forceRTL(true)
 
   const copyToClipboard = () => {
-    Clipboard.setStringAsync(props.Title)
+    Clipboard.setStringAsync(props.text)
     Toast.show({
       type: 'success',
       text1: 'Text Copied',
@@ -33,7 +33,7 @@ const DialogAi = (props) => {
         <Dialog.Content>
           <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
             <Text style={[Theme.primaryText, styles.rtlText]}>
-              {props.Title}
+            {props.text ? props.text.replace(/\*/g, '') : ''}
             </Text>
             <TouchableOpacity style={styles.button} onPress={copyToClipboard}>
               <Icon name='copy-outline' size={24} color='#fff' />

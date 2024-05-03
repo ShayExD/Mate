@@ -36,7 +36,7 @@ const PlanTrip = () => {
     setCountryLabel('');
     setCityLabel('');
     setDaysNumber('');
-    setAnswer(text.replace(/\*/g, ''));
+    setAnswer(text);
     // console.log(text);
     setVisible(true);
     setIsLoading(false);
@@ -80,7 +80,7 @@ const PlanTrip = () => {
           )}
         </View>
       </TouchableWithoutFeedback>
-      <DialogAi Title={answer} visible={visible} onDismiss={hideDialog}></DialogAi>
+      <DialogAi text={answer} visible={visible} onDismiss={hideDialog}></DialogAi>
     </ScrollView>
   );
 };
