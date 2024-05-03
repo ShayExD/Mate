@@ -36,8 +36,8 @@ const PlanTrip = () => {
     setCountryLabel('');
     setCityLabel('');
     setDaysNumber('');
-    setAnswer(text);
-    console.log(text);
+    setAnswer(text.replace(/\*/g, ''));
+    // console.log(text);
     setVisible(true);
     setIsLoading(false);
   };
