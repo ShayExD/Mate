@@ -8,8 +8,32 @@ import Input from '../../components/Input/input'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import { Avatar } from 'react-native-paper'
 import TextView from '../../components/TextView/textView'
+import TagsView from '../../components/TagsView/tagsView'
 export default function ViewProfile() {
-
+  const user = {
+    age: 28,
+    city: 'New York',
+    email: 'john.doe@example.com',
+    fullname: 'John Doe',
+    gender: 'Male',
+    id: 1001,
+    instagram: 'johndoe_travels',
+    introduction:
+      'Passionate traveler exploring the world and seeking new adventures.',
+    password: 'Tr@v3l3r!',
+    phoneNumber: '+1-555-123-4567',
+    profileImage: 'https://example.com/profile-images/johndoe.jpg',
+    travelPlan: [
+      'Tokyo, Japan - 2023/07/01 to 2023/07/10',
+      'Barcelona, Spain - 2023/09/15 to 2023/09/25',
+    ],
+    tripInterests: [
+      'Food and cuisine',
+      'Historical landmarks',
+      'Nature and hiking',
+      'Art and culture',
+    ],
+  }
   return (
     <ScrollView
       contentContainerStyle={styles.screen}
@@ -23,30 +47,30 @@ export default function ViewProfile() {
           source={require('../../../assets/images/avatar.jpg')}
         />
         <Text style={[Theme.primaryText, styles.text]}>
-          מלא את השדות הבאים על מנת להירשם
+          {user.fullname.split(' ')[0]},{user.age}
         </Text>
       </View>
       <View style={styles.inputsContainer}>
-       <TextView
-	   title={'שם מלא'}
-	   content={'בר לוי אטיאס'}>
-	   </TextView>
-       <TextView
-	   title={'גיל'}
-	   content={'27'}>
-	   </TextView>
-       <TextView
-	   title={'קצת עלי'}
-	   content={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus nibh sit amet lacus malesuada fringilla. Etiam vitae ipsum in velit laoreet euismod. Ut ac consectetur neque. Suspendisse auctor nunc sed augue dapibus, nec ultricies ligula commodo. Sed et sapien placerat nulla venenatis faucibus. Nam nec sem ut diam efficitur egestas.  '}>
-	   </TextView>
-	   <TextView
-	   title={'תחביבים'}
-	   content={'תכנות '}>
-	   </TextView>
-	   <TextView
-	   title={'אנסטגרם'}
-	   content={'barlevi.atias '}>
-	   </TextView>
+        <TextView title={'שם מלא'} content={user.fullname}></TextView>
+        <TextView title={'גיל'} content={user.age}></TextView>
+        <TextView
+          title={'מין'}
+          content={user.gender}
+          iconName={user.gender === 'Male' ? 'man' : 'women'}
+        ></TextView>
+        <TextView
+          title={'קצת עלי'}
+          content={
+            user.introduction}
+        ></TextView>
+        <TagsView title={'תחביבים'} list={user.tripInterests}></TagsView>
+        <TagsView title={'יעדים לטיול'} list={user.travelPlan}></TagsView>
+        <TextView
+          iconName={'logo-instagram'}
+          title={'אנסטגרם'}
+          content={user.instagram}
+          allowCopy={true}
+        ></TextView>
       </View>
       <ButtonLower textContent={'עריכת פרופיל'} />
     </ScrollView>
@@ -65,7 +89,7 @@ const styles = StyleSheet.create({
     marginBottom: windowHeight * 0.0174,
   },
   smallTitle: {
-	color: Theme.primaryColor.color
+    color: Theme.primaryColor.color,
   },
   inputsContainer: {
     // marginTop: VerticalScale(44),
@@ -76,7 +100,7 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     minWidth: '90%',
-	maxWidth: '90%',
+    maxWidth: '90%',
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
@@ -84,10 +108,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start', // Center the content horizontally
     borderWidth: 1,
     borderColor: 'gray',
-	marginBottom: 10
+    marginBottom: 10,
   },
   text: {
-	paddingVertical: 10,
+    paddingVertical: 10,
     color: 'gray',
     marginHorizontal: 0,
   },
