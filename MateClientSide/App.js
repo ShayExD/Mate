@@ -15,6 +15,7 @@ import { AuthProvider } from './AuthContext'
 import EditProfileTest from './src/pages/edit_profile'
 import ViewProfile from './src/pages/view_profile'
 import Home from './src/pages/home'
+import Tabs from './src/navigation/tabs'
 
 export default function App() {
   return (
@@ -22,8 +23,7 @@ export default function App() {
       <AuthProvider>
         <NavigationContainer style={styles.container}>
           <Provider>
-            <Home></Home>
-            {/* <MainNavigation></MainNavigation> */}
+            <Tabs />
           </Provider>
         </NavigationContainer>
       </AuthProvider>

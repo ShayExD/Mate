@@ -21,9 +21,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Trip from '../../components/SingleTrip/singleTrip'
 import SingleTrip from '../../components/SingleTrip/singleTrip'
 import SingleProfile from '../../components/SinglePropfile/singleProfile'
+import Tabs from '../../navigation/tabs'
 
 export default function Home({ navigation }) {
-  const items = [
+  const trips = [
     {
       picUrl: require('../../../assets/images/TripPhoto.jpg'),
       title: 'Bromo Mountain',
@@ -49,7 +50,44 @@ export default function Home({ navigation }) {
       numOfPeople: 48,
     },
   ]
-
+  const users = [
+    {
+      name: 'כפיר קורן',
+      details:
+        'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותה צגה עצמית ב3 שורות',
+      profileImg: require('../../../assets/images/TripPhoto.jpg'),
+      age: 25,
+      city: 'חיפה',
+      ig: 'kfirkoren',
+    },
+    {
+      name: 'כפיר קורן',
+      details:
+        'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות',
+      profileImg: require('../../../assets/images/TripPhoto.jpg'),
+      age: 25,
+      city: 'חיפה',
+      ig: 'kfirkoren',
+    },
+    {
+      name: 'כפיר קורן',
+      details:
+        'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות',
+      profileImg: require('../../../assets/images/TripPhoto.jpg'),
+      age: 25,
+      city: 'חיפה',
+      ig: 'kfirkoren',
+    },
+    {
+      name: 'כפיר קורן',
+      details:
+        'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvצגה עצמית ב3 שורות',
+      profileImg: require('../../../assets/images/TripPhoto.jpg'),
+      age: 25,
+      city: 'חיפה',
+      ig: 'kfirkoren',
+    },
+  ]
   return (
     <SafeAreaView style={[Theme.screen, styles.screen]}>
       <View style={styles.topBar}>
@@ -70,7 +108,7 @@ export default function Home({ navigation }) {
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={items}
+          data={trips}
           renderItem={({ item }) => (
             <SingleTrip
               picUrl={item.picUrl}
@@ -85,12 +123,21 @@ export default function Home({ navigation }) {
         <Text style={[Theme.primaryTitle, styles.title]}>
           פרופילים מומלצים עבורך
         </Text>
-        <SingleProfile
-          title={'kfir'}
-          picUrl={require('../../../assets/images/TripPhoto.jpg')}
-          destination={'lala'}
-          numOfPeople={80}
-        ></SingleProfile>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={users}
+          renderItem={({ item }) => (
+            <SingleProfile
+              name={item.name}
+              details={item.details}
+              profileImg={item.profileImg}
+              age={item.age}
+              city={item.city}
+              ig={item.ig}
+            ></SingleProfile>
+          )}
+        />
       </View>
     </SafeAreaView>
   )
@@ -106,7 +153,7 @@ const styles = StyleSheet.create({
     marginTop: VerticalScale(20),
   },
   content: {
-    marginTop: VerticalScale(63),
+    marginTop: VerticalScale(30),
     width: '90%',
     // flexDirection: 'row-reverse',
   },
