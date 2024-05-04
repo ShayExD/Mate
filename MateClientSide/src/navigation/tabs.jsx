@@ -20,13 +20,13 @@ const Tabs = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          position: 'absolute',
-          bottom: VerticalScale(10),
-          marginHorizontal: HorizontalScale(20),
+          // position: 'absolute',
+          // bottom: VerticalScale(10),
+          // marginHorizontal: HorizontalScale(20),
           elevation: 0,
           backgroundColor: 'white',
           borderRadius: VerticalScale(150),
-          height: VerticalScale(70),
+          height: VerticalScale(85),
           justifyContent: 'center',
           alignItems: 'center',
           paddingBottom: '0',

@@ -10,26 +10,27 @@ import GenderPicker from '../../components/GenderPicker/genderPicker'
 import AvatarComponent from '../../components/Avatar/AvatarComponent '
 import MultiSelectDropdown from '../../components/MultiSelectDropdown/multiSelectDropdown';
 import DatePickerComponent from '../../components/DatePicker/datePicker'
-import { hobbies } from '../../utils'
+import { interests } from '../../utils'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { differenceInYears, parseISO } from 'date-fns';
 import CitiesComponent from '../../components/CitiesComponents/citiesComponent'
 import { AuthContext } from '../../../AuthContext'
 
 export default function EditProfile() {
-  const [profilePicture, setProfilePicture] = useState(null)
-  const [fullName, setFullName] = useState('')
-  const [description, setDescription] = useState('')
+  const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
+
+  const [profilePicture, setProfilePicture] = useState(loggedInUser.profileImage)
+  const [fullName, setFullName] = useState(loggedInUser.fullname)
+  const [description, setDescription] = useState(loggedInUser.introduction)
   const [age, setAge] = useState('')
   const [selectedDate, setSelectedDate] = useState(null);
   const [gender, setGender] = useState('')
-  const [destination, setDestination] = useState('')
-  const [instagram, setInstagram] = useState('')
+  const [destination, setDestination] = useState(loggedInUser.travelPlan)
+  const [instagram, setInstagram] = useState(loggedInUser.instagram)
   const [city, setCity] = useState('')
-  const [selectedInterests, setSelectedInterests] = useState([])
+  const [selectedInterests, setSelectedInterests] = useState(loggedInUser.tripInterests)
   const [countryData, setCountryData] = useState([])
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
+  const [phoneNumber, setPhoneNumber] = useState(loggedInUser.phoneNumber);
   const [updatedUser, setUpdatedUser] = useState(loggedInUser);
 
   useEffect(() => {
@@ -185,7 +186,7 @@ export default function EditProfile() {
         onGenderChange={setGender}
         selectedGender={gender}></GenderPicker>
         <MultiSelectDropdown
-            data={hobbies}
+            data={interests}
             title={'בחירת תחומי עניין בטיול'}
             onSelectionsChange={handleSelectedInterests}
 
@@ -200,7 +201,7 @@ export default function EditProfile() {
 
 </View>
       
-    <ButtonLower textContent={'עדכון פרטים'} handlePress={updateUser} />
+    <ButtonLower textContent={'עדכון פרטים'} handlePress={updateUser}  />
     </ScrollView>
   )
 }

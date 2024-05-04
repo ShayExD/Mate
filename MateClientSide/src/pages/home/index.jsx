@@ -24,6 +24,10 @@ import SingleProfile from '../../components/SinglePropfile/singleProfile'
 import Tabs from '../../navigation/tabs'
 
 export default function Home({ navigation }) {
+
+  const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
+
+
   const trips = [
     {
       picUrl: require('../../../assets/images/TripPhoto.jpg'),
@@ -91,7 +95,7 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView style={[Theme.screen, styles.screen]}>
       <View style={styles.topBar}>
-        <Header></Header>
+        <Header nickName={loggedInUser.fullname}></Header>
         <View style={styles.bell}>
           <Icon
             name='bell-badge-outline'

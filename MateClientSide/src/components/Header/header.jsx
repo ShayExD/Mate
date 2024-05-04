@@ -4,10 +4,10 @@ import { Avatar } from 'react-native-paper'
 import { HorizontalScale, VerticalScale } from '../../utils'
 import Theme from '../../../assets/styles/theme'
 
-const Header = ({ title }) => {
+const Header = ({ nickName }) => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.text]}>כפיר קורן</Text>
+      <Text style={[styles.text]}>{nickName}</Text>
       <Avatar.Image
         size={40}
         source={require('../../../assets/images/avatar.jpg')}
