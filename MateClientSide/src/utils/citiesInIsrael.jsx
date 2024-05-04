@@ -7591,7 +7591,7 @@
     }
 ]
 
-const IsraelCitiesNames = IsraelCities.map(city => city.name);
+ const IsraelCitiesNames = IsraelCities.map(city => city.name);
 
 
-export default IsraelCitiesNames;
+export default IsraelCities;

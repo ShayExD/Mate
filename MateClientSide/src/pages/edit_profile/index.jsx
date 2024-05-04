@@ -18,6 +18,7 @@ import { List, Button } from 'react-native-paper';
 import IsraelCitiesNames from '../../utils/citiesInIsrael'
 import Autocomplete from 'react-native-autocomplete-input';
 import AutocompleteCities from '../../components/AutoComplete/autoCompleteCities'
+import CitiesComponent from '../../components/CitiesComponents/citiesComponent'
 
 export default function EditProfile() {
   const [profilePicture, setProfilePicture] = useState(null)
@@ -132,7 +133,6 @@ const [query,setQuery]=useState('');
       activeOutlineColor="#E6824A"
       selectionColor="gray"
       />
-      <AutocompleteCities cityNames={IsraelCitiesNames} onSelectCity={handleSelectCity} />
 
       
        <DatePickerComponent
@@ -154,6 +154,7 @@ const [query,setQuery]=useState('');
             onSelectionsChange={handleSelectedDestinations}
 
           ></MultiSelectDropdown>
+          <CitiesComponent></CitiesComponent>
       </View>
       
 
