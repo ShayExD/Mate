@@ -112,9 +112,10 @@ export default function EditProfile() {
   
       console.log('User updated successfully:', response.data);
       // You can perform additional actions after successful update, such as updating the loggedInUser state
-  
+        if(response.data){
+          loginUser(updatedUserData);
+        }
       // Example: Update the loggedInUser state with the updated user data
-      loginUser(updatedUserData);
     } catch (error) {
       console.error('Error updating user:', error);
       // Handle the error if needed
