@@ -1,32 +1,23 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
-import { windowWidth, windowHeight } from './src/utils'
-import Splash from './src/pages/splash'
-import Intro from './src/pages/intro'
-import Login from './src/pages/login'
-import Register from './src/pages/register'
-import EditProfile from './src/pages/edit_profile'
-import PlanTrip from './src/pages/plan_trip'
-import { Provider } from 'react-native-paper'
-import { TouchableWithoutFeedback, Keyboard } from 'react-native'
-import MainNavigation from './src/navigation/Navigation'
-import { AuthProvider } from './AuthContext'
-import ViewProfile from './src/pages/view_profile'
-import Home from './src/pages/home'
-import Tabs from './src/navigation/tabs'
+import React, { useContext } from 'react';
+import { StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { AuthProvider } from './AuthContext';
-import { KeyboardAvoidingView } from 'react-native';
+import { AuthProvider, AuthContext } from './AuthContext';
+import { Provider as PaperProvider } from 'react-native-paper';
+import MainNavigation from './src/navigation/Navigation';
+import Tabs from './src/navigation/tabs';
 
 export default function App() {
+
+  const { loggedInUser} = useContext(AuthContext);
+
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-
     <AuthProvider>
     <NavigationContainer style={styles.container}>
-    <Provider>
-    <MainNavigation></MainNavigation>
-    </Provider>
+    <PaperProvider>
+            {loggedInUser ? <MainNavigation /> : <Tabs />}
+    </PaperProvider>
     </NavigationContainer>
     </AuthProvider>
     </TouchableWithoutFeedback>

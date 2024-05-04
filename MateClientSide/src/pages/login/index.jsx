@@ -43,8 +43,6 @@ export default function Login({navigation}) {
       loginUser(response.data)
       console.log(loggedInUser)
       console.log('User logged in successfully:', response.data);
-      // navigation.navigate('Home')
-
       // Handle further actions after successful login
     } catch (error) {
       // console.error('Error logging in:', error);
