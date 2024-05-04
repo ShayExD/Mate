@@ -10,23 +10,25 @@ import PlanTrip from './src/pages/plan_trip'
 import { Provider } from 'react-native-paper'
 import { TouchableWithoutFeedback, Keyboard } from 'react-native'
 import MainNavigation from './src/navigation/Navigation'
-import { NavigationContainer } from '@react-navigation/native'
 import { AuthProvider } from './AuthContext'
-import EditProfileTest from './src/pages/edit_profile'
 import ViewProfile from './src/pages/view_profile'
 import Home from './src/pages/home'
 import Tabs from './src/navigation/tabs'
+import { NavigationContainer } from '@react-navigation/native';
+import { AuthProvider } from './AuthContext';
+import { KeyboardAvoidingView } from 'react-native';
 
 export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <AuthProvider>
-        <NavigationContainer style={styles.container}>
-          <Provider>
-            <Tabs />
-          </Provider>
-        </NavigationContainer>
-      </AuthProvider>
+
+    <AuthProvider>
+    <NavigationContainer style={styles.container}>
+    <Provider>
+    <MainNavigation></MainNavigation>
+    </Provider>
+    </NavigationContainer>
+    </AuthProvider>
     </TouchableWithoutFeedback>
   )
 }

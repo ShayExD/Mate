@@ -1,55 +1,71 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Theme from '../../../assets/styles/theme'
-const TextView  = ({ title, content }) => {
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import Theme from '../../../assets/styles/theme';
+import Icon from 'react-native-vector-icons/Ionicons';
+import * as Clipboard from 'expo-clipboard';
+
+const TextView = ({ title, content, iconName, allowCopy }) => {
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(content);
+    Alert.alert('Text Copied', 'The text has been copied to the clipboard.', [
+      { text: 'OK' },
+    ]);
+  };
 
   return (
     <View style={styles.labelContainer}>
-    <Text style={styles.smallTitle}>{title}</Text>
-
-      <Text style={styles.textAttributes}> {content}</Text>
+      <Text style={styles.smallTitle}>{title}</Text>
+      <View style={styles.titleContainer}>
+        {iconName && <Icon name={iconName} size={20} style={styles.icon} />}
+        <Text style={styles.textAttributes}>{content}</Text>
+        {allowCopy && (
+          <TouchableOpacity onPress={copyToClipboard}>
+            <Icon name="copy-outline" size={20} style={styles.copyIcon} />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-      smallTitle: {
-        color: Theme.primaryColor.color
-      },
-      inputsContainer: {
-        // marginTop: VerticalScale(44),
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        direction: 'rtl',
-      },
-      labelContainer: {
-        minWidth: '90%',
-        maxWidth: '90%',
-        backgroundColor: 'white',
-        padding: 10,
-        borderRadius: 5,
-        justifyContent: 'center',
-        alignItems: 'flex-start', // Center the content horizontally
-        borderWidth: 1,
-        borderColor: 'gray',
-        marginBottom: 10
-      },
-      text: {
-        color: 'gray',
-        marginHorizontal: 0,
-      },
-      textAttributes: {
-        textAlign: 'left',
-        direction: 'rtl',
-        color: 'black',
-        fontSize: 18,
-        // marginBottom: 10,
-        // marginRight: 120,
-      },
-    
-      button: {
-        marginTop: 10,
-      },});
+  smallTitle: {
+    textAlign: 'right',
+    color: Theme.primaryColor.color,
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginRight: 10,
+  },
+  labelContainer: {
+    minWidth: '90%',
+    maxWidth: '90%',
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginBottom: 10,
+    direction: 'rtl',
+    alignItems: 'flex-start',
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  textAttributes: {
+    textAlign: 'left',
+    color: 'black',
+    fontSize: 18,
+    flex: 1,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  copyIcon: {
+    color: 'gray',
+    marginLeft: 5,
+  },
+});
 
 export default TextView;
