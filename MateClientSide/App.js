@@ -14,7 +14,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider } from './AuthContext';
 import EditProfileTest from './src/pages/edit_profile';
 import ViewProfile from './src/pages/view_profile';
-
+import Home from './src/pages/home';
+import { KeyboardAvoidingView } from 'react-native';
 
 export default function App() {
   return (

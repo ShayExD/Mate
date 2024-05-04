@@ -9,6 +9,11 @@ const MultiSelectDropdown = (props) => {
   const [data, setData] = useState(props.data.slice(0, 10)); // Initial data, show first 10 items
   const [loadingMore, setLoadingMore] = useState(false);
 
+  const handleSelectionChange = (selectedItems) => {
+    setSelected(selectedItems);
+    props.onSelectionsChange(selectedItems); // Call the callback function with selected items
+  };
+
   const loadMoreData = useCallback(() => {
     if (!loadingMore) {
       setLoadingMore(true);
@@ -47,7 +52,7 @@ const MultiSelectDropdown = (props) => {
           alignItems: 'flex-end',
         }}
         dropdownItemStyles={{ width: '100%', justifyContent: 'space-between' }}
-        setSelected={(val) => setSelected(val)}
+        setSelected={(val) => handleSelectionChange(val)} // Pass the selected values to the handleSelectionChange function
         data={props.data}
         save='value'
         // onSelect={() => alert(selected)}
