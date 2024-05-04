@@ -18,7 +18,6 @@ export default function Splash({navigation}) {
         try {
           // Check if the country data is already stored in Async Storage
           const storedCountryData = await AsyncStorage.getItem('countryData');
-          console.log(storedCountryData)
           // console.log(storedCountryData);
           if (storedCountryData) {
             setLoadCountries(true)

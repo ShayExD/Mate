@@ -7,11 +7,13 @@ import EditProfile from '../pages/edit_profile'
 import PlanTrip from '../pages/plan_trip'
 import Home from '../pages/home'
 import { HorizontalScale, VerticalScale } from '../utils'
-const Tab = createBottomTabNavigator()
 import { StyleSheet, View, Text } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Theme from '../../assets/styles/theme'
+
+
+const Tab = createBottomTabNavigator()
 
 const Tabs = () => {
   return (
