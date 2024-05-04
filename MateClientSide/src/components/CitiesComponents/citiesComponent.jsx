@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput,KeyboardAvoidingView ,Platform} from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { VerticalScale } from '../../utils';
+import Theme from '../../../assets/styles/theme';
 
-const CitiesComponent = () => {
+const CitiesComponent = ({onSelectCity}) => {
     const [selected, setSelected]  = useState('');
 
     const preprocessedData = IsraelCities.map(city => ({
@@ -14,24 +15,21 @@ const CitiesComponent = () => {
         englishName: city.english_name,
       }));
 
+      const handleSelectCity = (city) => {
+        setSelected(city);
+        onSelectCity(city);
+      };
 
   return (
-   
      <View style={styles.container}>
      <SelectList 
-        setSelected={(val) => setSelected(val)} 
+        setSelected={handleSelectCity} 
         data={preprocessedData} 
         boxStyles={{
             direction: 'rtl',
             textAlign: 'center',
             minWidth: '100%',
             alignItems:'center'
-          }}
-          inputStyles={{
-            fontSize: 16,
-            textAlign: 'right',
-            alignContent: 'center',
-
           }}
           dropdownStyles={{
             textAlign: 'right',
@@ -40,6 +38,8 @@ const CitiesComponent = () => {
 
         save="value"
         search={true}
+        placeholder='עיר בישראל'
+        inputStyles={[Theme.primaryText,{textAlign:'right',marginHorizontal:0}]}
         renderItem={(item, styleProps) => (
         <View style={styleProps.listItemContainer}>
         <Text style={styleProps.listItemLabel}>{`${item.value}`}</Text>
@@ -55,14 +55,14 @@ const styles = StyleSheet.create({
         width: '90%',
         alignItems: 'center',
         marginBottom: VerticalScale(24),
-        justifyContent: 'flex-end',
-
+        justifyContent:'flex-end'
     
       },
     inputStyle: {
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
+        fontFamily:Theme.primaryText.fontFamily
       },
 });
 

@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import Theme from '../../../assets/styles/theme'
 import { VerticalScale, windowHeight } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
 import { TextInput } from 'react-native-paper'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import axios from 'axios'
-import AgePicker from '../../components/AgePicker/agePicker'
 import GenderPicker from '../../components/GenderPicker/genderPicker'
 import AvatarComponent from '../../components/Avatar/AvatarComponent '
 import MultiSelectDropdown from '../../components/MultiSelectDropdown/multiSelectDropdown';
@@ -14,11 +13,8 @@ import DatePickerComponent from '../../components/DatePicker/datePicker'
 import { hobbies } from '../../utils'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { differenceInYears, parseISO } from 'date-fns';
-import { List, Button } from 'react-native-paper';
-import IsraelCitiesNames from '../../utils/citiesInIsrael'
-import Autocomplete from 'react-native-autocomplete-input';
-import AutocompleteCities from '../../components/AutoComplete/autoCompleteCities'
 import CitiesComponent from '../../components/CitiesComponents/citiesComponent'
+import { AuthContext } from '../../../AuthContext'
 
 export default function EditProfile() {
   const [profilePicture, setProfilePicture] = useState(null)
@@ -32,18 +28,14 @@ export default function EditProfile() {
   const [city, setCity] = useState('')
   const [selectedInterests, setSelectedInterests] = useState([])
   const [countryData, setCountryData] = useState([])
-  const [localityNames,setLocalityName] = useState([])
   const [phoneNumber, setPhoneNumber] = useState('');
-const [query,setQuery]=useState('');
-
-
-
+  const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
+  const [updatedUser, setUpdatedUser] = useState(loggedInUser);
 
   useEffect(() => {
     const fetchData = async () => {
       const storedCountryData = await AsyncStorage.getItem('countryData');
       setCountryData(JSON.parse(storedCountryData));
-      console.log(IsraelCitiesNames)
     };
     fetchData();
   }, []);
@@ -60,6 +52,8 @@ const [query,setQuery]=useState('');
     ageCalculate();
   }, [selectedDate]);
 
+
+
   const handleSelectedInterests = (selectedItems) => {
     setSelectedInterests(selectedItems);
     console.log(selectedInterests)
@@ -71,14 +65,61 @@ const [query,setQuery]=useState('');
 
   };
 
-  const handleSelectCity = (city) => {
-    setQuery(city);
-    setShowDropdown(false);
-    onSelectCity(city);
-
-    // You can do whatever you want with the selected city here
+  const handleSelectedCity = (selectedCity) => {
+    setCity(selectedCity);
   };
+
+  const mapToSingleChar = (label) => {
+    switch (label) {
+      case 'גבר':
+        return 'ז';
+      case 'אישה':
+        return 'נ';
+      case 'אחר':
+        return 'א';
+      default:
+        return '';
+    }
+  }
   
+  const updateUser = async () => {
+    try {
+      const updatedUserData = {
+        id: loggedInUser.id, // Assuming you have the user's ID in loggedInUser.id
+        fullname: fullName,
+        password: loggedInUser.password, 
+        introduction: description,
+        gender: mapToSingleChar(gender),
+        age: age,
+        instagram: instagram,
+        email: loggedInUser.email, 
+        phoneNumber: phoneNumber,
+        profileImage: profilePicture, // Assuming you have the user's profile image URL in loggedInUser.profileImage
+        city: city,
+        travelPlan: destination,
+        tripInterests: selectedInterests,
+      };
+      console.log(updatedUserData)
+  
+      const response = await axios({
+        method: 'PUT', // or 'PATCH' if the server expects a PATCH request
+        url: 'https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User/UpdateUser',
+        data: updatedUserData,
+        headers: {
+          'Content-Type': 'application/json',
+        },      });
+  
+      console.log('User updated successfully:', response.data);
+      // You can perform additional actions after successful update, such as updating the loggedInUser state
+  
+      // Example: Update the loggedInUser state with the updated user data
+      loginUser(updatedUserData);
+    } catch (error) {
+      console.error('Error updating user:', error);
+      // Handle the error if needed
+    }
+  };
+
 
 
   return (
@@ -93,7 +134,8 @@ const [query,setQuery]=useState('');
           size={150}
           source={require('../../../assets/images/avatar.jpg')}
         /> */}
-        <AvatarComponent></AvatarComponent>
+      <AvatarComponent setProfilePicture={setProfilePicture} />
+
       </View>
       <View style={styles.inputsContainer}>
       <TextInput
@@ -154,14 +196,11 @@ const [query,setQuery]=useState('');
             onSelectionsChange={handleSelectedDestinations}
 
           ></MultiSelectDropdown>
-          <CitiesComponent></CitiesComponent>
-      </View>
+          <CitiesComponent onSelectCity={handleSelectedCity} />
+
+</View>
       
-
-
-
-
-      <ButtonLower textContent={'עדכון פרטים'} handlePress={() => {}} />
+    <ButtonLower textContent={'עדכון פרטים'} handlePress={updateUser} />
     </ScrollView>
   )
 }

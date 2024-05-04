@@ -16,6 +16,8 @@ const GenderPicker = ({ selectedGender, onGenderChange }) => {
     setModalVisible(false)
   }
 
+  
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.touchableArea} onPress={openPicker}>
