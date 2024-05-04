@@ -22,7 +22,7 @@ export default function App() {
     <AuthProvider>
     <NavigationContainer style={styles.container}>
     <Provider>
-    <PlanTrip></PlanTrip>
+    <ViewProfile></ViewProfile>
     </Provider>
     </NavigationContainer>
     </AuthProvider>

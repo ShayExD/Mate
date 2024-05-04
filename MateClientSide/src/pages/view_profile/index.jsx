@@ -8,6 +8,7 @@ import Input from '../../components/Input/input'
 import ButtonLower from '../../components/ButtonLower/buttonLower'
 import { Avatar } from 'react-native-paper'
 import TextView from '../../components/TextView/textView'
+import TagsView from '../../components/TagsView/tagsView'
 export default function ViewProfile() {
 
   return (
@@ -39,10 +40,10 @@ export default function ViewProfile() {
 	   title={'קצת עלי'}
 	   content={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus nibh sit amet lacus malesuada fringilla. Etiam vitae ipsum in velit laoreet euismod. Ut ac consectetur neque. Suspendisse auctor nunc sed augue dapibus, nec ultricies ligula commodo. Sed et sapien placerat nulla venenatis faucibus. Nam nec sem ut diam efficitur egestas.  '}>
 	   </TextView>
-	   <TextView
+	   <TagsView
 	   title={'תחביבים'}
 	   content={'תכנות '}>
-	   </TextView>
+	   </TagsView>
 	   <TextView
 	   title={'אנסטגרם'}
 	   content={'barlevi.atias '}>
