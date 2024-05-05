@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native'
-import React, { useState, useContext,useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Theme from '../../../assets/styles/theme'
 import { VerticalScale, windowHeight, HorizontalScale } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
@@ -21,33 +21,51 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Trip from '../../components/SingleTrip/singleTrip'
 import SingleTrip from '../../components/SingleTrip/singleTrip'
 import SingleProfile from '../../components/SinglePropfile/singleProfile'
-import Spinner from 'react-native-loading-spinner-overlay';
+import Spinner from 'react-native-loading-spinner-overlay'
 
 export default function Home({ navigation }) {
+  const { loginUser, loggedInUser, setLoggedInUser } = useContext(AuthContext)
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const userPostsPageSize = 2
+  const [userPostsCurretPage, setuserPostsCurretPage] = useState(1)
+  const [userPostsRenderData, setuserPostsRenderData] = useState([])
+  const [isLoadinguserPosts, setisLoadinguserPosts] = useState(false)
 
-  const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-
+  const pagination = (database, currentPage, pageSize) => {
+    console.log('currentPage' + currentPage)
+    const startIndex = (currentPage - 1) * pageSize
+    const endIndex = startIndex + pageSize
+    if (startIndex >= database.length) {
+      return []
+    }
+    return database.slice(startIndex, endIndex)
+  }
 
   function calculateMatchingScore(user1, user2) {
     // Calculate matching score based on age proximity, trip interests, and travel plans
-    let ageScore = 100 - Math.abs(user1.age - user2.age); // Assuming closer ages have higher scores
-    let interestsScore = user1.tripInterests.filter(interest => user2.tripInterests.includes(interest)).length * 10; // Assuming each shared interest adds 10 points
-    let travelPlanScore = user1.travelPlan.filter(plan => user2.travelPlan.includes(plan)).length * 10; // Assuming each shared travel plan adds 10 points
-    return ageScore + interestsScore + travelPlanScore;
-}
+    let ageScore = 100 - Math.abs(user1.age - user2.age) // Assuming closer ages have higher scores
+    let interestsScore =
+      user1.tripInterests.filter((interest) =>
+        user2.tripInterests.includes(interest),
+      ).length * 10 // Assuming each shared interest adds 10 points
+    let travelPlanScore =
+      user1.travelPlan.filter((plan) => user2.travelPlan.includes(plan))
+        .length * 10 // Assuming each shared travel plan adds 10 points
+    return ageScore + interestsScore + travelPlanScore
+  }
 
-function getRecommendedUsers(loggedInUser, allUsers) {
-  // Calculate matching scores for all users
-  const recommendedUsers = allUsers.filter(user => user.id !== loggedInUser.id).map(user => {
-      const matchingScore = calculateMatchingScore(loggedInUser, user);
-      return { ...user, matchingScore };
-  });
-  recommendedUsers.sort((a, b) => b.matchingScore - a.matchingScore);
-  return recommendedUsers;
-}
+  function getRecommendedUsers(loggedInUser, allUsers) {
+    // Calculate matching scores for all users
+    const recommendedUsers = allUsers
+      .filter((user) => user.id !== loggedInUser.id)
+      .map((user) => {
+        const matchingScore = calculateMatchingScore(loggedInUser, user)
+        return { ...user, matchingScore }
+      })
+    recommendedUsers.sort((a, b) => b.matchingScore - a.matchingScore)
+    return recommendedUsers
+  }
 
   const trips = [
     {
@@ -116,33 +134,42 @@ function getRecommendedUsers(loggedInUser, allUsers) {
 
   const getAllUser = async () => {
     try {
-      const response = await axios.get(`https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User`);
-      
+      const response = await axios.get(
+        `https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User`,
+      )
+
       // const updatedUserData = response.data.filter(user => user.id !== loggedInUser.id);
-      updatedUserData=getRecommendedUsers(loggedInUser,response.data)
+      updatedUserData = getRecommendedUsers(loggedInUser, response.data)
 
       console.log(updatedUserData)
-      setData(updatedUserData);
-      
+      setData(updatedUserData)
+
       // console.log('Data fetched successfully:', response.data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    getAllUser();
-  }, []); 
+    getAllUser()
+  }, [])
+
+  useEffect(() => {
+    setisLoadinguserPosts(true)
+    const getInitPostData = pagination(data, 1, userPostsPageSize)
+    setuserPostsRenderData(getInitPostData)
+    setisLoadinguserPosts(false)
+  }, [data])
 
   return (
     <SafeAreaView style={[Theme.screen, styles.screen]}>
-        <Spinner
+      <Spinner
         visible={isLoading}
         textContent={'Loading...'}
         textStyle={styles.spinnerText}
-        overlayColor="rgba(0, 0, 0, 0.6)"
+        overlayColor='rgba(0, 0, 0, 0.6)'
       />
       <View style={styles.topBar}>
         <Header nickName={loggedInUser.fullname}></Header>
@@ -180,18 +207,39 @@ function getRecommendedUsers(loggedInUser, allUsers) {
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={data}
+          data={userPostsRenderData}
           renderItem={({ item }) => (
             <SingleProfile
-              handlePress={()=>{    navigation.navigate('ViewProfile', { profile: item });}}
+              handlePress={() => {
+                navigation.navigate('ViewProfile', { profile: item })
+              }}
               name={item.fullname}
               details={item.introduction}
-              profileImg={ require('../../../assets/images/TripPhoto.jpg')}
+              profileImg={require('../../../assets/images/TripPhoto.jpg')}
               age={item.age}
               city={item.city}
               ig={item.instagram}
             ></SingleProfile>
           )}
+          onEndReachedThreshold={0.5}
+          onEndReached={() => {
+            console.log('fetch page number' + userPostsCurretPage + 1)
+            console.log(userPostsRenderData)
+            if (isLoadinguserPosts) {
+              return
+            }
+            setisLoadinguserPosts(true)
+            const contentToAppend = pagination(
+              data,
+              userPostsCurretPage + 1,
+              userPostsPageSize,
+            )
+            if (contentToAppend.length > 0) {
+              setuserPostsCurretPage(userPostsCurretPage + 1)
+              setuserPostsRenderData((prev) => [...prev, ...contentToAppend])
+            }
+            setisLoadinguserPosts(false)
+          }}
         />
       </View>
     </SafeAreaView>
