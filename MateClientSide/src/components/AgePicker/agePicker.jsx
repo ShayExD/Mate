@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { VerticalScale } from '../../utils';
+import Theme from '../../../assets/styles/theme';
 
 const AgePicker = ({ selectedAge, onAgeChange }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,19 +49,22 @@ const AgePicker = ({ selectedAge, onAgeChange }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    marginBottom: VerticalScale(24),
   },
   touchableArea: {
-    backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center', // Center the content horizontally
+    alignItems: 'flex-start',
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'black',
+    paddingHorizontal: 10,
+    textAlign: 'left',
+    direction: 'rtl',
   },
   selectedAge: {
+    fontFamily:Theme.primaryText.fontFamily,
     fontSize: 16,
-    textAlign: 'center', // Center the text horizontally
+    textAlign: 'right',
   },
   modalContainer: {
     flex: 1,

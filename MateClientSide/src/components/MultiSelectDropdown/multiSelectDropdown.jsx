@@ -1,10 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState,useCallback  } from 'react'
+import React, { useState,useCallback,useContext  } from 'react'
 import { MultipleSelectList } from 'react-native-dropdown-select-list'
 import Theme from '../../../assets/styles/theme'
 import { VerticalScale } from '../../utils'
+import { AuthContext } from '../../../AuthContext'
 
 const MultiSelectDropdown = (props) => {
+
+  const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
+
   const [selected, setSelected] = useState([])
   const [data, setData] = useState(props.data.slice(0, 10)); // Initial data, show first 10 items
   const [loadingMore, setLoadingMore] = useState(false);

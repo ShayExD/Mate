@@ -15,20 +15,33 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { differenceInYears, parseISO } from 'date-fns';
 import CitiesComponent from '../../components/CitiesComponents/citiesComponent'
 import { AuthContext } from '../../../AuthContext'
+import AgePicker from '../../components/AgePicker/agePicker'
 
 export default function EditProfile() {
   const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
+  const SingleCharToString = (char) => {
+    switch (char) {
+      case 'ז':
+        return 'גבר';
+      case 'נ':
+        return 'אישה';
+      case 'א':
+        return 'אחר';
+      default:
+        return '';
+    }
+  }
 
   const [profilePicture, setProfilePicture] = useState(loggedInUser.profileImage)
   const [fullName, setFullName] = useState(loggedInUser.fullname)
   const [description, setDescription] = useState(loggedInUser.introduction)
   const [age, setAge] = useState('')
   const [selectedDate, setSelectedDate] = useState(null);
-  const [gender, setGender] = useState('')
-  const [destination, setDestination] = useState(loggedInUser.travelPlan)
+  const [gender, setGender] = useState(SingleCharToString(loggedInUser.gender))
+  const [destination, setDestination] = useState([])
   const [instagram, setInstagram] = useState(loggedInUser.instagram)
-  const [city, setCity] = useState('')
-  const [selectedInterests, setSelectedInterests] = useState(loggedInUser.tripInterests)
+  const [city, setCity] = useState(loggedInUser.city)
+  const [selectedInterests, setSelectedInterests] = useState([])
   const [countryData, setCountryData] = useState([])
   const [phoneNumber, setPhoneNumber] = useState(loggedInUser.phoneNumber);
   const [updatedUser, setUpdatedUser] = useState(loggedInUser);
@@ -43,15 +56,15 @@ export default function EditProfile() {
 
 
 
-  useEffect(() => {
-    const ageCalculate = () => {
-       const today = new Date();
-       const birthDate = selectedDate;
-       const calculatedAge = differenceInYears(today, birthDate);
-       setAge(calculatedAge)
-    };
-    ageCalculate();
-  }, [selectedDate]);
+  // useEffect(() => {
+  //   const ageCalculate = () => {
+  //      const today = new Date();
+  //      const birthDate = selectedDate;
+  //      const calculatedAge = differenceInYears(today, birthDate);
+  //      setAge(calculatedAge)
+  //   };
+  //   ageCalculate();
+  // }, [selectedDate]);
 
 
 
@@ -82,11 +95,12 @@ export default function EditProfile() {
         return '';
     }
   }
+
   
   const updateUser = async () => {
     try {
       const updatedUserData = {
-        id: loggedInUser.id, // Assuming you have the user's ID in loggedInUser.id
+        id: loggedInUser.id, 
         fullname: fullName,
         password: loggedInUser.password, 
         introduction: description,
@@ -95,7 +109,7 @@ export default function EditProfile() {
         instagram: instagram,
         email: loggedInUser.email, 
         phoneNumber: phoneNumber,
-        profileImage: profilePicture, // Assuming you have the user's profile image URL in loggedInUser.profileImage
+        profileImage: profilePicture, 
         city: city,
         travelPlan: destination,
         tripInterests: selectedInterests,
@@ -179,10 +193,13 @@ export default function EditProfile() {
       />
 
       
-       <DatePickerComponent
+       {/* <DatePickerComponent
 					selectedDate={selectedDate}
 					onDateChange={setSelectedDate}
-				/>
+				/> */}
+        <AgePicker selectedAge={age}
+        onAgeChange={setAge}/>
+        
         <GenderPicker
         onGenderChange={setGender}
         selectedGender={gender}></GenderPicker>
@@ -196,9 +213,10 @@ export default function EditProfile() {
             data={countryData}
             title={'בחירת יעדים'}
             onSelectionsChange={handleSelectedDestinations}
+            selectedItems={loggedInUser.travelPlan}
 
           ></MultiSelectDropdown>
-          <CitiesComponent onSelectCity={handleSelectedCity} />
+          <CitiesComponent onSelectCity={handleSelectedCity} defualtOptionCheck={loggedInUser.city}/>
 
 </View>
       

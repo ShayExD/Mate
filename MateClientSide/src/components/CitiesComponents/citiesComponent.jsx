@@ -6,7 +6,7 @@ import { SelectList } from 'react-native-dropdown-select-list'
 import { VerticalScale } from '../../utils';
 import Theme from '../../../assets/styles/theme';
 
-const CitiesComponent = ({onSelectCity}) => {
+const CitiesComponent = ({onSelectCity,defualtOptionCheck}) => {
     const [selected, setSelected]  = useState('');
 
     const preprocessedData = IsraelCities.map(city => ({
@@ -35,10 +35,14 @@ const CitiesComponent = ({onSelectCity}) => {
             textAlign: 'right',
             alignItems: 'flex-end'
           }}
-
+          dropdownItemStyles={{
+            textAlign:'right',
+            alignItems:'flex-end'
+          }}
+          defaultOption={defualtOptionCheck ? defualtOptionCheck: ""}
         save="value"
         search={true}
-        placeholder='עיר בישראל'
+        placeholder={defualtOptionCheck? defualtOptionCheck: 'עיר בישראל'}
         inputStyles={[Theme.primaryText,{textAlign:'right',marginHorizontal:0}]}
         renderItem={(item, styleProps) => (
         <View style={styleProps.listItemContainer}>
