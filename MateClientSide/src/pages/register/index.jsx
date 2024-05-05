@@ -71,7 +71,7 @@ export default function Register({navigation}) {
           {
             text: 'OK',
             onPress: () => {
-              navigation.navigate('EditProfile');
+              navigation.navigate('myTabs',{screen:'EditProfile'});
             },
           },
         ]

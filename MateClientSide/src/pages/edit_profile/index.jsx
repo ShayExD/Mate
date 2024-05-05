@@ -77,20 +77,20 @@ export default function EditProfile({navigation}) {
   
   const updateUser = async () => {
     try {
-      const defaultValues = {
-        fullname: '',
-        password: '',
-        introduction: '',
-        gender: ' ', // Assuming space is considered a default value for gender
-        age: 0,
-        instagram: '',
-        email: '',
-        phoneNumber: '',
-        profileImage: '',
-        city: '',
-        travelPlan: [], // Assuming an empty array is considered a default value for travelPlan
-        tripInterests: [], // Assuming an empty array is considered a default value for tripInterests
-      };
+      // const defaultValues = {
+      //   fullname: '',
+      //   password: '',
+      //   introduction: '',
+      //   gender: ' ', // Assuming space is considered a default value for gender
+      //   age: 0,
+      //   instagram: '',
+      //   email: '',
+      //   phoneNumber: '',
+      //   profileImage: '',
+      //   city: '',
+      //   travelPlan: [], // Assuming an empty array is considered a default value for travelPlan
+      //   tripInterests: [], // Assuming an empty array is considered a default value for tripInterests
+      // };
 
 
       const updatedUserData = {
@@ -108,10 +108,8 @@ export default function EditProfile({navigation}) {
         travelPlan: destination,
         tripInterests: selectedInterests,
       };
-      console.log(updatedUserData)
-      const hasDefaultValues = Object.keys(updatedUserData).some(key => updatedUserData[key] === defaultValues[key]);
       
-      if (hasDefaultValues && destination== [] || selectedInterests==[]) {
+      if (fullName==''||description=='' ||gender==' '||instagram==''||phoneNumber==''||profilePicture== ''||city=='' || destination.length==0 || selectedInterests.length==0) {
         // Alert user to fill all fields
         Alert.alert(
           'Updated failed',
