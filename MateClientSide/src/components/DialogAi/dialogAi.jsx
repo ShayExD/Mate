@@ -7,7 +7,7 @@ import Toast from 'react-native-toast-message'
 import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Alert } from 'react-native'
-import { VerticalScale } from '../../utils'
+import { HorizontalScale, VerticalScale } from '../../utils'
 
 const DialogAi = (props) => {
   I18nManager.forceRTL(true)
@@ -32,7 +32,7 @@ const DialogAi = (props) => {
       <Dialog visible={props.visible} onDismiss={props.onDismiss}>
         <Toast />
         <Dialog.Content>
-          <ScrollView contentContainerStyle={{ alignItems: 'center',paddingTop:30 }}>
+          <ScrollView contentContainerStyle={{ alignItems: 'center',paddingTop:VerticalScale(60) }}>
           <TouchableOpacity style={[styles.button,{position:'absolute',left:5}]} onPress={copyToClipboard}>
               <Icon name='copy-outline' size={24} color={Theme.primaryColor.color} />
               <Text style={styles.buttonText}>Copy</Text>
@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // backgroundColor: Theme.primaryColor.color,
     borderColor:Theme.primaryColor.color,
-    paddingHorizontal: 15,
+    paddingHorizontal: HorizontalScale(5),
     borderWidth:1,
-    paddingVertical: 10,
+    paddingVertical: VerticalScale(5),
     borderRadius: 8,
-    marginVertical: VerticalScale(10),
+    marginVertical: VerticalScale(15),
   },
   buttonText: {
     color:Theme.primaryColor.color,
