@@ -29,6 +29,26 @@ export default function Home({ navigation }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+
+
+  function calculateMatchingScore(user1, user2) {
+    // Calculate matching score based on age proximity, trip interests, and travel plans
+    let ageScore = 100 - Math.abs(user1.age - user2.age); // Assuming closer ages have higher scores
+    let interestsScore = user1.tripInterests.filter(interest => user2.tripInterests.includes(interest)).length * 10; // Assuming each shared interest adds 10 points
+    let travelPlanScore = user1.travelPlan.filter(plan => user2.travelPlan.includes(plan)).length * 10; // Assuming each shared travel plan adds 10 points
+    return ageScore + interestsScore + travelPlanScore;
+}
+
+function getRecommendedUsers(loggedInUser, allUsers) {
+  // Calculate matching scores for all users
+  const recommendedUsers = allUsers.filter(user => user.id !== loggedInUser.id).map(user => {
+      const matchingScore = calculateMatchingScore(loggedInUser, user);
+      return { ...user, matchingScore };
+  });
+  recommendedUsers.sort((a, b) => b.matchingScore - a.matchingScore);
+  return recommendedUsers;
+}
+
   const trips = [
     {
       picUrl: require('../../../assets/images/TripPhoto.jpg'),
@@ -97,7 +117,11 @@ export default function Home({ navigation }) {
   const getAllUser = async () => {
     try {
       const response = await axios.get(`https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User`);
-      const updatedUserData = response.data.filter(user => user.id !== loggedInUser.id);
+      
+      // const updatedUserData = response.data.filter(user => user.id !== loggedInUser.id);
+      updatedUserData=getRecommendedUsers(loggedInUser,response.data)
+
+      console.log(updatedUserData)
       setData(updatedUserData);
       
       // console.log('Data fetched successfully:', response.data);
