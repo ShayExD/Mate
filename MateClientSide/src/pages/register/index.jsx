@@ -98,7 +98,7 @@ export default function Register({navigation}) {
       <Text style={[Theme.primaryTitle,styles.title]}>הרשמה</Text>
       <Text  style={[Theme.primaryText,styles.text]}>מלא את השדות הבאים על מנת להירשם</Text>
       <View style={styles.inputsContainer}>
-        {showError&&emailError!='' ?  <Text>{emailError}</Text> : null}
+        {showError&&emailError!='' ?  <Text style={{color:'red'}}>{emailError}</Text> : null}
 
       <TextInput
         label= {"אימייל"}
@@ -121,7 +121,7 @@ export default function Register({navigation}) {
         selectionColor='gray'
         textAlign='right'
         />
-        {showError&&passwordError!='' ?  <Text>{passwordError}</Text> : null}
+        {showError&&passwordError!='' ?  <Text style={{color:'red'}}>{passwordError}</Text> : null}
 
       </View>
       <ButtonLower textContent={"הירשם"} handlePress={handleRegister}/>
