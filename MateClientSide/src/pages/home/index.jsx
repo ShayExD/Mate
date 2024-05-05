@@ -97,8 +97,8 @@ export default function Home({ navigation }) {
   const getAllUser = async () => {
     try {
       const response = await axios.get(`https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User`);
-
-      setData(response.data);
+      const updatedUserData = response.data.filter(user => user.id !== loggedInUser.id);
+      setData(updatedUserData);
       
       // console.log('Data fetched successfully:', response.data);
     } catch (error) {
@@ -159,7 +159,7 @@ export default function Home({ navigation }) {
           data={data}
           renderItem={({ item }) => (
             <SingleProfile
-              handlePress={()=>{navigation.navigate('ViewProfile'); }}
+              handlePress={()=>{    navigation.navigate('ViewProfile', { profile: item });}}
               name={item.fullname}
               details={item.introduction}
               profileImg={ require('../../../assets/images/TripPhoto.jpg')}

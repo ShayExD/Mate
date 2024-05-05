@@ -10,9 +10,9 @@ import { Avatar } from 'react-native-paper'
 import TextView from '../../components/TextView/textView'
 import TagsView from '../../components/TagsView/tagsView'
 import { useRoute } from '@react-navigation/native';
-
+import { SingleCharToString } from '../../utils'
 export default function ViewProfile() {
-  const route = useRoute();
+const route = useRoute();
 const { profile } = route.params; 
 
 console.log(profile)
@@ -53,32 +53,31 @@ console.log(profile)
           source={require('../../../assets/images/avatar.jpg')}
         />
         <Text style={[Theme.primaryText, styles.text]}>
-          {user.fullname.split(' ')[0]},{user.age}
+          {profile.fullname.split(' ')[0]},{profile.age}
         </Text>
       </View>
       <View style={styles.inputsContainer}>
-        <TextView title={'שם מלא'} content={user.fullname}></TextView>
-        <TextView title={'גיל'} content={user.age}></TextView>
+        <TextView title={'שם מלא'} content={profile.fullname}></TextView>
+        <TextView title={'גיל'} content={profile.age}></TextView>
         <TextView
           title={'מין'}
-          content={user.gender}
+          content={SingleCharToString(profile.gender)}
           iconName={user.gender === 'Male' ? 'man' : 'women'}
         ></TextView>
         <TextView
           title={'קצת עלי'}
           content={
-            user.introduction}
+            profile.introduction}
         ></TextView>
-        <TagsView title={'תחביבים'} list={user.tripInterests}></TagsView>
-        <TagsView title={'יעדים לטיול'} list={user.travelPlan}></TagsView>
+        <TagsView title={'תחביבים'} list={profile.tripInterests}></TagsView>
+        <TagsView title={'יעדים לטיול'} list={profile.travelPlan}></TagsView>
         <TextView
           iconName={'logo-instagram'}
           title={'אנסטגרם'}
-          content={user.instagram}
+          content={profile.instagram}
           allowCopy={true}
         ></TextView>
       </View>
-      <ButtonLower textContent={'עריכת פרופיל'} />
     </ScrollView>
   )
 }

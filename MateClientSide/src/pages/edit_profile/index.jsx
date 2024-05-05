@@ -17,21 +17,10 @@ import CitiesComponent from '../../components/CitiesComponents/citiesComponent'
 import { AuthContext } from '../../../AuthContext'
 import AgePicker from '../../components/AgePicker/agePicker'
 import { Alert } from 'react-native';
+import { mapToSingleChar,SingleCharToString } from '../../utils'
 
 export default function EditProfile({navigation}) {
   const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
-  const SingleCharToString = (char) => {
-    switch (char) {
-      case 'ז':
-        return 'גבר';
-      case 'נ':
-        return 'אישה';
-      case 'א':
-        return 'אחר';
-      default:
-        return '';
-    }
-  }
 
   const [profilePicture, setProfilePicture] = useState(loggedInUser.profileImage)
   const [fullName, setFullName] = useState(loggedInUser.fullname)
@@ -84,22 +73,26 @@ export default function EditProfile({navigation}) {
     setCity(selectedCity);
   };
 
-  const mapToSingleChar = (label) => {
-    switch (label) {
-      case 'גבר':
-        return 'ז';
-      case 'אישה':
-        return 'נ';
-      case 'אחר':
-        return 'א';
-      default:
-        return '';
-    }
-  }
 
   
   const updateUser = async () => {
     try {
+      const defaultValues = {
+        fullname: '',
+        password: '',
+        introduction: '',
+        gender: ' ', // Assuming space is considered a default value for gender
+        age: 0,
+        instagram: '',
+        email: '',
+        phoneNumber: '',
+        profileImage: '',
+        city: '',
+        travelPlan: [], // Assuming an empty array is considered a default value for travelPlan
+        tripInterests: [], // Assuming an empty array is considered a default value for tripInterests
+      };
+
+
       const updatedUserData = {
         id: loggedInUser.id, 
         fullname: fullName,
@@ -115,6 +108,23 @@ export default function EditProfile({navigation}) {
         travelPlan: destination,
         tripInterests: selectedInterests,
       };
+      console.log(updatedUserData)
+      const hasDefaultValues = Object.keys(updatedUserData).some(key => updatedUserData[key] === defaultValues[key]);
+      
+      if (hasDefaultValues && destination== [] || selectedInterests==[]) {
+        // Alert user to fill all fields
+        Alert.alert(
+          'Updated failed',
+          'You have to fill all the fields, please update your details!',
+          [
+            {
+              text: 'OK',
+            },
+          ]
+        );
+        return;
+      }
+
       console.log(updatedUserData)
   
       const response = await axios({
@@ -136,7 +146,7 @@ export default function EditProfile({navigation}) {
               {
                 text: 'OK',
                 onPress: () => {
-                  navigation.navigate('myTabs');
+                  navigation.navigate('myTabs',{screen:'Home'});
                 },
               },
             ]
@@ -144,16 +154,7 @@ export default function EditProfile({navigation}) {
         }
       // Example: Update the loggedInUser state with the updated user data
     } catch (error) {
-      Alert.alert(
-        'Updated failed',
-        'You have to fill all the fields, please update your details!',
-        [
-          {
-            text: 'OK',
-          },
-        ]
-      );
-      // console.error('Error updating user:', error);
+      console.error('Error updating user:', error);
       
       // Handle the error if needed
     }

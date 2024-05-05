@@ -11,6 +11,7 @@ import { StyleSheet, View, Text } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Theme from '../../assets/styles/theme'
+import ComingSoon from '../pages/comingSoon'
 
 
 const Tab = createBottomTabNavigator()
@@ -103,8 +104,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name='הודעות'
-        component={PlanTrip}
+        name='ComingSoon'
+        component={ComingSoon}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
