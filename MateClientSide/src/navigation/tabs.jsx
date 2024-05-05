@@ -38,7 +38,7 @@ const Tabs = () => {
       }}
     >
       <Tab.Screen
-        name='ראשי'
+        name='Home'
         component={Home}
         options={{
           headerShown: false,

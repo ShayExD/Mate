@@ -89,15 +89,7 @@ export default function Register({navigation}) {
       }
     }
   };
-  // const handleLogin = async () => {
-  //   try {
-  //     const response = await axios.get(`https://localhost:7271/api/User`);
-  //     setData(response.data);
-  //     console.log('Data fetched successfully:', response.data);
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
+
 
 
   return (

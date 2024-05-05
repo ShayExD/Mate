@@ -191,7 +191,8 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: Theme.primaryText.fontSize,
-    textAlign:'center',
+    textAlign:'right',
+alignItems:'flex-end'
   },
   selectedTextStyle: {
     fontSize: Theme.primaryText.fontSize,
@@ -210,6 +211,7 @@ const styles = StyleSheet.create({
     width: 340,
     marginBottom: 15,
     textAlign: 'right',
+    
   },
 
   textStyle: {

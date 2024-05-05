@@ -6,7 +6,7 @@ import Theme from '../../../assets/styles/theme';
 
 const AgePicker = ({ selectedAge, onAgeChange }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const ageOptions = Array.from({ length: 100 }, (_, index) => index + 1);
+  const ageOptions = Array.from({ length: 83 }, (_, index) => index + 18);
 
   const openPicker = () => {
     setModalVisible(true);

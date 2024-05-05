@@ -7,6 +7,7 @@ import Toast from 'react-native-toast-message'
 import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Alert } from 'react-native'
+import { VerticalScale } from '../../utils'
 
 const DialogAi = (props) => {
   I18nManager.forceRTL(true)
@@ -31,14 +32,18 @@ const DialogAi = (props) => {
       <Dialog visible={props.visible} onDismiss={props.onDismiss}>
         <Toast />
         <Dialog.Content>
-          <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+          <ScrollView contentContainerStyle={{ alignItems: 'center',paddingTop:30 }}>
+          <TouchableOpacity style={[styles.button,{position:'absolute',left:5}]} onPress={copyToClipboard}>
+              <Icon name='copy-outline' size={24} color={Theme.primaryColor.color} />
+              <Text style={styles.buttonText}>Copy</Text>
+            </TouchableOpacity>
             <Text style={[Theme.primaryText, styles.rtlText]}>
             {props.text ? props.text.replace(/\*/g, '') : ''}
             </Text>
-            <TouchableOpacity style={styles.button} onPress={copyToClipboard}>
+            {/* <TouchableOpacity style={styles.button} onPress={copyToClipboard}>
               <Icon name='copy-outline' size={24} color='#fff' />
               <Text style={styles.buttonText}>Copy to Clipboard</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </ScrollView>
         </Dialog.Content>
       </Dialog>
@@ -56,14 +61,16 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Theme.primaryColor.color,
+    // backgroundColor: Theme.primaryColor.color,
+    borderColor:Theme.primaryColor.color,
     paddingHorizontal: 15,
+    borderWidth:1,
     paddingVertical: 10,
     borderRadius: 8,
-    marginBottom: 10,
+    marginVertical: VerticalScale(10),
   },
   buttonText: {
-    color: '#fff',
+    color:Theme.primaryColor.color,
     fontSize: 16,
     marginLeft: 5,
   },

@@ -16,8 +16,9 @@ import { differenceInYears, parseISO } from 'date-fns';
 import CitiesComponent from '../../components/CitiesComponents/citiesComponent'
 import { AuthContext } from '../../../AuthContext'
 import AgePicker from '../../components/AgePicker/agePicker'
+import { Alert } from 'react-native';
 
-export default function EditProfile() {
+export default function EditProfile({navigation}) {
   const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
   const SingleCharToString = (char) => {
     switch (char) {
@@ -35,7 +36,7 @@ export default function EditProfile() {
   const [profilePicture, setProfilePicture] = useState(loggedInUser.profileImage)
   const [fullName, setFullName] = useState(loggedInUser.fullname)
   const [description, setDescription] = useState(loggedInUser.introduction)
-  const [age, setAge] = useState('')
+  const [age, setAge] = useState(loggedInUser.age)
   const [selectedDate, setSelectedDate] = useState(null);
   const [gender, setGender] = useState(SingleCharToString(loggedInUser.gender))
   const [destination, setDestination] = useState([])
@@ -128,6 +129,18 @@ export default function EditProfile() {
       // You can perform additional actions after successful update, such as updating the loggedInUser state
         if(response.data){
           loginUser(updatedUserData);
+          Alert.alert(
+            'Updated Successful',
+            'You have successfully updated your details!',
+            [
+              {
+                text: 'OK',
+                onPress: () => {
+                  navigation.navigate('Home');
+                },
+              },
+            ]
+          );
         }
       // Example: Update the loggedInUser state with the updated user data
     } catch (error) {

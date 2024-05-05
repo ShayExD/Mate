@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native'
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 import Theme from '../../../assets/styles/theme'
 import { VerticalScale, windowHeight, HorizontalScale } from '../../utils'
 import BackArrow from '../../components/BackArrow/backArrow'
@@ -22,11 +22,13 @@ import Trip from '../../components/SingleTrip/singleTrip'
 import SingleTrip from '../../components/SingleTrip/singleTrip'
 import SingleProfile from '../../components/SinglePropfile/singleProfile'
 import Tabs from '../../navigation/tabs'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Home({ navigation }) {
 
   const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
-
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const trips = [
     {
@@ -92,8 +94,33 @@ export default function Home({ navigation }) {
       ig: 'kfirkoren',
     },
   ]
+
+  const getAllUser = async () => {
+    try {
+      const response = await axios.get(`https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User`);
+
+      setData(response.data);
+      
+      // console.log('Data fetched successfully:', response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAllUser();
+  }, []); 
+
   return (
     <SafeAreaView style={[Theme.screen, styles.screen]}>
+        <Spinner
+        visible={isLoading}
+        textContent={'Loading...'}
+        textStyle={styles.spinnerText}
+        overlayColor="rgba(0, 0, 0, 0.6)"
+      />
       <View style={styles.topBar}>
         <Header nickName={loggedInUser.fullname}></Header>
         <View style={styles.bell}>
@@ -130,15 +157,15 @@ export default function Home({ navigation }) {
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={users}
+          data={data}
           renderItem={({ item }) => (
             <SingleProfile
-              name={item.name}
-              details={item.details}
-              profileImg={item.profileImg}
+              name={item.fullname}
+              details={item.introduction}
+              profileImg={ require('../../../assets/images/TripPhoto.jpg')}
               age={item.age}
               city={item.city}
-              ig={item.ig}
+              ig={item.instagram}
             ></SingleProfile>
           )}
         />
@@ -155,6 +182,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '90%',
     marginTop: VerticalScale(20),
+  },
+  spinnerText: {
+    color: '#FFF',
   },
   content: {
     marginTop: VerticalScale(30),

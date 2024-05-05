@@ -49,7 +49,7 @@ const NumberPicker = ({selectedValueState, onValueChange ,text}) => {
 
 const styles = StyleSheet.create({
   container: {
-  width:'200px',
+  // width:'200px',
   alignItems:'center'
   },
   touchableArea: {
@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
   },
   selectedDays: {
     fontSize: Theme.primaryText.fontSize,
-    textAlign: 'center', // Center the text horizontally
+    textAlign: 'center',
+    // marginRight:20 // Center the text horizontally
   },
   modalContainer: {
     flex: 1,
