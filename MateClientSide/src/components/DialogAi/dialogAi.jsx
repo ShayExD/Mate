@@ -71,8 +71,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color:Theme.primaryColor.color,
-    fontSize: 16,
-    marginLeft: 5,
+    fontSize: Theme.primaryText.fontSize,
+    fontFamily:Theme.primaryText.fontFamily,
+    marginLeft: VerticalScale(5),
   },
 })
 

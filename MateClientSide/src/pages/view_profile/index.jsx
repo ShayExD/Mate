@@ -9,7 +9,13 @@ import ButtonLower from '../../components/ButtonLower/buttonLower'
 import { Avatar } from 'react-native-paper'
 import TextView from '../../components/TextView/textView'
 import TagsView from '../../components/TagsView/tagsView'
+import { useRoute } from '@react-navigation/native';
+
 export default function ViewProfile() {
+  const route = useRoute();
+const { profile } = route.params; 
+
+console.log(profile)
   const user = {
     age: 28,
     city: 'New York',

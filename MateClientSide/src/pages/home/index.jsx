@@ -21,7 +21,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Trip from '../../components/SingleTrip/singleTrip'
 import SingleTrip from '../../components/SingleTrip/singleTrip'
 import SingleProfile from '../../components/SinglePropfile/singleProfile'
-import Tabs from '../../navigation/tabs'
 import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Home({ navigation }) {
@@ -160,6 +159,7 @@ export default function Home({ navigation }) {
           data={data}
           renderItem={({ item }) => (
             <SingleProfile
+              handlePress={()=>{navigation.navigate('ViewProfile'); }}
               name={item.fullname}
               details={item.introduction}
               profileImg={ require('../../../assets/images/TripPhoto.jpg')}

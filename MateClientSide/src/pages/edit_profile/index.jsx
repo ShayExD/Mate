@@ -136,7 +136,7 @@ export default function EditProfile({navigation}) {
               {
                 text: 'OK',
                 onPress: () => {
-                  navigation.navigate('Home');
+                  navigation.navigate('myTabs');
                 },
               },
             ]
@@ -144,7 +144,17 @@ export default function EditProfile({navigation}) {
         }
       // Example: Update the loggedInUser state with the updated user data
     } catch (error) {
-      console.error('Error updating user:', error);
+      Alert.alert(
+        'Updated failed',
+        'You have to fill all the fields, please update your details!',
+        [
+          {
+            text: 'OK',
+          },
+        ]
+      );
+      // console.error('Error updating user:', error);
+      
       // Handle the error if needed
     }
   };

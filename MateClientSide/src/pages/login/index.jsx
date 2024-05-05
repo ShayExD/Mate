@@ -41,6 +41,7 @@ export default function Login({navigation}) {
         }
       );
       loginUser(response.data)
+      navigation.navigate("myTabs");
       console.log(loggedInUser)
       console.log('User logged in successfully:', response.data);
       // Handle further actions after successful login
