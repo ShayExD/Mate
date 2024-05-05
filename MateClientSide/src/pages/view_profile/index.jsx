@@ -46,19 +46,19 @@ console.log(profile)
       showsVerticalScrollIndicator={false}
     >
       <BackArrow />
-      <Text style={[Theme.primaryTitle, styles.title]}>הפרופיל שלי</Text>
+      {/* <Text style={[Theme.primaryTitle, styles.title]}>הפרופיל שלי</Text> */}
       <View style={styles.avatarContainer}>
         <Avatar.Image
           size={150}
           source={require('../../../assets/images/avatar.jpg')}
         />
-        <Text style={[Theme.primaryText, styles.text]}>
+        <Text style={[Theme.primaryTitle, styles.text]}>
           {profile.fullname.split(' ')[0]},{profile.age}
         </Text>
       </View>
       <View style={styles.inputsContainer}>
-        <TextView title={'שם מלא'} content={profile.fullname}></TextView>
-        <TextView title={'גיל'} content={profile.age}></TextView>
+        {/* <TextView title={'שם מלא'} content={profile.fullname}></TextView>
+        <TextView title={'גיל'} content={profile.age}></TextView> */}
         <TextView
           title={'מין'}
           content={SingleCharToString(profile.gender)}
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 20,
     alignItems: 'center',
+    
   },
   title: {
     marginTop: windowHeight * 0.1,
@@ -124,6 +125,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   avatarContainer: {
+    marginTop: windowHeight * 0.1,
+    marginBottom: windowHeight * 0.0174,
     alignItems: 'center',
     marginVertical: windowHeight * 0.05,
   },

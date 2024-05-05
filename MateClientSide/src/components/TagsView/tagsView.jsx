@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    borderWidth: 1,
-    borderColor: 'gray',
     marginBottom: 10,
   },
   tagsContainer: {
