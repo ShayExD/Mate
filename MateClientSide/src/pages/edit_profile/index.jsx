@@ -35,6 +35,20 @@ export default function EditProfile({navigation}) {
   const [countryData, setCountryData] = useState([])
   const [phoneNumber, setPhoneNumber] = useState(loggedInUser.phoneNumber);
   const [updatedUser, setUpdatedUser] = useState(loggedInUser);
+  const [phoneNumberError, setPhoneNumberError] = useState('')
+
+  const phoneNumberPattern = /^\d{10}$/
+
+
+  const validatePhoneNumber = () => {
+    if (!phoneNumberPattern.test(phoneNumber)) {
+      setPhoneNumberError(
+        'Invalid phone number format. Please enter 10 digits.',
+      )
+    } else {
+      setPhoneNumberError('')
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,8 +105,17 @@ export default function EditProfile({navigation}) {
       //   travelPlan: [], // Assuming an empty array is considered a default value for travelPlan
       //   tripInterests: [], // Assuming an empty array is considered a default value for tripInterests
       // };
-
-
+      
+      if (!phoneNumberPattern.test(phoneNumber)) {
+        setPhoneNumberError(
+          'Invalid phone number format. Please enter 10 digits.',
+        )
+        return;
+      } 
+      else {
+        setPhoneNumberError('')
+      }
+    
       const updatedUserData = {
         id: loggedInUser.id, 
         fullname: fullName,
@@ -214,6 +237,10 @@ export default function EditProfile({navigation}) {
       selectionColor="gray"
       />
 
+        {phoneNumberError !== '' && (
+          <Text style={styles.errorText}>{phoneNumberError}</Text>
+        )}
+
       
        {/* <DatePickerComponent
 					selectedDate={selectedDate}
@@ -288,4 +315,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
   },
+  errorText:{
+    marginTop: -VerticalScale(24),
+    paddingVertical:VerticalScale(5),
+    color:'red'
+  }
 })
