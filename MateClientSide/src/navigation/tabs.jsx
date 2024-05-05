@@ -87,8 +87,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name='EditProfile'
-        component={EditProfile}
+        name='בקרוב'
+        component={ComingSoon}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (

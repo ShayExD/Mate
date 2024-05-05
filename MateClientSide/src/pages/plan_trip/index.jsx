@@ -9,6 +9,8 @@ import * as googleGenerativeAI from '@google/generative-ai';
 import DropdownComponent from '../../components/DropdownCountryCityComponents/dropdownCountryCityComponents';
 import NumberPicker from '../../components/NumberPicker/numberPicker';
 import DialogAi from '../../components/DialogAi/dialogAi';
+import { Alert } from 'react-native';
+
 
 const PlanTrip = () => {
   const [daysNumber, setDaysNumber] = useState('');
@@ -20,8 +22,20 @@ const PlanTrip = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const hideDialog = () => setVisible(false);
-
   const StartChat = async () => {
+    if (daysNumber=='' || country=='' ) {
+      Alert.alert(
+        'Empty Fields',
+        'Please fill in all fields before starting the chat with AI.',
+        [
+          {
+            text: 'OK',
+          },
+        ]
+      );
+      return;
+    }
+
     setIsLoading(true);
 
     const API_KEY = 'AIzaSyBozb6vVgoZ6pYEjsfZ7W5jtsEZjRSgI2Y';
