@@ -157,8 +157,8 @@ export default function EditProfile({ navigation }) {
         profilePicture == '' ||
         city == '' ||
         destination.length == 0 ||
-        selectedInterests.length == 0||
-        isImageUpload===false
+        selectedInterests.length == 0
+        // isImageUpload===false
       ) {
         // Alert user to fill all fields
         Alert.alert(
