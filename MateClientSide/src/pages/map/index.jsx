@@ -16,6 +16,7 @@ const MapPage = () => {
   const [hotels, setHotels] = useState([])
   const [selectedHotel, setSelectedHotel] = useState(null)
   const [selectedHotelPhoto, setSelectedHotelPhoto] = useState(null)
+  const [visible,SetVisible] = useState(true)
   const GOOGLE_PLACES_API_KEY = 'AIzaSyB_5ASA2fagdnDwIvc6XxGcOdPpH0H_Z5I'
   const getLocation = async () => {
     try {
@@ -48,6 +49,9 @@ const MapPage = () => {
       }
     } catch (error) {
       console.error('Error getting hotel photo:', error)
+    }
+    finally{
+      SetVisible(true)
     }
   }
 
@@ -147,14 +151,24 @@ const MapPage = () => {
       ) : (
         <Text style={{justifyContent:'center'}}>Loading location...</Text>
       )}
-      {selectedHotel && (
+    
+      {visible && selectedHotel && (
         <View
           style={{
             alignItems: 'center',
             backgroundColor: 'white', 
             padding: 20,
           }}
+          accessibilityElementsHidden={visible}
         >
+          <Pressable style={[styles.icon,{right:'5%',left:'auto'}]} onPress={()=>{SetVisible(false); console.log(visible)}} >
+          <Fontisto
+            name='close'
+            size={30}
+            color='#46A2FF'
+          />
+          </Pressable>
+
           <Pressable style={[styles.icon]} onPress={navigateToHotel} >
           <Fontisto
             name='navigate'

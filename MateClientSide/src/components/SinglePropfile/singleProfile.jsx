@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 0,
     // objectFit: 'cover',
-    objectPosition: 'center',
+    // objectPosition: 'center',
 
     // marginTop: VerticalScale(5),
   },
