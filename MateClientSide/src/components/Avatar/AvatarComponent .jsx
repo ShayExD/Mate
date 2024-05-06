@@ -8,10 +8,12 @@ import { AuthContext } from '../../../AuthContext';
 import * as Permissions from 'expo-permissions'; // Import Permissions module
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
+import Spinner from 'react-native-loading-spinner-overlay'
+
 
 const AvatarComponent = ({ setProfilePicture  }) => {
   const { loggedInUser } = useContext(AuthContext);
-
+  const [isLoading, setIsLoading] = useState(false)
 
   const [avatar, setAvatar] = useState(loggedInUser.profileImage !== "" ? loggedInUser.profileImage : 'https://i.imgur.com/LBIwlSy.png');
   const [modalVisible, setModalVisible] = useState(false);
@@ -46,6 +48,7 @@ const AvatarComponent = ({ setProfilePicture  }) => {
     }
 
     if (!result.cancelled) {
+      setIsLoading(true)
       setModalVisible(false)
       setAvatar(result.assets[0].uri);
       setProfilePicture(result.assets[0].uri);
@@ -68,6 +71,7 @@ const AvatarComponent = ({ setProfilePicture  }) => {
     console.log(result.assets[0].uri)
     
     if (!result.cancelled) {
+      setIsLoading(true)
       setModalVisible(false)
       setAvatar(result.assets[0].uri);
       setProfilePicture(result.assets[0].uri);
@@ -97,16 +101,25 @@ const AvatarComponent = ({ setProfilePicture  }) => {
       console.log('Upload successful:', response.data);
       if (Array.isArray(response.data) && response.data.length > 0) {
         const uploadedFileName = response.data[0];
-        const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/uploadedFiles/${uploadedFileName}`;
+        const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/images/${uploadedFileName}`;
         setProfilePicture(uploadedImageURI);
       }
     } catch (error) {
       console.error('Upload error:', error);
     }
+    finally{
+      setIsLoading(false)
+    }
   };
 
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+         <Spinner
+        visible={isLoading}
+        textContent={'Loading...'}
+        textStyle={styles.spinnerText}
+        overlayColor='rgba(0, 0, 0, 0.6)'
+      />
       {avatar && <Image source={{ uri: avatar }} style={{ width: 150, height: 150, borderRadius: 75 }} />}
       <Button title="העלאת תמונת פרופיל" onPress={() => setModalVisible(true)} />
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
@@ -151,6 +164,9 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 16,
     fontFamily:'OpenSans'
+  },
+  spinnerText: {
+    color: '#FFF',
   },
 });
 
