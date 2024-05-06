@@ -50,7 +50,7 @@ console.log(profile)
       <View style={styles.avatarContainer}>
         <Avatar.Image
           size={150}
-          source={require('../../../assets/images/avatar.jpg')}
+          source={{uri:profile.profileImage}}
         />
         <Text style={[Theme.primaryTitle, styles.text]}>
           {profile.fullname.split(' ')[0]},{profile.age}

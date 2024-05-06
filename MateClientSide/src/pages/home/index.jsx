@@ -180,7 +180,7 @@ export default function Home({ navigation }) {
               }}
               name={item.fullname}
               details={item.introduction}
-              profileImg={require('../../../assets/images/avatar.jpg')}
+              profileImg={{uri:item.profileImage}}
               age={item.age}
               city={item.city}
               ig={item.instagram}
