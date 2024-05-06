@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView,Pressable } from 'react-native'
 import React, { useState,useEffect,useContext } from 'react'
 import Theme from '../../../assets/styles/theme'
 import { VerticalScale, windowHeight } from '../../utils'
@@ -18,9 +18,11 @@ import { AuthContext } from '../../../AuthContext'
 import AgePicker from '../../components/AgePicker/agePicker'
 import { Alert } from 'react-native';
 import { mapToSingleChar,SingleCharToString } from '../../utils'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+
 
 export default function EditProfile({navigation}) {
-  const { loginUser,loggedInUser ,setLoggedInUser} = useContext(AuthContext);
+  const { loginUser,loggedInUser ,setLoggedInUser,logoutUser} = useContext(AuthContext);
 
   const [profilePicture, setProfilePicture] = useState(loggedInUser.profileImage)
   const [fullName, setFullName] = useState(loggedInUser.fullname)
@@ -37,6 +39,7 @@ export default function EditProfile({navigation}) {
   const [updatedUser, setUpdatedUser] = useState(loggedInUser);
   const [phoneNumberError, setPhoneNumberError] = useState('')
 
+  
   const phoneNumberPattern = /^\d{10}$/
 
 
@@ -58,7 +61,11 @@ export default function EditProfile({navigation}) {
     fetchData();
   }, []);
 
-
+  const logOot = () => {
+    logoutUser()
+    navigation.navigate('Register')
+    console.log('logOut')
+  }
 
   // useEffect(() => {
   //   const ageCalculate = () => {
@@ -188,7 +195,11 @@ export default function EditProfile({navigation}) {
       contentContainerStyle={[styles.screen]}
       showsVerticalScrollIndicator={false}
     >
-      <BackArrow />
+      {/* <BackArrow /> */}
+      <Pressable style={styles.icon} onPress={logOot}>
+        <AntDesign name='logout' size={30} color='#e6824a' />
+        <Text>LogOut</Text>
+      </Pressable>
       <Text style={[Theme.primaryTitle, styles.title]}>בניית הפרופיל שלך</Text>
       <View style={styles.avatarContainer}>
         {/* <Avatar.Image
@@ -300,6 +311,15 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
+  },
+  icon: {
+    position: 'absolute',
+    right: '8%',
+    top: VerticalScale(70),
+    // backgroundColor: 'red',
+    borderRadius: '50%',
+    textAlign: 'center',
+    alignItems: 'center',
   },
   avatarContainer: {
     alignItems: 'center',

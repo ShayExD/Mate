@@ -11,7 +11,22 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
-    setLoggedInUser(null);
+    const defaultValues = {
+      fullname: '',
+      password: '',
+      introduction: '',
+      gender: ' ', 
+      age: 0,
+      instagram: '',
+      email: '',
+      phoneNumber: '',
+      profileImage: '',
+      city: '',
+      travelPlan: [], 
+      tripInterests: [], 
+    }
+
+    setLoggedInUser(defaultValues);
   };
 
   return (

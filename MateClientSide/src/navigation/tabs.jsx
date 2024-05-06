@@ -128,7 +128,7 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name='פרופיל'
+        name='EditProfile'
         component={EditProfile}
         options={{
           headerShown: false,

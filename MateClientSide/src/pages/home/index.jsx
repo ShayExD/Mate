@@ -33,7 +33,7 @@ export default function Home({ navigation }) {
   const [isLoadinguserPosts, setisLoadinguserPosts] = useState(false)
 
   const pagination = (database, currentPage, pageSize) => {
-    console.log('currentPage' + currentPage)
+    // console.log('currentPage' + currentPage)
     const startIndex = (currentPage - 1) * pageSize
     const endIndex = startIndex + pageSize
     if (startIndex >= database.length) {
@@ -93,45 +93,7 @@ export default function Home({ navigation }) {
       numOfPeople: 48,
     },
   ]
-  const users = [
-    {
-      name: 'כפיר קורן',
-      details:
-        'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותה צגה עצמית ב3 שורות',
-      profileImg: require('../../../assets/images/TripPhoto.jpg'),
-      age: 25,
-      city: 'חיפה',
-      ig: 'kfirkoren',
-    },
-    {
-      name: 'כפיר קורן',
-      details:
-        'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות',
-      profileImg: require('../../../assets/images/TripPhoto.jpg'),
-      age: 25,
-      city: 'חיפה',
-      ig: 'kfirkoren',
-    },
-    {
-      name: 'כפיר קורן',
-      details:
-        'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות',
-      profileImg: require('../../../assets/images/TripPhoto.jpg'),
-      age: 25,
-      city: 'חיפה',
-      ig: 'kfirkoren',
-    },
-    {
-      name: 'כפיר קורן',
-      details:
-        'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvצגה עצמית ב3 שורות',
-      profileImg: require('../../../assets/images/TripPhoto.jpg'),
-      age: 25,
-      city: 'חיפה',
-      ig: 'kfirkoren',
-    },
-  ]
-
+ 
   const getAllUser = async () => {
     try {
       const response = await axios.get(
@@ -141,7 +103,7 @@ export default function Home({ navigation }) {
       // const updatedUserData = response.data.filter(user => user.id !== loggedInUser.id);
       updatedUserData = getRecommendedUsers(loggedInUser, response.data)
 
-      console.log(updatedUserData)
+      // console.log(updatedUserData)
       setData(updatedUserData)
 
       // console.log('Data fetched successfully:', response.data);
@@ -223,8 +185,8 @@ export default function Home({ navigation }) {
           )}
           onEndReachedThreshold={0.5}
           onEndReached={() => {
-            console.log('fetch page number' + userPostsCurretPage + 1)
-            console.log(userPostsRenderData)
+            // console.log('fetch page number' + userPostsCurretPage + 1)
+            // console.log(userPostsRenderData)
             if (isLoadinguserPosts) {
               return
             }
