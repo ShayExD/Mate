@@ -22,6 +22,7 @@ import Trip from '../../components/SingleTrip/singleTrip'
 import SingleTrip from '../../components/SingleTrip/singleTrip'
 import SingleProfile from '../../components/SinglePropfile/singleProfile'
 import Spinner from 'react-native-loading-spinner-overlay'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 export default function Home({ navigation }) {
   const { loginUser, loggedInUser, setLoggedInUser } = useContext(AuthContext)
@@ -42,21 +43,20 @@ export default function Home({ navigation }) {
     return database.slice(startIndex, endIndex)
   }
 
+  
   function calculateMatchingScore(user1, user2) {
-    // Calculate matching score based on age proximity, trip interests, and travel plans
-    let ageScore = 100 - Math.abs(user1.age - user2.age) // Assuming closer ages have higher scores
+    let ageScore = 100 - Math.abs(user1.age - user2.age) 
     let interestsScore =
       user1.tripInterests.filter((interest) =>
         user2.tripInterests.includes(interest),
-      ).length * 10 // Assuming each shared interest adds 10 points
+      ).length * 10 
     let travelPlanScore =
       user1.travelPlan.filter((plan) => user2.travelPlan.includes(plan))
-        .length * 10 // Assuming each shared travel plan adds 10 points
+        .length * 10 
     return ageScore + interestsScore + travelPlanScore
   }
 
   function getRecommendedUsers(loggedInUser, allUsers) {
-    // Calculate matching scores for all users
     const recommendedUsers = allUsers
       .filter((user) => user.id !== loggedInUser.id)
       .map((user) => {
@@ -133,6 +133,7 @@ export default function Home({ navigation }) {
         textStyle={styles.spinnerText}
         overlayColor='rgba(0, 0, 0, 0.6)'
       />
+     
       <View style={styles.topBar}>
         <Header nickName={loggedInUser.fullname}></Header>
         <View style={styles.bell}>
@@ -234,4 +235,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  
 })

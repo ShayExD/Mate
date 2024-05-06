@@ -50,4 +50,44 @@ const mapToSingleChar = (label) => {
   }
 }
 
+const users = [
+  {
+    name: 'כפיר קורן',
+    details:
+      'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותה צגה עצמית ב3 שורות',
+    // profileImg: require('../../../assets/images/TripPhoto.jpg'),
+    age: 25,
+    city: 'חיפה',
+    ig: 'kfirkoren',
+  },
+  {
+    name: 'כפיר קורן',
+    details:
+      'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות',
+    // profileImg: require('../../../assets/images/TripPhoto.jpg'),
+    age: 25,
+    city: 'חיפה',
+    ig: 'kfirkoren',
+  },
+  {
+    name: 'כפיר קורן',
+    details:
+      'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות',
+    // profileImg: require('../../../assets/images/TripPhoto.jpg'),
+    age: 25,
+    city: 'חיפה',
+    ig: 'kfirkoren',
+  },
+  {
+    name: 'כפיר קורן',
+    details:
+      'הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהצגה עצמית ב3 שורות הצגה עצמית ב3 שורותהvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvצגה עצמית ב3 שורות',
+    // profileImg: require('../../../assets/images/TripPhoto.jpg'),
+    age: 25,
+    city: 'חיפה',
+    ig: 'kfirkoren',
+  },
+]
+
+
 export { windowWidth, windowHeight ,HorizontalScale,VerticalScale,interests,SingleCharToString,mapToSingleChar};

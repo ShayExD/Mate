@@ -20,7 +20,6 @@ import { Alert } from 'react-native';
 import { mapToSingleChar,SingleCharToString } from '../../utils'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-
 export default function EditProfile({navigation}) {
   const { loginUser,loggedInUser ,setLoggedInUser,logoutUser} = useContext(AuthContext);
 
@@ -61,7 +60,7 @@ export default function EditProfile({navigation}) {
     fetchData();
   }, []);
 
-  const logOot = () => {
+  const logOut = () => {
     logoutUser()
     navigation.navigate('Login')
     console.log('logOut')
@@ -196,7 +195,7 @@ export default function EditProfile({navigation}) {
       showsVerticalScrollIndicator={false}
     >
       {/* <BackArrow /> */}
-      <Pressable style={styles.icon} onPress={logOot}>
+      <Pressable style={styles.icon} onPress={logOut}>
         <AntDesign name='logout' size={30} color='#e6824a' />
         <Text>התנתק</Text>
       </Pressable>
