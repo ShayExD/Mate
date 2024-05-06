@@ -66,6 +66,11 @@ export default function Home({ navigation }) {
     recommendedUsers.sort((a, b) => b.matchingScore - a.matchingScore)
     return recommendedUsers
   }
+  const logOut = () => {
+    logoutUser()
+    navigation.navigate('Login')
+    console.log('logOut')
+  }
 
   const trips = [
     {
@@ -136,14 +141,10 @@ export default function Home({ navigation }) {
      
       <View style={styles.topBar}>
         <Header nickName={loggedInUser.fullname}></Header>
-        <View style={styles.bell}>
-          <Icon
-            name='bell-badge-outline'
-            size={30}
-            color='#e6824a'
-            style={styles.icon}
-          />
-        </View>
+        <Pressable style={styles.icon} onPress={logOut}>
+          <AntDesign name='logout' size={30} color='#e6824a' />
+          <Text>התנתק</Text>
+        </Pressable>
       </View>
       <View style={styles.content}>
         <Text style={[Theme.primaryTitle, styles.title]}>
@@ -233,6 +234,15 @@ const styles = StyleSheet.create({
     height: VerticalScale(50),
     width: HorizontalScale(50),
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    position: 'absolute',
+    right: '0%',
+    paddingHorizontal: HorizontalScale(5),
+    top: VerticalScale(10),
+    borderRadius: '50%',
+    textAlign: 'center',
     alignItems: 'center',
   },
   
