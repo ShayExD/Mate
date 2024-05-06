@@ -122,6 +122,7 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     getAllUser()
+    setuserPostsCurretPage(1)
   }, [loggedInUser])
 
   useEffect(() => {
