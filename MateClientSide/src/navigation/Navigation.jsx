@@ -9,6 +9,7 @@ import PlanTrip from "../pages/plan_trip";
 import ViewProfile from "../pages/view_profile";
 import Home from "../pages/home";
 import Tabs from "./tabs";
+import Chat from "../pages/chat";
 const MainNavigation = () => {
   const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ const MainNavigation = () => {
       <Stack.Screen name="ViewProfile" component={ViewProfile} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="myTabs" component={Tabs} />
+      <Stack.Screen name="Chat" component={Chat} />
 
 
       {/* <Stack.Screen name="PlanTrip" component={PlanTrip} /> */}
