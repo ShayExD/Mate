@@ -28,7 +28,6 @@ const SingleProfile = ({
               <Text style={styles.title}>
                 {name},{age}
               </Text>
-              {/* <Text style={styles.text}>{details} </Text> */}
             <View style={styles.bottom}>
               {/* <View style={styles.profileDetail}>
               <Text style={[styles.profileText]}></Text>
@@ -94,9 +93,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '5%',
     alignItems: 'center',
-    // justifyContent: 'flex-end',
-    // paddingBottom: 10,
-    // marginTop: 5,
     // marginTop: VerticalScale(10),
     // paddingHorizontal: HorizontalScale(10),
     // paddingVertical: VerticalScale(10),

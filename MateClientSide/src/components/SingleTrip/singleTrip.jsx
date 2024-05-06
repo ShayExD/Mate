@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   shadowContainer: {
     borderRadius: HorizontalScale(20),
     overflow: 'hidden',
-    shadowColor: '#000',
+    shadowColor: '#dddddd',
     shadowOffset: {
       width: 0,
       height: 5,
