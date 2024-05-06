@@ -12,9 +12,8 @@ import * as MediaLibrary from 'expo-media-library';
 const AvatarComponent = ({ setProfilePicture ,uploadImage }) => {
   const { loggedInUser } = useContext(AuthContext);
 
-  const defaultAvatarURI = 'https://i.imgur.com/LBIwlSy.png';
 
-  const [avatar, setAvatar] = useState(defaultAvatarURI);
+  const [avatar, setAvatar] = useState(loggedInUser.profileImage !== "" ? loggedInUser.profileImage : 'https://i.imgur.com/LBIwlSy.png');
   const [modalVisible, setModalVisible] = useState(false);
 
 
