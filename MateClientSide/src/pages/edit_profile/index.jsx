@@ -210,7 +210,7 @@ export default function EditProfile({navigation}) {
       </Pressable>
       <Text style={[Theme.primaryTitle, styles.title]}>בניית הפרופיל שלך</Text>
       <View style={styles.avatarContainer}>
-      <AvatarComponent uploadImage={uploadImage} setProfilePicture={setProfilePicture} />
+      <AvatarComponent setProfilePicture={setProfilePicture} />
 
       </View>
       <View style={styles.inputsContainer}>

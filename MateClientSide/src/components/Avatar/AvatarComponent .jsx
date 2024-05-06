@@ -9,7 +9,7 @@ import * as Permissions from 'expo-permissions'; // Import Permissions module
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 
-const AvatarComponent = ({ setProfilePicture ,uploadImage }) => {
+const AvatarComponent = ({ setProfilePicture  }) => {
   const { loggedInUser } = useContext(AuthContext);
 
 
