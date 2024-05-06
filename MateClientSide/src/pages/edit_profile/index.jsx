@@ -63,7 +63,7 @@ export default function EditProfile({navigation}) {
 
   const logOot = () => {
     logoutUser()
-    navigation.navigate('Register')
+    navigation.navigate('Login')
     console.log('logOut')
   }
 
@@ -198,7 +198,7 @@ export default function EditProfile({navigation}) {
       {/* <BackArrow /> */}
       <Pressable style={styles.icon} onPress={logOot}>
         <AntDesign name='logout' size={30} color='#e6824a' />
-        <Text>LogOut</Text>
+        <Text>התנתק</Text>
       </Pressable>
       <Text style={[Theme.primaryTitle, styles.title]}>בניית הפרופיל שלך</Text>
       <View style={styles.avatarContainer}>
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    right: '8%',
+    left: '8%',
     top: VerticalScale(70),
     // backgroundColor: 'red',
     borderRadius: '50%',
