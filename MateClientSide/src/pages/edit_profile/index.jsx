@@ -100,11 +100,15 @@ export default function EditProfile({navigation}) {
       console.log('Upload successful:', response.data);
       if (Array.isArray(response.data) && response.data.length > 0) {
         const uploadedFileName = response.data[0];
-        const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/uploadedFiles/${uploadedFileName}`;
-        setProfilePicture(uploadedImageURI);
+        const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/images/${uploadedFileName}`;
+        await setProfilePicture(uploadedImageURI);
+        console.log("check")
       }
     } catch (error) {
       console.error('Upload error:', error);
+    }
+    finally{
+      console.log(loggedInUser)
     }
   };
 
@@ -122,7 +126,7 @@ export default function EditProfile({navigation}) {
       else {
         setPhoneNumberError('')
       }
-    
+
       const updatedUserData = {
         id: loggedInUser.id, 
         fullname: fullName,
@@ -138,6 +142,7 @@ export default function EditProfile({navigation}) {
         travelPlan: destination,
         tripInterests: selectedInterests,
       };
+
       
       if (fullName==''||description=='' ||gender==' '||instagram==''||phoneNumber==''||profilePicture== ''||city=='' || destination.length==0 || selectedInterests.length==0) {
         // Alert user to fill all fields
@@ -152,7 +157,9 @@ export default function EditProfile({navigation}) {
         );
         return;
       }
-      uploadImage(profilePicture)
+      await uploadImage(profilePicture)
+
+      
 
       console.log(updatedUserData)
   

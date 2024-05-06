@@ -141,7 +141,7 @@ export default function Home({ navigation }) {
       />
      
       <View style={styles.topBar}>
-        <Header nickName={loggedInUser.fullname}></Header>
+        <Header nickName={loggedInUser.fullname} picUri={loggedInUser.profileImage}></Header>
         <Pressable style={styles.icon} onPress={logOut}>
           <AntDesign name='logout' size={30} color='#e6824a' />
           <Text>התנתק</Text>
