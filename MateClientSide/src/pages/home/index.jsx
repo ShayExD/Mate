@@ -25,7 +25,7 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 export default function Home({ navigation }) {
-  const { loginUser, loggedInUser, setLoggedInUser } = useContext(AuthContext)
+  const { loginUser, loggedInUser, setLoggedInUser,logoutUser } = useContext(AuthContext)
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const userPostsPageSize = 2
