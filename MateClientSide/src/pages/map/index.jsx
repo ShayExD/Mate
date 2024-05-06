@@ -161,7 +161,7 @@ const MapPage = () => {
           }}
           accessibilityElementsHidden={visible}
         >
-          <Pressable style={[styles.icon,{right:'5%',left:'auto'}]} onPress={()=>{SetVisible(false); console.log(visible)}} >
+          <Pressable style={[styles.icon,{right:'5%',left:'auto'}]} onPress={()=>{SetVisible(false);}} >
           <Fontisto
             name='close'
             size={30}

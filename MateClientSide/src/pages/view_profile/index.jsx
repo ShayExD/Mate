@@ -62,8 +62,14 @@ console.log(profile)
         <TextView
           title={'מין'}
           content={SingleCharToString(profile.gender)}
-          iconName={user.gender === 'Male' ? 'man' : 'women'}
-        ></TextView>
+          iconName={
+            SingleCharToString(profile.gender) === 'גבר' 
+              ? 'man' 
+              : SingleCharToString(profile.gender) === 'אישה'
+                ? 'woman'
+                : 'male-female-outline'
+          }
+         ></TextView>
         <TextView
           title={'קצת עלי'}
           content={
