@@ -19,9 +19,12 @@ import AgePicker from '../../components/AgePicker/agePicker'
 import { Alert } from 'react-native';
 import { mapToSingleChar,SingleCharToString } from '../../utils'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Spinner from 'react-native-loading-spinner-overlay'
+
 
 export default function EditProfile({navigation}) {
   const { loginUser,loggedInUser ,setLoggedInUser,logoutUser} = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false)
 
   const [profilePicture, setProfilePicture] = useState(loggedInUser.profileImage)
   const [fullName, setFullName] = useState(loggedInUser.fullname)
@@ -79,9 +82,45 @@ export default function EditProfile({navigation}) {
   };
 
  
+  const uploadImage = async (uri) => {
+    try {
+      const formData = new FormData()
+      const randomKey = Math.random().toString(36).substring(7)
+      formData.append('files', {
+        uri,
+        name: `AvatarImage_${loggedInUser.id}_${randomKey}.jpg`,
+        type: 'image/jpeg',
+      })
+      const response = await axios.post(
+        'https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/Upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      )
 
+      console.log('Upload successful:', response.data)
+      if (Array.isArray(response.data) && response.data.length > 0) {
+        const uploadedFileName = response.data[0]
+        const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/images/${uploadedFileName}`
+        setProfilePicture(uploadedImageURI)
+        setLoggedInUser((prevUser) => ({
+          ...prevUser,
+          profileImage: uploadedImageURI,
+        }))
+      }
+    } catch (error) {
+      console.error('Upload error:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
   
   const updateUser = async () => {
+    setIsLoading(true)
+    await uploadImage(profilePicture)
     try {
       if (!phoneNumberPattern.test(phoneNumber)) {
         setPhoneNumberError(
@@ -92,7 +131,7 @@ export default function EditProfile({navigation}) {
       else {
         setPhoneNumberError('')
       }
-
+      // uploadImage(profilePicture)
       const updatedUserData = {
         id: loggedInUser.id, 
         fullname: fullName,
@@ -141,6 +180,7 @@ export default function EditProfile({navigation}) {
       // You can perform additional actions after successful update, such as updating the loggedInUser state
         if(response.data){
           loginUser(updatedUserData);
+          setIsLoading(false);
           Alert.alert(
             'Updated Successful',
             'You have successfully updated your details!',
@@ -170,16 +210,23 @@ export default function EditProfile({navigation}) {
       showsVerticalScrollIndicator={false}
     >
       {/* <BackArrow /> */}
+      
       <Pressable style={styles.icon} onPress={logOut}>
         <AntDesign name='logout' size={30} color='#e6824a' />
         <Text>התנתק</Text>
       </Pressable>
       <Text style={[Theme.primaryTitle, styles.title]}>בניית הפרופיל שלך</Text>
       <View style={styles.avatarContainer}>
-      <AvatarComponent setProfilePicture={setProfilePicture} />
+      <AvatarComponent uploadImage={uploadImage} setProfilePicture={setProfilePicture} />
 
       </View>
       <View style={styles.inputsContainer}>
+      <Spinner
+        visible={isLoading}
+        textContent={'Loading...'}
+        textStyle={styles.spinnerText}
+        overlayColor='rgba(0, 0, 0, 0.6)'
+      />
       <TextInput
         label= {"שם מלא"}
         value={fullName}

@@ -18,7 +18,7 @@ import { Camera } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-const AvatarComponent = ({ setProfilePicture }) => {
+const AvatarComponent = ({ setProfilePicture ,uploadImage}) => {
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -61,8 +61,8 @@ const AvatarComponent = ({ setProfilePicture }) => {
       setIsLoading(true)
       setModalVisible(false)
       setAvatar(result.assets[0].uri)
-      // setProfilePicture(result.assets[0].uri)
-      uploadImage(result.assets[0].uri)
+      setProfilePicture(result.assets[0].uri)
+      // uploadImage(result.assets[0].uri)
     }
   }
 
@@ -84,55 +84,50 @@ const AvatarComponent = ({ setProfilePicture }) => {
       setIsLoading(true)
       setModalVisible(false)
       setAvatar(result.assets[0].uri)
-      // setProfilePicture(result.assets[0].uri)
-      uploadImage(result.assets[0].uri)
+      setProfilePicture(result.assets[0].uri)
+      // uploadImage(result.assets[0].uri)
     }
   }
 
-  const uploadImage = async (uri) => {
-    try {
-      const formData = new FormData()
-      const randomKey = Math.random().toString(36).substring(7)
-      formData.append('files', {
-        uri,
-        name: `AvatarImage_${loggedInUser.id}_${randomKey}.jpg`,
-        type: 'image/jpeg',
-      })
-      const response = await axios.post(
-        'https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/Upload',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        },
-      )
+  // const uploadImage = async (uri) => {
+  //   try {
+  //     const formData = new FormData()
+  //     const randomKey = Math.random().toString(36).substring(7)
+  //     formData.append('files', {
+  //       uri,
+  //       name: `AvatarImage_${loggedInUser.id}_${randomKey}.jpg`,
+  //       type: 'image/jpeg',
+  //     })
+  //     const response = await axios.post(
+  //       'https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/Upload',
+  //       formData,
+  //       {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       },
+  //     )
 
-      console.log('Upload successful:', response.data)
-      if (Array.isArray(response.data) && response.data.length > 0) {
-        const uploadedFileName = response.data[0]
-        const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/images/${uploadedFileName}`
-        setProfilePicture(uploadedImageURI)
-        setLoggedInUser((prevUser) => ({
-          ...prevUser,
-          profileImage: uploadedImageURI,
-        }))
-      }
-    } catch (error) {
-      console.error('Upload error:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  //     console.log('Upload successful:', response.data)
+  //     if (Array.isArray(response.data) && response.data.length > 0) {
+  //       const uploadedFileName = response.data[0]
+  //       const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/images/${uploadedFileName}`
+  //       setProfilePicture(uploadedImageURI)
+  //       setLoggedInUser((prevUser) => ({
+  //         ...prevUser,
+  //         profileImage: uploadedImageURI,
+  //       }))
+  //     }
+  //   } catch (error) {
+  //     console.error('Upload error:', error)
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }
 
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Spinner
-        visible={isLoading}
-        textContent={'Loading...'}
-        textStyle={styles.spinnerText}
-        overlayColor='rgba(0, 0, 0, 0.6)'
-      />
+      
       {avatar && (
         <Image
           source={{ uri: avatar }}
