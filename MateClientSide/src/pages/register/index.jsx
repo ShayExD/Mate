@@ -45,25 +45,23 @@ export default function Register({navigation}) {
 
   const handleRegister = async () => {
     setShowError(true);
-
-    if(emailError !='' || passwordError !=''){
+    if (emailError != '' || passwordError != '') {
       return;
     }
     try {
+      const lowercaseEmail = email.toLowerCase(); // Convert email to lowercase
       const response = await axios.post(
-        `https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User/Register?email=${encodeURIComponent(email)}`,
+        `https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User/Register?email=${encodeURIComponent(lowercaseEmail)}`,
         password.toString(),
-         // Send password in the request body
         {
           headers: {
-            'Content-Type': 'application/json', // Set the Content-Type header to application/json
+            'Content-Type': 'application/json',
           },
         }
       );
-      
-      console.log('User register in successfully:', response.data);
-      loginUser(response.data)
-      console.log(loggedInUser)
+      console.log('User registered successfully:', response.data);
+      loginUser(response.data);
+      console.log(loggedInUser);
       Alert.alert(
         'Registration Successful',
         'You have successfully registered!',
@@ -71,21 +69,17 @@ export default function Register({navigation}) {
           {
             text: 'OK',
             onPress: () => {
-              navigation.navigate('myTabs',{screen:'EditProfile'});
+              navigation.navigate('myTabs', { screen: 'EditProfile' });
             },
           },
         ]
       );
-
-      // Handle further actions after successful login
     } catch (error) {
-      // console.error('Error logging in:', error);
       if (error.response) {
         Alert.alert('Email already exists', 'Please enter a different email address.');
-        setShowError(false)
-        setEmail('')
-        setPassword('')
-        // console.error('Response data:', error.response.data);
+        setShowError(false);
+        setEmail('');
+        setPassword('');
       }
     }
   };

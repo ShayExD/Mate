@@ -178,7 +178,7 @@ export default function Home({ navigation }) {
               }}
               name={item.fullname}
               details={item.introduction}
-              profileImg={require('../../../assets/images/TripPhoto.jpg')}
+              profileImg={require('../../../assets/images/avatar.jpg')}
               age={item.age}
               city={item.city}
               ig={item.instagram}
