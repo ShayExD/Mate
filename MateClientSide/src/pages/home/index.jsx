@@ -58,6 +58,7 @@ export default function Home({ navigation }) {
 
   function getRecommendedUsers(loggedInUser, allUsers) {
     const recommendedUsers = allUsers
+      .filter(user => user.age !== 0) 
       .filter((user) => user.id !== loggedInUser.id)
       .map((user) => {
         const matchingScore = calculateMatchingScore(loggedInUser, user)
