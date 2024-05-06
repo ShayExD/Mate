@@ -120,7 +120,7 @@ export default function EditProfile({navigation}) {
   
   const updateUser = async () => {
     setIsLoading(true)
-    await uploadImage(profilePicture)
+    // await uploadImage(profilePicture)
     try {
       if (!phoneNumberPattern.test(phoneNumber)) {
         setPhoneNumberError(
