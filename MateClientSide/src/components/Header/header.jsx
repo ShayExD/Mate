@@ -9,12 +9,6 @@ import { AuthContext } from '../../../AuthContext';
 const Header = ({ nickName, picUri }) => {
   const { loggedInUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    // Perform any actions or state updates based on the updated loggedInUser
-    console.log('User profile updated::::::', loggedInUser);
-    // Update any relevant state or trigger any necessary re-renders
-  }, [loggedInUser]);
-
   return (
     <View style={styles.container}>
       <Text style={[styles.text]}>{nickName}</Text>

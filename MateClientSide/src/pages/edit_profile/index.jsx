@@ -83,8 +83,6 @@ export default function EditProfile({navigation}) {
   
   const updateUser = async () => {
     try {
-    
-      
       if (!phoneNumberPattern.test(phoneNumber)) {
         setPhoneNumberError(
           'Invalid phone number format. Please enter 10 digits.',

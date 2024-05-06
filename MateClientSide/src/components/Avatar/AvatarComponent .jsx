@@ -61,7 +61,7 @@ const AvatarComponent = ({ setProfilePicture }) => {
       setIsLoading(true)
       setModalVisible(false)
       setAvatar(result.assets[0].uri)
-      setProfilePicture(result.assets[0].uri)
+      // setProfilePicture(result.assets[0].uri)
       uploadImage(result.assets[0].uri)
     }
   }
@@ -84,7 +84,7 @@ const AvatarComponent = ({ setProfilePicture }) => {
       setIsLoading(true)
       setModalVisible(false)
       setAvatar(result.assets[0].uri)
-      setProfilePicture(result.assets[0].uri)
+      // setProfilePicture(result.assets[0].uri)
       uploadImage(result.assets[0].uri)
     }
   }
