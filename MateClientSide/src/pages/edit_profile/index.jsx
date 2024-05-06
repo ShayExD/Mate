@@ -20,7 +20,6 @@ import { Alert } from 'react-native';
 import { mapToSingleChar,SingleCharToString } from '../../utils'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-
 export default function EditProfile({navigation}) {
   const { loginUser,loggedInUser ,setLoggedInUser,logoutUser} = useContext(AuthContext);
 
@@ -61,7 +60,7 @@ export default function EditProfile({navigation}) {
     fetchData();
   }, []);
 
-  const logOot = () => {
+  const logOut = () => {
     logoutUser()
     navigation.navigate('Login')
     console.log('logOut')
@@ -94,6 +93,35 @@ export default function EditProfile({navigation}) {
     setCity(selectedCity);
   };
 
+  const uploadImage = async (uri) => {
+    try {
+      const formData = new FormData();
+      formData.append('files', {
+        uri,
+        name: 'AvatarImage' + loggedInUser.id + '.jpg',
+        type: 'image/jpeg',
+      });
+
+      const response = await axios.post(
+        'https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/Upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      console.log('Upload successful:', response.data);
+      if (Array.isArray(response.data) && response.data.length > 0) {
+        const uploadedFileName = response.data[0];
+        const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/uploadedFiles/${uploadedFileName}`;
+        setProfilePicture(uploadedImageURI);
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+    }
+  };
 
   
   const updateUser = async () => {
@@ -152,6 +180,7 @@ export default function EditProfile({navigation}) {
         );
         return;
       }
+      uploadImage(profilePicture)
 
       console.log(updatedUserData)
   
@@ -196,7 +225,7 @@ export default function EditProfile({navigation}) {
       showsVerticalScrollIndicator={false}
     >
       {/* <BackArrow /> */}
-      <Pressable style={styles.icon} onPress={logOot}>
+      <Pressable style={styles.icon} onPress={logOut}>
         <AntDesign name='logout' size={30} color='#e6824a' />
         <Text>התנתק</Text>
       </Pressable>
@@ -206,7 +235,7 @@ export default function EditProfile({navigation}) {
           size={150}
           source={require('../../../assets/images/avatar.jpg')}
         /> */}
-      <AvatarComponent setProfilePicture={setProfilePicture} />
+      <AvatarComponent uploadImage={uploadImage} setProfilePicture={setProfilePicture} />
 
       </View>
       <View style={styles.inputsContainer}>

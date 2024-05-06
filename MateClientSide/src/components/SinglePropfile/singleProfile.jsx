@@ -4,7 +4,15 @@ import { HorizontalScale, VerticalScale } from '../../utils'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import Theme from '../../../assets/styles/theme'
-const SingleProfile = ({ name, details, profileImg, age, city, ig,handlePress}) => {
+const SingleProfile = ({
+  name,
+  details,
+  profileImg,
+  age,
+  city,
+  ig,
+  handlePress,
+}) => {
   return (
     <Pressable onPress={handlePress}>
       <View style={styles.shadowContainer}>
@@ -14,22 +22,26 @@ const SingleProfile = ({ name, details, profileImg, age, city, ig,handlePress}) 
             source={profileImg}
             style={styles.image}
           />
-          <View style={styles.information}>
-            <Text style={styles.title}>{name}</Text>
-            <Text style={styles.text}>{details} </Text>
+          <View style={styles.bottomContainer} >
+            <View style={styles.information}>
+              </View>
+              <Text style={styles.title}>
+                {name},{age}
+              </Text>
+              {/* <Text style={styles.text}>{details} </Text> */}
+            <View style={styles.bottom}>
+              {/* <View style={styles.profileDetail}>
+              <Text style={[styles.profileText]}></Text>
+            </View> */}
+              <View style={styles.profileDetail}>
+                <Text style={[styles.profileText]}>{city}</Text>
+              </View>
+              <View style={styles.profileDetail}>
+                <Text style={[styles.profileText]}>{ig}</Text>
+              </View>
+            </View>
+            </View>
           </View>
-          <View style={styles.bottom}>
-            <View style={styles.profileDetail}>
-              <Text style={[styles.profileText]}>{age}</Text>
-            </View>
-            <View style={styles.profileDetail}>
-              <Text style={[styles.profileText]}>{city}</Text>
-            </View>
-            <View style={styles.profileDetail}>
-              <Text style={[styles.profileText]}>{ig}</Text>
-            </View>
-          </View>
-        </View>
       </View>
     </Pressable>
   )
@@ -38,8 +50,8 @@ const SingleProfile = ({ name, details, profileImg, age, city, ig,handlePress}) 
 const styles = StyleSheet.create({
   shadowContainer: {
     borderRadius: HorizontalScale(20),
-    overflow: 'hidden',
-    shadowColor: '#000',
+    // overflow: 'hidden',
+    shadowColor: '#c4c4c4',
     shadowOffset: {
       width: 0,
       height: 5,
@@ -57,30 +69,45 @@ const styles = StyleSheet.create({
     borderRadius: HorizontalScale(20),
     overflow: 'hidden',
     alignItems: 'center',
-    backgroundColor: '#F3F3F3',
+    backgroundColor: 'rgba(243, 243, 243, 0.9)',
   },
   image: {
-    width: '40%',
-    height: '40%',
-    borderRadius: 50,
-    marginTop: VerticalScale(5),
+    width: '100%',
+    height: '100%',
+    borderRadius: 0,
+    // objectFit: 'cover',
+    objectPosition: 'center',
+
+    // marginTop: VerticalScale(5),
   },
-  information: {
-    width: '90%',
-    height: '35%',
+  bottomContainer: {
+    width: '100%',
+    // height: '%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: VerticalScale(10),
-    paddingHorizontal: HorizontalScale(10),
-    paddingVertical: VerticalScale(10),
+    marginTop: -45,
+    backgroundColor: Theme.primaryColor.color,
+    // opacity: 0.7,
+    zIndex: 999,
+  },
+  information: {
+    width: '100%',
+    height: '5%',
+    alignItems: 'center',
+    // justifyContent: 'flex-end',
+    // paddingBottom: 10,
+    // marginTop: 5,
+    // marginTop: VerticalScale(10),
+    // paddingHorizontal: HorizontalScale(10),
+    // paddingVertical: VerticalScale(10),
   },
   title: {
     textAlign: 'right',
-    color: 'black',
+    color: 'white',
     fontFamily: 'OpenSans-Bold',
     fontSize: 12,
-    maxWidth: '90%',
-    maxHeight:'30%'
+    maxWidth: '100%',
+    // maxHeight:'30%'
   },
   text: {
     marginTop: VerticalScale(10),
@@ -90,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize: 8,
   },
   profileText: {
-    color: 'white',
+    color: 'black',
     fontFamily: 'OpenSans',
     fontSize: 8,
   },
@@ -99,8 +126,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    height: '15%',
-    marginTop: VerticalScale(5),
+    // height: '15%',
+    // marginTop: VerticalScale(5),
     marginBottom: VerticalScale(0),
   },
   profileDetail: {
@@ -113,6 +140,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: HorizontalScale(5),
     borderRadius: HorizontalScale(50),
     marginHorizontal: HorizontalScale(5),
+
+    backgroundColor: '#f0f0f0',
+    borderRadius: 5,
+    // paddingHorizontal: 10,
+    // paddingVertical: 5,
+    // marginRight: 10,
+    // marginBottom: 10,
+    color: 'black',
+    fontSize: 14,
   },
 })
 

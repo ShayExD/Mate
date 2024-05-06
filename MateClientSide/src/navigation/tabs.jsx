@@ -9,9 +9,12 @@ import Home from '../pages/home'
 import { HorizontalScale, VerticalScale } from '../utils'
 import { StyleSheet, View, Text } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Entypo from 'react-native-vector-icons/Entypo'
+
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Theme from '../../assets/styles/theme'
 import ComingSoon from '../pages/comingSoon'
+import MapPage from '../pages/map'
 
 
 const Tab = createBottomTabNavigator()
@@ -71,7 +74,7 @@ const Tabs = () => {
             <View style={styles.tabItem}>
               <FontAwesome
                 name='magic'
-                size={25}
+                size={30}
                 color={focused ? '#e6824a' : '#7D848D'}
               />
               <Text
@@ -104,14 +107,14 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name='ComingSoon'
-        component={ComingSoon}
+        name='MapPage'
+        component={MapPage}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>
-              <AntDesign
-                name='message1'
+              <Entypo
+                name='map'
                 size={30}
                 color={focused ? '#e6824a' : '#7D848D'}
               />
@@ -121,7 +124,7 @@ const Tabs = () => {
                   { color: focused ? '#e6824a' : '#7D848D' },
                 ]}
               >
-                הודעות
+                מפה
               </Text>
             </View>
           ),

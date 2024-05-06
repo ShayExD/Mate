@@ -30,39 +30,34 @@ export default function Login({navigation}) {
 
   const handleLogin = async () => {
     try {
+      const lowercaseEmail = email.toLowerCase(); // Convert email to lowercase
       const response = await axios.post(
-        `https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User/Login?email=${encodeURIComponent(email)}`,
+        `https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User/Login?email=${encodeURIComponent(lowercaseEmail)}`,
         password.toString(),
-         // Send password in the request body
         {
           headers: {
-            'Content-Type': 'application/json', // Set the Content-Type header to application/json
+            'Content-Type': 'application/json',
           },
         }
       );
-      loginUser(response.data)
+      loginUser(response.data);
       navigation.navigate("myTabs");
-      console.log(loggedInUser)
+      console.log(loggedInUser);
       console.log('User logged in successfully:', response.data);
-      // Handle further actions after successful login
     } catch (error) {
-      // console.error('Error logging in:', error);
       if (error.response) {
-        // console.error('Response data:', error.response.data);
         Alert.alert(
           'Incorrect Details',
           'Please enter the correct email and password.',
           [{ text: 'OK' }],
           { cancelable: false }
         );
-        setEmail('')
-        setPassword('')
+        setEmail('');
+        setPassword('');
       }
     }
   };
-  
-  // Example usage:
-  // Replace 'user@email.com' and 'password123' with actual user input
+
 
   return (
     <View style={[Theme.screen,styles.screen]}>
