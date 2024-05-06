@@ -116,7 +116,7 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     getAllUser()
-  }, [])
+  }, [loggedInUser])
 
   useEffect(() => {
     setisLoadinguserPosts(true)
