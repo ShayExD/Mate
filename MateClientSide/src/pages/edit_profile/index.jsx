@@ -157,7 +157,7 @@ export default function EditProfile({navigation}) {
         );
         return;
       }
-      await uploadImage(profilePicture)
+      // await uploadImage(profilePicture)
 
       
 
