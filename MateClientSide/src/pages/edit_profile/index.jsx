@@ -37,11 +37,7 @@ export default function EditProfile({navigation}) {
   const [phoneNumber, setPhoneNumber] = useState(loggedInUser.phoneNumber);
   const [updatedUser, setUpdatedUser] = useState(loggedInUser);
   const [phoneNumberError, setPhoneNumberError] = useState('')
-
-  
   const phoneNumberPattern = /^\d{10}$/
-
-
   const validatePhoneNumber = () => {
     if (!phoneNumberPattern.test(phoneNumber)) {
       setPhoneNumberError(
@@ -66,18 +62,7 @@ export default function EditProfile({navigation}) {
     console.log('logOut')
   }
 
-  // useEffect(() => {
-  //   const ageCalculate = () => {
-  //      const today = new Date();
-  //      const birthDate = selectedDate;
-  //      const calculatedAge = differenceInYears(today, birthDate);
-  //      setAge(calculatedAge)
-  //   };
-  //   ageCalculate();
-  // }, [selectedDate]);
-
-
-
+  
   const handleSelectedInterests = (selectedItems) => {
     setSelectedInterests(selectedItems);
     console.log(selectedInterests)
@@ -126,20 +111,7 @@ export default function EditProfile({navigation}) {
   
   const updateUser = async () => {
     try {
-      // const defaultValues = {
-      //   fullname: '',
-      //   password: '',
-      //   introduction: '',
-      //   gender: ' ', // Assuming space is considered a default value for gender
-      //   age: 0,
-      //   instagram: '',
-      //   email: '',
-      //   phoneNumber: '',
-      //   profileImage: '',
-      //   city: '',
-      //   travelPlan: [], // Assuming an empty array is considered a default value for travelPlan
-      //   tripInterests: [], // Assuming an empty array is considered a default value for tripInterests
-      // };
+    
       
       if (!phoneNumberPattern.test(phoneNumber)) {
         setPhoneNumberError(
@@ -231,10 +203,6 @@ export default function EditProfile({navigation}) {
       </Pressable>
       <Text style={[Theme.primaryTitle, styles.title]}>בניית הפרופיל שלך</Text>
       <View style={styles.avatarContainer}>
-        {/* <Avatar.Image
-          size={150}
-          source={require('../../../assets/images/avatar.jpg')}
-        /> */}
       <AvatarComponent uploadImage={uploadImage} setProfilePicture={setProfilePicture} />
 
       </View>
@@ -272,7 +240,7 @@ export default function EditProfile({navigation}) {
       onChangeText={setPhoneNumber}
       style={[styles.input,{textAlign:'left'}]}
       mode="outlined"
-      keyboardType="phone-pad" // Set keyboardType to phone-pad for phone number input
+      keyboardType="phone-pad"
       activeOutlineColor="#E6824A"
       selectionColor="gray"
       />
