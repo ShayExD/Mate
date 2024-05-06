@@ -19,7 +19,8 @@ const Header = ({ nickName, picUri }) => {
 
 const styles = StyleSheet.create({
   container: {
-    minWidth: '40%',
+    minWidth: '30%',
+    maxWidth: '40%',
     flexDirection: 'row-reverse',
     alignItems: 'center',
     backgroundColor: '#E3E3E3',
