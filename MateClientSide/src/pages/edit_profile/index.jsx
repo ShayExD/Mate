@@ -78,39 +78,7 @@ export default function EditProfile({navigation}) {
     setCity(selectedCity);
   };
 
-  const uploadImage = async (uri) => {
-    try {
-      const formData = new FormData();
-      formData.append('files', {
-        uri,
-        name: 'AvatarImage' + loggedInUser.id + '.jpg',
-        type: 'image/jpeg',
-      });
-
-      const response = await axios.post(
-        'https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/Upload',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
-
-      console.log('Upload successful:', response.data);
-      if (Array.isArray(response.data) && response.data.length > 0) {
-        const uploadedFileName = response.data[0];
-        const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/images/${uploadedFileName}`;
-        await setProfilePicture(uploadedImageURI);
-        console.log("check")
-      }
-    } catch (error) {
-      console.error('Upload error:', error);
-    }
-    finally{
-      console.log(loggedInUser)
-    }
-  };
+ 
 
   
   const updateUser = async () => {

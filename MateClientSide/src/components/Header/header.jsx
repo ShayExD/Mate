@@ -1,30 +1,36 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Avatar } from 'react-native-paper'
-import { HorizontalScale, VerticalScale } from '../../utils'
-import Theme from '../../../assets/styles/theme'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Avatar } from 'react-native-paper';
+import { HorizontalScale, VerticalScale } from '../../utils';
+import Theme from '../../../assets/styles/theme';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../../../AuthContext';
 
-const Header = ({ nickName,picUri }) => {
+const Header = ({ nickName, picUri }) => {
+  const { loggedInUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    // Perform any actions or state updates based on the updated loggedInUser
+    console.log('User profile updated::::::', loggedInUser);
+    // Update any relevant state or trigger any necessary re-renders
+  }, [loggedInUser]);
+
   return (
     <View style={styles.container}>
       <Text style={[styles.text]}>{nickName}</Text>
-      <Avatar.Image
-        size={40}
-        source={{uri:picUri}}
-        style={styles.image}
-      />
+      <Avatar.Image size={40} source={{ uri: loggedInUser.profileImage }} style={styles.image} />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    minWidthwidth: '40%',
-    flexDirection: 'row-reverse', // Reverse the order of elements to place the text on the right
-    alignItems: 'center', // Align items vertically in the center
+    minWidth: '40%',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
     backgroundColor: '#E3E3E3',
     height: VerticalScale(50),
-    paddingHorizontal: HorizontalScale(5), // Add horizontal padding for spacing between items
+    paddingHorizontal: HorizontalScale(5),
     borderRadius: HorizontalScale(50),
     justifyContent: 'space-between',
   },
@@ -39,6 +45,6 @@ const styles = StyleSheet.create({
     marginLeft: '0px',
     paddingLeft: '0px',
   },
-})
+});
 
-export default Header
+export default Header;
