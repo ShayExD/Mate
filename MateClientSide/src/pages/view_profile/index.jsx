@@ -75,7 +75,7 @@ console.log(profile)
           content={
             profile.introduction}
         ></TextView>
-        <TagsView title={'תחביבים'} list={profile.tripInterests}></TagsView>
+        <TagsView title={'תחומי עניין בטיול'} list={profile.tripInterests}></TagsView>
         <TagsView title={'יעדים לטיול'} list={profile.travelPlan}></TagsView>
         <TextView
           iconName={'logo-instagram'}
