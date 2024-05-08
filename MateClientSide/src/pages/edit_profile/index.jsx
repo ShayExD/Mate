@@ -189,7 +189,6 @@ export default function EditProfile({ navigation }) {
       // You can perform additional actions after successful update, such as updating the loggedInUser state
       if (response.data) {
         loginUser(updatedUserData)
-        setIsLoading(false)
         Alert.alert(
           'Updated Successful',
           'You have successfully updated your details!',
