@@ -209,6 +209,10 @@ export default function EditProfile({ navigation }) {
 
       // Handle the error if needed
     }
+    finally{
+      setIsLoading(false)
+
+    }
   }
 
   return (

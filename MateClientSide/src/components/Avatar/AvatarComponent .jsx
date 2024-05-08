@@ -30,18 +30,15 @@ const AvatarComponent = ({ setProfilePicture ,uploadImage}) => {
   const [modalVisible, setModalVisible] = useState(false)
 
   useEffect(() => {
-    // Request permissions when the component mounts
     requestPermissions()
   }, [])
 
   const requestPermissions = async () => {
     const { status: cameraStatus } =
       await Camera.requestCameraPermissionsAsync()
-    // const { status: mediaLibraryStatus } = await MediaLibrary.requestMediaLibraryPermissionsAsync();
 
     // Handle permissions
     if (cameraStatus !== 'granted') {
-      // Permissions not granted, handle accordingly (e.g., show an error message)
       console.log('Camera or media library permissions not granted')
     }
   }
