@@ -76,7 +76,7 @@ const AvatarComponent = ({ setProfilePicture ,uploadImage}) => {
       return
     }
 
-    console.log(result.assets[0].uri)
+    // console.log(result.assets[0].uri)
 
     if (!result.cancelled) {
       setIsLoading(true)

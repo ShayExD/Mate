@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = (user) => {
     setLoggedInUser(user);
-    console.log(user)
+    // console.log(user)
   };
 
   const logoutUser = () => {

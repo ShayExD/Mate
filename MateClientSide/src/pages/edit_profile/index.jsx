@@ -100,7 +100,7 @@ export default function EditProfile({ navigation }) {
         },
       )
 
-      console.log('Upload successful:', response.data)
+      // console.log('Upload successful:', response.data)
       if (Array.isArray(response.data) && response.data.length > 0) {
         const uploadedFileName = response.data[0]
         const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/images/${uploadedFileName}`
