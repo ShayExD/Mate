@@ -88,41 +88,7 @@ const AvatarComponent = ({ setProfilePicture ,uploadImage}) => {
     }
   }
 
-  // const uploadImage = async (uri) => {
-  //   try {
-  //     const formData = new FormData()
-  //     const randomKey = Math.random().toString(36).substring(7)
-  //     formData.append('files', {
-  //       uri,
-  //       name: `AvatarImage_${loggedInUser.id}_${randomKey}.jpg`,
-  //       type: 'image/jpeg',
-  //     })
-  //     const response = await axios.post(
-  //       'https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/Upload',
-  //       formData,
-  //       {
-  //         headers: {
-  //           'Content-Type': 'multipart/form-data',
-  //         },
-  //       },
-  //     )
 
-  //     console.log('Upload successful:', response.data)
-  //     if (Array.isArray(response.data) && response.data.length > 0) {
-  //       const uploadedFileName = response.data[0]
-  //       const uploadedImageURI = `https://proj.ruppin.ac.il/cgroup72/test2/tar1/images/${uploadedFileName}`
-  //       setProfilePicture(uploadedImageURI)
-  //       setLoggedInUser((prevUser) => ({
-  //         ...prevUser,
-  //         profileImage: uploadedImageURI,
-  //       }))
-  //     }
-  //   } catch (error) {
-  //     console.error('Upload error:', error)
-  //   } finally {
-  //     setIsLoading(false)
-  //   }
-  // }
 
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center' }}>

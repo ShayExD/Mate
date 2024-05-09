@@ -17,17 +17,6 @@ export default function Login({navigation}) {
   const { loginUser,loggedInUser } = useContext(AuthContext);
 
 
-  // const getAllUser = async () => {
-  //   try {
-  //     const response = await axios.get(`https://proj.ruppin.ac.il/cgroup72/test2/tar1/api/User`);
-  
-  //     setData(response.data);
-  //     console.log('Data fetched successfully:', response.data);
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
-
   const handleLogin = async () => {
     try {
       const lowercaseEmail = email.toLowerCase(); // Convert email to lowercase
@@ -42,8 +31,8 @@ export default function Login({navigation}) {
       );
       loginUser(response.data);
       navigation.navigate("myTabs");
-      console.log(loggedInUser);
-      console.log('User logged in successfully:', response.data);
+      // console.log(loggedInUser);
+      // console.log('User logged in successfully:', response.data);
     } catch (error) {
       if (error.response) {
         Alert.alert(
@@ -52,9 +41,12 @@ export default function Login({navigation}) {
           [{ text: 'OK' }],
           { cancelable: false }
         );
-        setEmail('');
-        setPassword('');
+    
       }
+    }
+    finally{
+      setEmail('');
+      setPassword('');
     }
   };
 

@@ -15,38 +15,13 @@ export default function ViewProfile() {
 const route = useRoute();
 const { profile } = route.params; 
 
-console.log(profile)
-  const user = {
-    age: 28,
-    city: 'New York',
-    email: 'john.doe@example.com',
-    fullname: 'John Doe',
-    gender: 'Male',
-    id: 1001,
-    instagram: 'johndoe_travels',
-    introduction:
-      'Passionate traveler exploring the world and seeking new adventures.',
-    password: 'Tr@v3l3r!',
-    phoneNumber: '+1-555-123-4567',
-    profileImage: 'https://example.com/profile-images/johndoe.jpg',
-    travelPlan: [
-      'Tokyo, Japan - 2023/07/01 to 2023/07/10',
-      'Barcelona, Spain - 2023/09/15 to 2023/09/25',
-    ],
-    tripInterests: [
-      'Food and cuisine',
-      'Historical landmarks',
-      'Nature and hiking',
-      'Art and culture',
-    ],
-  }
+  
   return (
     <ScrollView
       contentContainerStyle={styles.screen}
       showsVerticalScrollIndicator={false}
     >
       <BackArrow />
-      {/* <Text style={[Theme.primaryTitle, styles.title]}>הפרופיל שלי</Text> */}
       <View style={styles.avatarContainer}>
         <Avatar.Image
           size={150}
@@ -57,8 +32,7 @@ console.log(profile)
         </Text>
       </View>
       <View style={styles.inputsContainer}>
-        {/* <TextView title={'שם מלא'} content={profile.fullname}></TextView>
-        <TextView title={'גיל'} content={profile.age}></TextView> */}
+  
         <TextView
           title={'מין'}
           content={SingleCharToString(profile.gender)}

@@ -59,9 +59,9 @@ export default function Register({navigation}) {
           },
         }
       );
-      console.log('User registered successfully:', response.data);
+      // console.log('User registered successfully:', response.data);
       loginUser(response.data);
-      console.log(loggedInUser);
+      // console.log(loggedInUser);
       Alert.alert(
         'Registration Successful',
         'You have successfully registered!',

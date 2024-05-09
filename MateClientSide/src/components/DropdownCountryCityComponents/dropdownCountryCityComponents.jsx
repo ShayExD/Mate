@@ -117,47 +117,7 @@ const DropdownCountryCityComponents = ({setCityLabel,setCountryLabel,cityValue,c
           setIsFocusCity(false)
         }}
       />
-      {/* <TextInput
-        label={'הכנס מספר ימים'}
-        value={days}
-        onChangeText={setDaysNumber}
-        style={styles.input}
-        mode='outlined'
-        activeOutlineColor='#E6824A'
-        selectionColor='gray'
-        textAlign='right'
-        theme={{
-          colors: {
-            primary: '#E6824A',
-            background: 'white',
-          },
-          roundness: 7,
-          borderWidth: 0.3,
-        }}
-        keyboardType='number-pad'
-      /> */}
-      {/* <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
-        data={hobbies}
-        search
-        maxHeight={300}
-        labelField='label'
-        valueField='value'
-        placeholder={!isFocus ? 'תחומי עניין בטיול' : '...'}
-        searchPlaceholder='Search...'
-        value={value}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
-        onChange={(item) => {
-          setValue(item.value)
-          setIsFocus(false)
-          sethobbys(item.value)
-        }}
-      /> */}
+     
     </View>
   )
 }

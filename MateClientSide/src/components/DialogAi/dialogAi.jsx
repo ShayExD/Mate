@@ -14,11 +14,7 @@ const DialogAi = (props) => {
 
   const copyToClipboard = () => {
     Clipboard.setStringAsync(props.text)
-    Toast.show({
-      type: 'success',
-      text1: 'Text Copied',
-      text2: 'The text has been copied to the clipboard.',
-    })
+    
     Alert.prompt(
       'Text copy to clipboard',
       'Text copy to clipboard',
@@ -30,7 +26,6 @@ const DialogAi = (props) => {
   return (
     <Portal>
       <Dialog visible={props.visible} onDismiss={props.onDismiss}>
-        <Toast />
         <Dialog.Content>
           <ScrollView contentContainerStyle={{ alignItems: 'center',paddingTop:VerticalScale(60) }}>
           <TouchableOpacity style={[styles.button,{position:'absolute',left:5}]} onPress={copyToClipboard}>
@@ -40,10 +35,7 @@ const DialogAi = (props) => {
             <Text style={[Theme.primaryText, styles.rtlText]}>
             {props.text ? props.text.replace(/\*/g, '') : ''}
             </Text>
-            {/* <TouchableOpacity style={styles.button} onPress={copyToClipboard}>
-              <Icon name='copy-outline' size={24} color='#fff' />
-              <Text style={styles.buttonText}>Copy to Clipboard</Text>
-            </TouchableOpacity> */}
+           
           </ScrollView>
         </Dialog.Content>
       </Dialog>

@@ -15,7 +15,6 @@ const AppContent = () => {
       <NavigationContainer style={styles.container}>
         <PaperProvider>
         <MainNavigation />
-          {/* {loggedInUser===null ? <MainNavigation /> : <Tabs />} */}
         </PaperProvider>
       </NavigationContainer>
     </TouchableWithoutFeedback>

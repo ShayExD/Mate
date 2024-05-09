@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
       instagram: '',
       email: '',
       phoneNumber: '',
-      profileImage: require('../MateClientSide/assets/images/avatar.jpg'),
+      profileImage: 'https://i.imgur.com/LBIwlSy.png',
       city: '',
       travelPlan: [], 
       tripInterests: [], 

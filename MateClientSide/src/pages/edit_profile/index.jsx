@@ -64,17 +64,17 @@ export default function EditProfile({ navigation }) {
   const logOut = () => {
     logoutUser()
     navigation.navigate('Login')
-    console.log('logOut')
+    // console.log('logOut')
   }
 
   const handleSelectedInterests = (selectedItems) => {
     setSelectedInterests(selectedItems)
-    console.log(selectedInterests)
+    // console.log(selectedInterests)
   }
 
   const handleSelectedDestinations = (selectedItems) => {
     setDestination(selectedItems)
-    console.log(destination)
+    // console.log(destination)
   }
 
   const handleSelectedCity = (selectedCity) => {
@@ -174,7 +174,7 @@ export default function EditProfile({ navigation }) {
       }
       // await uploadImage(profilePicture)
 
-      console.log(updatedUserData)
+      // console.log(updatedUserData)
 
       const response = await axios({
         method: 'PUT', // or 'PATCH' if the server expects a PATCH request
@@ -185,7 +185,7 @@ export default function EditProfile({ navigation }) {
         },
       })
 
-      console.log('User updated successfully:', response.data)
+      // console.log('User updated successfully:', response.data)
       // You can perform additional actions after successful update, such as updating the loggedInUser state
       if (response.data) {
         loginUser(updatedUserData)

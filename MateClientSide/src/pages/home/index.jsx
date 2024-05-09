@@ -20,7 +20,7 @@ import Header from '../../components/Header/header'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Trip from '../../components/SingleTrip/singleTrip'
 import SingleTrip from '../../components/SingleTrip/singleTrip'
-import SingleProfile from '../../components/SinglePropfile/singleProfile'
+import SingleProfile from '../../components/SingleProfile/singleProfile'
 import Spinner from 'react-native-loading-spinner-overlay'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
@@ -70,7 +70,7 @@ export default function Home({ navigation }) {
   const logOut = () => {
     logoutUser()
     navigation.navigate('Login')
-    console.log('logOut')
+    // console.log('logOut')
   }
 
   const trips = [

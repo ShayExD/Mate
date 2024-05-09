@@ -11,11 +11,11 @@ const ImageLibrary = () => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-      allowsMultipleSelection: true, // Enable multiple selection
+      allowsMultipleSelection: true, 
     });
 
     if (!result.cancelled) {
-      setImages([...images, ...result.uri]); // Update the state with an array of selected image URIs
+      setImages([...images, ...result.uri]); 
     }
   };
 
